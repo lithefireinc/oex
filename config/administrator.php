@@ -14,7 +14,7 @@ return array(
 	 *
 	 * @type string
 	 */
-	'title' => 'Admin',
+	'title' => 'Oex File Reference',
 
 	/**
 	 * The path to your model config directory
