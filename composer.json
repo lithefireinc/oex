@@ -1,7 +1,7 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
+	"name": "lithefireinc/oex",
+	"description": "Online Survey for PMMS.",
+	"keywords": ["survey", "laravel"],
 	"license": "MIT",
 	"type": "project",
 	"require": {
