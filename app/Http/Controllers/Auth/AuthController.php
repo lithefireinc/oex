@@ -26,7 +26,7 @@ class AuthController extends Controller {
      * @var string
      */
 
-    protected $redirectTo = 'surveys.index';
+    protected $redirectTo = 'surveys';
 
 	/**
 	 * Create a new authentication controller instance.
