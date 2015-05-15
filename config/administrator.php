@@ -1,5 +1,5 @@
 <?php
-
+//dd(config_path('administrator'));
 return array(
 
 	/**
@@ -21,6 +21,7 @@ return array(
 	 *
 	 * @type string
 	 */
+
 	'model_config_path' => config_path('administrator'),
 
 	/**
@@ -51,7 +52,7 @@ return array(
 	 * 		'Analytics' => array('E-Commerce' => 'page.ecommerce.analytics'),
 	 *	)
 	 */
-	'menu' => array(),
+	'menu' => array('questionSets',),
 
 	/**
 	 * The permission option is the highest-level authentication check that lets you define a closure that should return true if the current user
@@ -84,14 +85,14 @@ return array(
 	 *
 	 * @type string
 	 */
-	'home_page' => '',
+	'home_page' => 'questionSets',
 
 	/**
 	 * The route to which the user will be taken when they click the "back to site" button
 	 *
 	 * @type string
 	 */
-	'back_to_site_path' => '/',
+	'back_to_site_path' => 'surveys',
 
 	/**
 	 * The login path is the path where Administrator will send the user if they fail a permission check
