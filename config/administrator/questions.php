@@ -24,7 +24,6 @@ return array(
 	 * The filter set
 	 */
 	'filters' => array(
-		'id',
 		'title',
 	),
 
