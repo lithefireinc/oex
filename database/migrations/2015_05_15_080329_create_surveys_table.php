@@ -12,9 +12,9 @@ class CreateSurveysTable extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('surveys', function(Blueprint $table)
-        {
-            $table->increments('id');
+		Schema::create('surveys', function(Blueprint $table)
+		{
+			$table->increments('id');
             $table->string('title');
             $table->string('description');
             $table->string('welcome_message');
@@ -31,7 +31,7 @@ class CreateSurveysTable extends Migration {
             $table->integer('deactivated_by_id')->unsigned();
             $table->integer('created_by_id')->unsigned();
             $table->timestamps();
-        });
+		});
 	}
 
 	/**
