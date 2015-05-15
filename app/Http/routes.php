@@ -13,6 +13,7 @@
 
 Route::get('/', 'PagesController@index');
 Route::resource('surveys','SurveysController');
+Route::resource('questionSets', 'questionSetsController');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
