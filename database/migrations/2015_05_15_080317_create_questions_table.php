@@ -19,7 +19,7 @@ class CreateQuestionsTable extends Migration {
 			$table->integer('question_type');
 			$table->string('title');
 			$table->text('question');
-			$table->tinyint('required');
+			$table->tinyInteger('required');
 			$table->integer('order')->unsigned();
 			$table->timestamps();
 		});
