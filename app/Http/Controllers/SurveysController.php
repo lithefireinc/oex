@@ -14,7 +14,7 @@ class SurveysController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		return view('surveys.index');
 	}
 
 	/**
