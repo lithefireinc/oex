@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'PagesController@index');
+Route::resource('surveys','SurveysController');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
