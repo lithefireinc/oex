@@ -18,13 +18,23 @@ return array(
 	'columns' => array(
 		'id',
 		'title',
-	),
+        'question_set_id' => array(
+            'title' => "Question Set",
+            'relationship' => 'questionSet', //this is the name of the Eloquent relationship method!
+            'select' => "description",
+        ),
+    ),
 
 	/**
 	 * The filter set
 	 */
 	'filters' => array(
-		'title',
+        'title',
+        'question_set_id' => array(
+            'title' => "Question Set",
+            'relationship' => 'questionSet', //this is the name of the Eloquent relationship method!
+            'select' => "description",
+        ),
 	),
 
 	/**
@@ -35,6 +45,11 @@ return array(
 			'title' => 'Title',
 			'type' => 'text',
 		),
+        'question_set_id' => array(
+            'title' => "Question Set",
+            'relationship' => 'questionSet', //this is the name of the Eloquent relationship method!
+            'select' => "description",
+        ),
 	),
 
 );
