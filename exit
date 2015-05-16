@@ -1,0 +1,131 @@
+[33mcommit 5605e626028cff324e90730500fe79e2b6cc75d8[m
+Author: richardmalkuth <richardmalkuth@gmail.com>
+Date:   Fri May 15 22:26:41 2015 +0800
+
+    change composer details
+
+[33mcommit d9dcb6a0c6aca2e40f997e33ca86eee4ab8fb349[m
+Author: Malkuth Richard Anggadol <richardmalkuth@gmail.com>
+Date:   Fri May 15 14:16:47 2015 +0000
+
+    added questions config in administrator
+
+[33mcommit 3d2adfe7e1b11876c2c3401f5cf5bce42bf8a725[m
+Author: Malkuth Richard Anggadol <richardmalkuth@gmail.com>
+Date:   Fri May 15 14:12:05 2015 +0000
+
+    change admin title; added admin link in the layout file
+
+[33mcommit 48b9d2d2b8eeada7890cc9115b140bfd9df8b2a3[m
+Author: Malkuth Richard Anggadol <richardmalkuth@gmail.com>
+Date:   Fri May 15 14:02:44 2015 +0000
+
+    configure administrator backend; Initialize questionset model
+
+[33mcommit 3946c534f1cd784131bc537dd1fec8cdd3717e0e[m
+Author: Malkuth Richard Anggadol <richardmalkuth@gmail.com>
+Date:   Fri May 15 13:28:09 2015 +0000
+
+    fixed redirectTo path
+
+[33mcommit 84b94541c0ba05740306c78eac1a7352a841bc53[m
+Author: Malkuth Richard Anggadol <richardmalkuth@gmail.com>
+Date:   Fri May 15 13:09:46 2015 +0000
+
+    published assets for frozennode/administrator
+
+[33mcommit ef82027c152a9c72958a83ee033607c6cf2430fd[m
+Author: Malkuth Richard Anggadol <richardmalkuth@gmail.com>
+Date:   Fri May 15 12:58:20 2015 +0000
+
+    added frozennode provider
+
+[33mcommit 6344dc37e0dc7db5b00a3785599d5807e94bf5b0[m
+Author: Malkuth Richard Anggadol <richardmalkuth@gmail.com>
+Date:   Fri May 15 12:55:56 2015 +0000
+
+    fillable fields for questionset model
+
+[33mcommit 621d07265a16c1bfea3aec2ea78928c81f3cae60[m
+Author: Malkuth Richard Anggadol <richardmalkuth@gmail.com>
+Date:   Fri May 15 12:52:44 2015 +0000
+
+    added question sets resource route
+
+[33mcommit 3b408b5b7a42c4002cac64e34d0baa726d34c09b[m
+Author: Malkuth Richard Anggadol <richardmalkuth@gmail.com>
+Date:   Fri May 15 12:51:46 2015 +0000
+
+    Added QuestionSetsController
+
+[33mcommit 6a08bcdf04899373a91c9028a6d2f9f32f5af7ff[m
+Author: Malkuth Richard Anggadol <richardmalkuth@gmail.com>
+Date:   Fri May 15 12:48:25 2015 +0000
+
+    corrected required tinyInteger
+
+[33mcommit afe9b4805060400f4b4cc8d4c983922f048248c1[m
+Author: vagrant <vagrant@homestead>
+Date:   Fri May 15 12:40:08 2015 +0000
+
+    fixed surveys index page
+
+[33mcommit b00db53da53fd49828b2c1d4370ecfa95894b0d7[m
+Author: richardmalkuth <richardmalkuth@gmail.com>
+Date:   Fri May 15 20:32:58 2015 +0800
+
+    Added surveys route and resource controller
+
+[33mcommit ff6b5fbc52c89f2b894df9fcf594e481addfd8fc[m
+Author: richardmalkuth <richardmalkuth@gmail.com>
+Date:   Fri May 15 20:28:49 2015 +0800
+
+    Create index page
+
+[33mcommit 564bcfb52e773ec17c246585047dc87970f476d0[m
+Author: richardmalkuth <richardmalkuth@gmail.com>
+Date:   Fri May 15 20:15:58 2015 +0800
+
+    Added pages controller in routes.php
+
+[33mcommit 6ef151fe7ae04280af2dd3dd382905740cef960d[m
+Author: richardmalkuth <richardmalkuth@gmail.com>
+Date:   Fri May 15 20:12:51 2015 +0800
+
+    added laravel administrator and entrust
+
+[33mcommit bd2dc08086afbabaa071a399279ce2e7b9fdaa6e[m
+Author: richardmalkuth <richardmalkuth@gmail.com>
+Date:   Fri May 15 17:52:12 2015 +0800
+
+    modified questions migrations
+
+[33mcommit 4fdee5828b466e061cfedfc5285666d8ca4935bd[m
+Author: vagrant <vagrant@homestead>
+Date:   Fri May 15 09:14:19 2015 +0000
+
+    added question_sets model and migration
+
+[33mcommit c663bda5675a5816eeff22a80efc05f0310e7e56[m
+Author: Darryl Anaud <darrylanaud@Darryls-MacBook-Pro.local>
+Date:   Tue Apr 28 15:58:37 2015 +0800
+
+    added surveys table
+
+[33mcommit 44835b8f7f699ab6e8c042e94ae61c4085a6a5df[m
+Author: Darryl Anaud <darrylanaud@Darryls-MacBook-Pro.local>
+Date:   Tue Apr 28 15:39:03 2015 +0800
+
+    ignore idea
+
+[33mcommit 03f5f1e4f73becedc99bc180210f0b000ca81858[m
+Author: Darryl Anaud <darrylanaud@Darryls-MacBook-Pro.local>
+Date:   Tue Apr 28 15:31:50 2015 +0800
+
+    modified users table
+
+[33mcommit be7cd8223933d34c363246bcc12cfd1f9a8d5750[m
+Author: Darryl Anaud <darrylanaud@Darryls-MacBook-Pro.local>
+Date:   Tue Apr 28 14:57:39 2015 +0800
+
+    initial commit

@@ -2,4 +2,6 @@
 /node_modules
 .env
 .idea/
+.idea/workspace.xml
 /public/packages/
+
