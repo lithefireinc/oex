@@ -11,4 +11,9 @@ class Question extends Model {
         'required',
         'order',
     ];
+
+    public function questionSet()
+    {
+        return $this->belongsTo('\App\QuestionSet');
+    }
 }
