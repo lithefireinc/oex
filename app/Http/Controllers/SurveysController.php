@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Survey;
 use Illuminate\Http\Request;
 
 class SurveysController extends Controller {
@@ -14,7 +15,9 @@ class SurveysController extends Controller {
 	 */
 	public function index()
 	{
-		return view('surveys.index');
+        $surveys = Survey::latest('created_at')->get();
+
+		return view('surveys.index', compact('surveys'));
 	}
 
 	/**
