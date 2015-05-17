@@ -11,11 +11,27 @@
 |
 */
 
-Route::get('/', 'PagesController@index');
-Route::resource('surveys','SurveysController');
+// Route::get('/', 'PagesController@index');
+Route::get('/', [
+    'middleware' => ['auth'],
+    'uses' => 'PagesController@index'
+]);
+
+//Route::get('surveys/', [
+//    'middleware' => ['auth', 'roles'],
+//    'uses' => 'SurveysController@index',
+//    'roles' => ['administrator']
+//]);
+Route::get('surveys/available',  [
+    'middleware' => ['auth'],
+    'uses' => 'SurveysController@available'
+]);
+Route::resource('surveys', 'SurveysController');
 Route::resource('questionSets', 'questionSetsController');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+

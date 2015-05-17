@@ -2,8 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-// composer require laracasts/testdummy
-use Laracasts\TestDummy\Factory as TestDummy;
+use App\Role;
 
 class RoleTableSeeder extends Seeder
 {
@@ -13,7 +12,7 @@ class RoleTableSeeder extends Seeder
             exit('I just stopped you getting fired. Love, Amo.');
         }
 
-        DB::table('role')->truncate();
+        DB::table('roles')->truncate();
 
         Role::create([
             'id'            => 1,
@@ -44,6 +43,6 @@ class RoleTableSeeder extends Seeder
             'name'          => 'User',
             'description'   => 'A standard user that can have a licence assigned to them. No administrative features.'
         ]);
-    
+
     }
 }

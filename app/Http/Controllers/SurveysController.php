@@ -33,7 +33,7 @@ class SurveysController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return $this->user->role->name;
 	}
 
 	/**
@@ -89,5 +89,10 @@ class SurveysController extends Controller {
 	{
 		//
 	}
+
+    public function available(){
+        $surveys = Survey::latest('created_at')->get();
+        return view('surveys.available', compact('surveys'));
+    }
 
 }

@@ -23,7 +23,7 @@
     </table>
 
     @unless(count($surveys))
-        <p class="text-center">You haven't add any surveys yet!</p>
+        <p class="text-center">You haven't created any surveys yet!</p>
     @endunless
 
 @stop
