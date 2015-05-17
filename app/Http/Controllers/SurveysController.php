@@ -110,4 +110,12 @@ class SurveysController extends Controller {
         return view('surveys.available', compact('surveys'));
     }
 
+
+    public function takeSurvey($id)
+    {
+        $survey = Survey::findOrFail($id);
+        $questions = $survey->questionSet->question;
+
+        return view('surveys.takeSurvey', compact('survey', 'questions'));
+    }
 }

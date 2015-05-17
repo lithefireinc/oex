@@ -7,10 +7,10 @@
     <table class="table table-striped table-bordered">
 
         <thead>
-            <th>Title:</th>
-            <th>Question Set:</th>
-            <th>Faculty:</th>
-            <th>Duration:</th>
+            <th>Title</th>
+            <th>Question Set</th>
+            <th>Faculty</th>
+            <th>Duration</th>
         </thead>
 
         <tbody>

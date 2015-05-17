@@ -26,6 +26,12 @@ Route::get('surveys/available',  [
     'middleware' => ['auth'],
     'uses' => 'SurveysController@available'
 ]);
+
+Route::get('surveys/takeSurvey/{id}',  [
+    'middleware' => ['auth'],
+    'uses' => 'SurveysController@takeSurvey'
+]);
+
 Route::resource('surveys', 'SurveysController');
 Route::resource('questionSets', 'questionSetsController');
 
