@@ -114,7 +114,7 @@ return [
 		 * Laravel Framework Service Providers...
 		 */
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
-		'Illuminate\Auth\AuthServiceProvider',
+		//'Illuminate\Auth\AuthServiceProvider',
 		'Illuminate\Bus\BusServiceProvider',
 		'Illuminate\Cache\CacheServiceProvider',
 		'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider',
@@ -148,7 +148,14 @@ return [
 		* Third Party Providers
 		*/
 		'Frozennode\Administrator\AdministratorServiceProvider',
-	],
+	    'Illuminate\Html\HtmlServiceProvider',
+        'Orchestra\Auth\AuthServiceProvider',
+        'Orchestra\Authorization\AuthorizationServiceProvider',
+        'Orchestra\Memory\MemoryServiceProvider',
+
+        'Orchestra\Auth\CommandServiceProvider',
+        'Orchestra\Memory\CommandServiceProvider',
+    ],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -195,6 +202,8 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+        'Form'      => 'Illuminate\Html\FormFacade',
+        'ACL' => 'Orchestra\Support\Facades\ACL',
 
 	],
 

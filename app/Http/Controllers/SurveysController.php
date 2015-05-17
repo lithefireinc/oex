@@ -2,12 +2,18 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Auth;
 
 use App\Survey;
 use Illuminate\Http\Request;
 
 class SurveysController extends Controller {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+        parent::__construct();
+    }
 	/**
 	 * Display a listing of the resource.
 	 *
