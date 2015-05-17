@@ -10,12 +10,23 @@
         <th>Question Set:</th>
         <th>Faculty:</th>
         <th>Duration:</th>
+        <th></th>
         </thead>
 
         <tbody>
         @foreach($surveys as $survey)
             <tr>
                 <td>{{ $survey->title }}</td>
+                <td>{{ $survey->questionSet->description }}</td>
+                <td>{{ $survey->faculty->last_name.', '.$survey->faculty->last_name.' '.$survey->faculty->middle_name}}</td>
+                <td>{{ date('F d, Y', strtotime($survey->start_date)) .' - '. date('F d, Y', strtotime($survey->expires))}}</td>
+                <td>
+                    {!! Form::open() !!}
+                        <div class="form-group">
+                            form
+                        </div>
+                    {!! Form::close() !!}
+                </td>
             </tr>
         @endforeach
         </tbody>

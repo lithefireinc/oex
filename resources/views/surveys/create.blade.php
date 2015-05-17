@@ -4,7 +4,7 @@
 
     <h1 class="page-heading">Create Survey</h1>
 
-    {!! Form::open(['method' => 'GET', 'action' => 'SurveysController@store']) !!}
+    {!! Form::open(['url'=>'surveys']) !!}
 
     <!-- Title Form Input -->
     <div class="form-group">
@@ -20,15 +20,31 @@
 
     <!-- Instructions Form Input -->
     <div class="form-group">
-        {!! Form::label('Instructions', 'Instructions:') !!}
-        {!! Form::text('Instructions', null, ['class' => 'form-control']) !!}
+        {!! Form::label('instructions', 'Instructions:') !!}
+        {!! Form::text('instructions', null, ['class' => 'form-control']) !!}
     </div>
 
-    {{--question_set--}}
+    <div class="form-group">
+        {!! Form::label('question_set_id', 'Question Set:') !!}
+        {!! Form::select('question_set_id', $questionSet, null, ['class' => 'form-control']) !!}
+    </div>
 
-    {{--faculty--}}
+    <div class="form-group">
+        {!! Form::label('faculty_id', 'Faculty:') !!}
+        {!! Form::select('faculty_id', $faculty, null, ['class' => 'form-control']) !!}
+    </div>
 
-    {{--start date - end date--}}
+    <!-- Start_date Form Input -->
+    <div class="form-group">
+        {!! Form::label('start_date', 'Start Date:') !!}
+        {!! Form::input('date', 'start_date', date('Y-m-d'), ['class' => 'form-control']) !!}
+    </div>
+
+    <!-- Expires Form Input -->
+    <div class="form-group">
+        {!! Form::label('expires', 'End Date:') !!}
+        {!! Form::input('date', 'expires', date('Y-m-d'), ['class' => 'form-control']) !!}
+    <div>
 
     <!-- 'Create Survey' Form Input -->
     <div class="form-group">

@@ -10,4 +10,9 @@ class QuestionSet extends Model {
     {
         return $this->hasMany('App\Question');
     }
+
+    public function survey()
+    {
+        return $this->hasMany('\App\Survey');
+    }
 }
