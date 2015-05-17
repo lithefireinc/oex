@@ -1,11 +1,16 @@
 <?php namespace App\Http\Controllers;
 
+use App\Faculty;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Question;
+use App\QuestionSet;
 use Auth;
 
 use App\Survey;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+use Request;
+use Illuminate\Support\Facades\Input;
 
 class SurveysController extends Controller {
 
@@ -33,8 +38,12 @@ class SurveysController extends Controller {
 	 */
 	public function create()
 	{
-		return $this->user->role->name;
-	}
+//		return $this->user->role->name;
+        $questionSet = QuestionSet::lists('description', 'id');
+        $faculty = Faculty::selectRaw('CONCAT(last_name,", ", first_name," ",middle_name) as full_name, id')->orderBy('last_name')->lists('full_name','id');
+
+	    return view('surveys.create', compact('questionSet', 'faculty'));
+    }
 
 	/**
 	 * Store a newly created resource in storage.
@@ -43,7 +52,13 @@ class SurveysController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		$input = Request::all();
+
+        Survey::create($input);
+
+        flash('Survey created successfully!');
+
+        return redirect('surveys');
 	}
 
 	/**

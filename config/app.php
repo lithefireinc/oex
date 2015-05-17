@@ -152,9 +152,9 @@ return [
         'Orchestra\Auth\AuthServiceProvider',
         'Orchestra\Authorization\AuthorizationServiceProvider',
         'Orchestra\Memory\MemoryServiceProvider',
-
         'Orchestra\Auth\CommandServiceProvider',
         'Orchestra\Memory\CommandServiceProvider',
+        'Laracasts\Flash\FlashServiceProvider',
     ],
 
 	/*
@@ -203,7 +203,7 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
         'Form'      => 'Illuminate\Html\FormFacade',
-        'ACL' => 'Orchestra\Support\Facades\ACL',
+        'ACL'       => 'Orchestra\Support\Facades\ACL',
 
 	],
 
