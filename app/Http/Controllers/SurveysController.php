@@ -4,6 +4,7 @@ use App\Faculty;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SurveyRequest;
+use App\Http\Requests\TakeSurveyRequest;
 use App\Question;
 use App\QuestionSet;
 use Auth;
@@ -124,8 +125,8 @@ class SurveysController extends Controller {
         return view('surveys.takeSurvey', compact('survey', 'questions', 'choices'));
     }
 
-    public function storeTakeSurvey()
+    public function storeTakeSurvey(TakeSurveyRequest $request)
     {
-
+        return $request->all();
     }
 }

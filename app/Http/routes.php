@@ -32,8 +32,10 @@ Route::get('surveys/takeSurvey/{id}',  [
     'uses' => 'SurveysController@takeSurvey'
 ]);
 
+Route::post('surveys/takeSurvey', 'SurveysController@storeTakeSurvey');
+
 Route::resource('surveys', 'SurveysController');
-Route::resource('questionSets', 'questionSetsController');
+Route::resource('questionSets', 'QuestionSetsController');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

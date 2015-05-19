@@ -12,7 +12,7 @@ class CreateSurveyResultsTable extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('roles', function(Blueprint $table)
+        Schema::create('survey_results', function(Blueprint $table)
         {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
