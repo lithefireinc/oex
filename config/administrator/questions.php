@@ -51,5 +51,10 @@ return array(
             'name_field' => "description",
         ),
 	),
+    'rules' => array(
+        'title' => 'required',
+        'question_set_id' => 'required',
+        ''
+    ),
 
 );
