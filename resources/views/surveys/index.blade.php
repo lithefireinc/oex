@@ -2,7 +2,10 @@
 @section('content')
 
     <h1 class="page-heading">Surveys</h1>
-    <div class="pull-right"><a class="btn btn-primary" href="{{ url('surveys/create') }}">Create New</a></div>
+
+    <div class="pull-right">
+        <a class="btn btn-primary" href="{{ url('surveys/create') }}">Create New</a>
+    </div>
 
     <table class="table table-striped table-bordered">
 
