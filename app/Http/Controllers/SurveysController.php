@@ -27,7 +27,6 @@ class SurveysController extends Controller {
 	public function index()
 	{
         $surveys = Survey::latest('created_at')->get();
-
 		return view('surveys.index', compact('surveys'));
 	}
 

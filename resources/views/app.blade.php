@@ -37,7 +37,7 @@
                     @if (!Auth::guest())
                     <li><a href="{{ url('surveys/available') }}">Surveys</a></li>
                     @endif
-                    @if(Auth::user() && Auth::user()->role->name == 'Administrator')
+                    @if(Auth::user()->hasRole(['Root', 'Administrator']))
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
