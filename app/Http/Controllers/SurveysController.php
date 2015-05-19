@@ -54,9 +54,9 @@ class SurveysController extends Controller {
      */
 	public function store(SurveyRequest $request)
 	{
-        $input = Request::all($request);
+//        Request::all($request);
 
-//        Survey::create($request->all());
+        Survey::create($request->all());
 
 //        Auth::user()->surveys->create($request->all());
 
@@ -119,7 +119,13 @@ class SurveysController extends Controller {
     {
         $survey = Survey::findOrFail($id);
         $questions = $survey->questionSet->question;
+        $choices = [1,2,3,4,5];
 
-        return view('surveys.takeSurvey', compact('survey', 'questions'));
+        return view('surveys.takeSurvey', compact('survey', 'questions', 'choices'));
+    }
+
+    public function storeTakeSurvey()
+    {
+
     }
 }
