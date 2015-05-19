@@ -21,7 +21,7 @@
     <!-- Instructions Form Input -->
     <div class="form-group">
         {!! Form::label('instructions', 'Instructions:') !!}
-        {!! Form::text('instructions', null, ['class' => 'form-control']) !!}
+        {!! Form::textarea('instructions', null, ['class' => 'form-control']) !!}
     </div>
 
     <div class="form-group">

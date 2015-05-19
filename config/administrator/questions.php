@@ -18,6 +18,7 @@ return array(
 	'columns' => array(
 		'id',
 		'title',
+        'question',
         'question_set_id' => array(
             'title' => "Question Set",
             'relationship' => 'questionSet', //this is the name of the Eloquent relationship method!
@@ -45,6 +46,11 @@ return array(
 			'title' => 'Title',
 			'type' => 'text',
 		),
+        'question' => array(
+            'title' => "Question",
+            'type' => 'textarea',
+            'height' => 130
+        ),
         'questionSet' => array(
             'type' => "relationship",
             'title' => 'Question Set', //this is the name of the Eloquent relationship method!
@@ -52,9 +58,13 @@ return array(
         ),
 	),
     'rules' => array(
-        'title' => 'required',
         'question_set_id' => 'required',
-        ''
+        'question' => 'required',
+
     ),
+    'messages' => array(
+        'question_set_id.required' => 'Select a question set.'
+    ),
+    'form_width' => 500,
 
 );

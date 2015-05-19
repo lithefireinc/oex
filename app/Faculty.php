@@ -9,4 +9,7 @@ class Faculty extends Model {
         return $this->hasMany('\App\Survey');
     }
 
+    public function getFullNameAttribute(){
+        return $this->last_name.", ".$this->first_name." ".$this->middle_name;
+    }
 }

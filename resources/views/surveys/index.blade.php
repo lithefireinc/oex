@@ -10,7 +10,7 @@
             <th>Title</th>
             <th>Question Set</th>
             <th>Faculty</th>
-            <th>Duration</th>
+            <th>Active until</th>
         </thead>
 
         <tbody>
@@ -18,8 +18,8 @@
                 <tr>
                     <td>{{ $survey->title }}</td>
                     <td>{{ $survey->questionSet->description }}</td>
-                    <td>{{ $survey->faculty->last_name.', '.$survey->faculty->last_name.' '.$survey->faculty->middle_name}}</td>
-                    <td>{{ date('F d, Y', strtotime($survey->start_date)) .' - '. date('F d, Y', strtotime($survey->expires))}}</td>
+                    <td>{{ $survey->faculty->fullName}}</td>
+                    <td>{{ $survey->expires->diffForHumans()}}</td>
                 </tr>
             @endforeach
         </tbody>
