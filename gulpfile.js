@@ -19,6 +19,7 @@ elixir(function(mix) {
         'libs/bootstrap.min.css',
         'libs/select2.css',
         'libs/bootstrap-datetimepicker.min.css',
+        'libs/select2-bootstrap.css',
         'app.css',
     ]);
 
