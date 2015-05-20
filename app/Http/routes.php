@@ -12,16 +12,11 @@
 */
 
 // Route::get('/', 'PagesController@index');
-Route::get('/', [
-    'middleware' => ['auth'],
-    'uses' => 'PagesController@index'
-]);
+Route::get('/', function(){
+    return redirect('surveys/available');
+});
 
-//Route::get('surveys/', [
-//    'middleware' => ['auth', 'roles'],
-//    'uses' => 'SurveysController@index',
-//    'roles' => ['administrator']
-//]);
+
 Route::get('surveys/available',  [
     'middleware' => ['auth'],
     'uses' => 'SurveysController@available'
@@ -35,6 +30,7 @@ Route::get('surveys/takeSurvey/{id}',  [
 Route::post('surveys/takeSurvey', 'SurveysController@storeTakeSurvey');
 
 Route::resource('surveys', 'SurveysController');
+
 Route::resource('questionSets', 'QuestionSetsController');
 
 Route::controllers([

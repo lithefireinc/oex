@@ -34,10 +34,10 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/') }}">Home</a></li>
-                    @if (!Auth::guest())
+                    @if (Auth::check())
                     <li><a href="{{ url('surveys/available') }}">Surveys</a></li>
                     @endif
-                    @if(Auth::user() && Auth::user()->hasRole(['Root', 'Administrator']))
+                    @if(Auth::check() && (Auth::user()->level() > 98))
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
@@ -70,7 +70,6 @@
 	    @yield('content')
     </div>
 	<!-- Scripts -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="/js/all.js"></script>
 </body>
 </html>

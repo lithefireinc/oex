@@ -1,6 +1,7 @@
 <?php namespace App\Services;
 
 use App\User;
+use Bican\Roles\Models\Role;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 
@@ -29,12 +30,20 @@ class Registrar implements RegistrarContract {
 	 */
 	public function create(array $data)
 	{
-		return User::create([
-			'name' => $data['name'],
-			'email' => $data['email'],
-			'password' => bcrypt($data['password']),
-            'role_id' => 5,
-		]);
+        return $this->saveUser($data);
 	}
+
+    private function saveUser(array $data){
+        $user = new User;
+        $user->fill([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+        $user->save();
+        $user->attachRole(Role::find(3));
+
+        return $user;
+    }
 
 }

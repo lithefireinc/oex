@@ -4,6 +4,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Faculty extends Model {
 
+    protected $appends = ['full_name'];
+
     public function survey()
     {
         return $this->hasMany('\App\Survey');

@@ -13,10 +13,22 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     //mix.less('app.less');
-    mix.sass('app.scss');
+    mix.sass('app.scss', 'resources/assets/css');
 
     mix.styles([
-        'vendor/bootstrap.css',
-        'app.css'
-    ], null, 'public/css');
+        'libs/bootstrap.min.css',
+        'libs/select2.css',
+        'libs/bootstrap-datetimepicker.min.css',
+        'libs/select2-bootstrap.css',
+        'app.css',
+    ]);
+
+    mix.scripts([
+        'libs/jquery.js',
+        'libs/select2.js',
+        'libs/bootstrap.min.js',
+        'libs/moment.js',
+        'libs/bootstrap-datetimepicker.js',
+        'app.js',
+    ]);
 });

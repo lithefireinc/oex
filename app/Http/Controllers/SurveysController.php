@@ -11,9 +11,11 @@ use Auth;
 
 use App\Survey;
 //use Illuminate\Http\Request;
+use Illuminate\Database\Schema\Blueprint;
 use Request;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Schema;
 
 class SurveysController extends Controller {
 
@@ -21,6 +23,7 @@ class SurveysController extends Controller {
     {
         $this->middleware('auth');
         parent::__construct();
+
     }
 	/**
 	 * Display a listing of the resource.
@@ -29,6 +32,10 @@ class SurveysController extends Controller {
 	 */
 	public function index()
 	{
+        if($this->user->level() < 99)
+        {
+            abort(403);
+        }
         $surveys = Survey::latest('created_at')->get();
 		return view('surveys.index', compact('surveys'));
 	}
@@ -40,9 +47,14 @@ class SurveysController extends Controller {
 	 */
 	public function create()
 	{
-//		return $this->user->role->name;
+        if($this->user->level() < 99)
+        {
+            abort(403);
+        }
+
         $questionSet = QuestionSet::lists('description', 'id');
-        $faculty = Faculty::selectRaw('CONCAT(last_name,", ", first_name," ",middle_name) as full_name, id')->orderBy('last_name')->lists('full_name','id');
+        $faculty = Faculty::get()->lists('full_name', 'id');
+
 
 	    return view('surveys.create', compact('questionSet', 'faculty'));
     }
@@ -55,9 +67,21 @@ class SurveysController extends Controller {
      */
 	public function store(SurveyRequest $request)
 	{
+        if($this->user->level() < 99)
+        {
+            abort(403);
+        }
 //        Request::all($request);
-
-        Survey::create($request->all());
+        $survey = Survey::firstOrNew(['code'=>str_random(8)]);
+        $survey->fill($request->all());
+        $survey->save();
+        Schema::create('results_'.$survey->code, function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->string('email')->unique();
+            $table->string('question_1');
+        });
+//        Survey::create($request->all()+['code'=>str_random(8)]);
 
 //        Auth::user()->surveys->create($request->all());
 

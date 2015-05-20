@@ -155,6 +155,7 @@ return [
         'Orchestra\Auth\CommandServiceProvider',
         'Orchestra\Memory\CommandServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
+        'Bican\Roles\RolesServiceProvider',
     ],
 
 	/*
