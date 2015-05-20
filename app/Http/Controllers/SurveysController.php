@@ -40,9 +40,9 @@ class SurveysController extends Controller {
 	 */
 	public function create()
 	{
-//		return $this->user->role->name;
         $questionSet = QuestionSet::lists('description', 'id');
-        $faculty = Faculty::selectRaw('CONCAT(last_name,", ", first_name," ",middle_name) as full_name, id')->orderBy('last_name')->lists('full_name','id');
+        $faculty = Faculty::get()->lists('full_name', 'id');
+
 
 	    return view('surveys.create', compact('questionSet', 'faculty'));
     }
