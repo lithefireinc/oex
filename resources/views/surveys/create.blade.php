@@ -44,7 +44,7 @@
     <div class="form-group">
         {!! Form::label('expires', 'End Date:') !!}
         {!! Form::input('date', 'expires', date('Y-m-d'), ['class' => 'form-control']) !!}
-    <div>
+    </div>
 
     <!-- 'Create Survey' Form Input -->
     <div class="form-group">
@@ -53,6 +53,6 @@
 
     {!! Form::close() !!}
 
-    {{--@include ('errors.list')--}}
+    @include ('errors.list')
 
 @endsection

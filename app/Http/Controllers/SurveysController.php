@@ -3,6 +3,8 @@
 use App\Faculty;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SurveyRequest;
+use App\Http\Requests\TakeSurveyRequest;
 use App\Question;
 use App\QuestionSet;
 use Auth;
@@ -45,16 +47,19 @@ class SurveysController extends Controller {
 	    return view('surveys.create', compact('questionSet', 'faculty'));
     }
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param SurveyRequest $request
+     * @return Response
+     */
+	public function store(SurveyRequest $request)
 	{
-		$input = Request::all();
+//        Request::all($request);
 
-        Survey::create($input);
+        Survey::create($request->all());
+
+//        Auth::user()->surveys->create($request->all());
 
         flash('Survey created successfully!');
 
@@ -115,7 +120,13 @@ class SurveysController extends Controller {
     {
         $survey = Survey::findOrFail($id);
         $questions = $survey->questionSet->question;
+        $choices = [1,2,3,4,5];
 
-        return view('surveys.takeSurvey', compact('survey', 'questions'));
+        return view('surveys.takeSurvey', compact('survey', 'questions', 'choices'));
+    }
+
+    public function storeTakeSurvey(TakeSurveyRequest $request)
+    {
+        return $request->all();
     }
 }

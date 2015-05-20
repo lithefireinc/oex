@@ -17,7 +17,7 @@ return array(
 	 */
 	'columns' => array(
 		'id',
-		'title',
+        'order',
         'question',
         'question_set_id' => array(
             'title' => "Question Set",
@@ -30,7 +30,7 @@ return array(
 	 * The filter set
 	 */
 	'filters' => array(
-        'title',
+        'question',
         'question_set_id' => array(
             'title' => "Question Set",
             'relationship' => 'questionSet', //this is the name of the Eloquent relationship method!
@@ -42,15 +42,15 @@ return array(
 	 * The editable fields
 	 */
 	'edit_fields' => array(
-		'title' => array(
-			'title' => 'Title',
-			'type' => 'text',
-		),
-        'question' => array(
-            'title' => "Question",
-            'type' => 'textarea',
-            'height' => 130
+        'order' => array(
+            'title' => 'Order',
+            'type' => 'number',
         ),
+		'question' => array(
+			'title' => 'Question',
+			'type' => 'textarea',
+            'height' => '200',
+		),
         'questionSet' => array(
             'type' => "relationship",
             'title' => 'Question Set', //this is the name of the Eloquent relationship method!
