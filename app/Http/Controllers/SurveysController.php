@@ -23,6 +23,7 @@ class SurveysController extends Controller {
     {
         $this->middleware('auth');
         parent::__construct();
+
     }
 	/**
 	 * Display a listing of the resource.
@@ -31,6 +32,10 @@ class SurveysController extends Controller {
 	 */
 	public function index()
 	{
+        if($this->user->level() < 99)
+        {
+            abort(403);
+        }
         $surveys = Survey::latest('created_at')->get();
 		return view('surveys.index', compact('surveys'));
 	}
@@ -42,6 +47,11 @@ class SurveysController extends Controller {
 	 */
 	public function create()
 	{
+        if($this->user->level() < 99)
+        {
+            abort(403);
+        }
+
         $questionSet = QuestionSet::lists('description', 'id');
         $faculty = Faculty::get()->lists('full_name', 'id');
 
@@ -57,6 +67,10 @@ class SurveysController extends Controller {
      */
 	public function store(SurveyRequest $request)
 	{
+        if($this->user->level() < 99)
+        {
+            abort(403);
+        }
 //        Request::all($request);
         $survey = Survey::firstOrNew(['code'=>str_random(8)]);
         $survey->fill($request->all());

@@ -12,7 +12,7 @@ class RoleTableSeeder extends Seeder
             exit('I just stopped you getting fired. Love, Amo.');
         }
 
-        DB::table('role')->truncate();
+        //DB::table('roles')->truncate();
 
         Role::create([
             'id'            => 1,

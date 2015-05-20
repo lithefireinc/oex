@@ -12,10 +12,9 @@
 */
 
 // Route::get('/', 'PagesController@index');
-Route::get('/', [
-    'middleware' => ['auth'],
-    'uses' => 'PagesController@index'
-]);
+Route::get('/', function(){
+    return redirect('surveys/available');
+});
 
 
 Route::get('surveys/available',  [
