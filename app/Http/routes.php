@@ -17,11 +17,7 @@ Route::get('/', [
     'uses' => 'PagesController@index'
 ]);
 
-//Route::get('surveys/', [
-//    'middleware' => ['auth', 'roles'],
-//    'uses' => 'SurveysController@index',
-//    'roles' => ['administrator']
-//]);
+
 Route::get('surveys/available',  [
     'middleware' => ['auth'],
     'uses' => 'SurveysController@available'
@@ -35,6 +31,12 @@ Route::get('surveys/takeSurvey/{id}',  [
 Route::post('surveys/takeSurvey', 'SurveysController@storeTakeSurvey');
 
 Route::resource('surveys', 'SurveysController');
+
+Route::get('surveys', [
+    'middleware' => ['auth', 'roles'],
+    'uses' => 'SurveysController@index',
+    'roles' => ['administrator']
+]);
 Route::resource('questionSets', 'QuestionSetsController');
 
 Route::controllers([
