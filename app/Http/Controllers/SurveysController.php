@@ -22,7 +22,6 @@ class SurveysController extends Controller {
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('roles', ['roles' => ['Administrator']]);
         parent::__construct();
     }
 	/**

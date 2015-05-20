@@ -32,11 +32,6 @@ Route::post('surveys/takeSurvey', 'SurveysController@storeTakeSurvey');
 
 Route::resource('surveys', 'SurveysController');
 
-Route::get('surveys', [
-    'middleware' => ['auth', 'roles'],
-    'uses' => 'SurveysController@index',
-    'roles' => ['administrator']
-]);
 Route::resource('questionSets', 'QuestionSetsController');
 
 Route::controllers([
