@@ -3,7 +3,10 @@
 use Illuminate\Database\Eloquent\Model;
 
 class Survey extends Model {
-
+    protected $dates = ['start_date', 'expires'];
+    protected $casts = [
+        'active' => 'boolean'
+    ];
 	protected $fillable = [
         'title',
         'description',
@@ -11,7 +14,8 @@ class Survey extends Model {
         'question_set_id',
         'faculty_id',
         'start_date',
-        'expires'
+        'expires',
+        'active',
     ];
 
     public function questionSet()

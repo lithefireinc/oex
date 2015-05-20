@@ -36,5 +36,6 @@ return array(
 			'type' => 'text',
 		),
 	),
+    'form_width' => 500,
 
 );

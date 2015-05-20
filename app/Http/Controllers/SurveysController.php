@@ -13,6 +13,7 @@ use App\Survey;
 //use Illuminate\Http\Request;
 use Request;
 use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
 
 class SurveysController extends Controller {
 
@@ -29,7 +30,6 @@ class SurveysController extends Controller {
 	public function index()
 	{
         $surveys = Survey::latest('created_at')->get();
-
 		return view('surveys.index', compact('surveys'));
 	}
 

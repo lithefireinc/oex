@@ -16,8 +16,9 @@ return array(
 	 * The display columns
 	 */
 	'columns' => array(
+		'id',
         'order',
-		'question',
+        'question',
         'question_set_id' => array(
             'title' => "Question Set",
             'relationship' => 'questionSet', //this is the name of the Eloquent relationship method!
@@ -56,5 +57,14 @@ return array(
             'name_field' => "description",
         ),
 	),
+    'rules' => array(
+        'question_set_id' => 'required',
+        'question' => 'required',
+
+    ),
+    'messages' => array(
+        'question_set_id.required' => 'Select a question set.'
+    ),
+    'form_width' => 500,
 
 );
