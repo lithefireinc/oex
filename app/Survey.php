@@ -16,6 +16,7 @@ class Survey extends Model {
         'start_date',
         'expires',
         'active',
+        'code',
     ];
 
     public function questionSet()
