@@ -30,14 +30,9 @@
     </div>
 
     <div class="form-group">
-        {!! Form::label('faculty_id') !!}
+        {!! Form::label('faculty_id', 'Faculty Id:') !!}
         {!! Form::select('faculty_id', $faculty, null, ['class' => 'form-control']) !!}
     </div>
-    {{----}}
-    {{--<div class="form-group">--}}
-        {{--{!! Form::label('faculty_id', 'Faculty:') !!}--}}
-        {{--{!! Form::select('faculty_id', $faculty, null, ['class' => 'form-control']) !!}--}}
-    {{--</div>--}}
 
     <!-- Start_date Form Input -->
     <div class="form-group">

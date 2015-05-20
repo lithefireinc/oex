@@ -17,12 +17,17 @@ elixir(function(mix) {
 
     mix.styles([
         'libs/bootstrap.min.css',
+        'libs/select2.css',
+        'libs/bootstrap-datetimepicker.min.css',
         'app.css',
-        'libs/select2.css'
     ]);
 
     mix.scripts([
         'libs/jquery.js',
-        'select2.js'
+        'libs/select2.js',
+        'libs/bootstrap.min.js',
+        'libs/moment.js',
+        'libs/bootstrap-datetimepicker.js',
+        'app.js',
     ]);
 });
