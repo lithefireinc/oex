@@ -21,7 +21,7 @@
                 <tr>
                     <td>{{ $survey->title }}</td>
                     <td>{{ $survey->questionSet->description }}</td>
-                    <td>{{ $survey->faculty->fullName}}</td>
+                    <td>{{ $survey->faculty->full_name}}</td>
                     <td>{{ $survey->expires->diffForHumans()}}</td>
                 </tr>
             @endforeach
