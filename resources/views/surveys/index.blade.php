@@ -4,7 +4,7 @@
     <h1 class="page-heading">Surveys</h1>
 
     <div class="pull-right">
-        <a class="btn btn-primary" href="{{ url('surveys/create') }}">Create New</a>
+        <a class="btn btn-primary b-create" href="{{ url('surveys/create') }}">Create New</a>
     </div>
 
     <table class="table table-striped table-bordered">
