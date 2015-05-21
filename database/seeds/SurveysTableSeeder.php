@@ -11,7 +11,7 @@ class SurveysTableSeeder extends Seeder
         Survey::truncate();
 
         $survey_code = str_random(8);
-        Survey::create([
+        $survey = Survey::create([
 
             'title' => "STUDENTS' EVALUATION of FACULTY MEMBER",
             'description' => "STUDENTS' EVALUATION of FACULTY MEMBER",
@@ -30,11 +30,19 @@ class SurveysTableSeeder extends Seeder
             'expires' => date('Y-m-d H:i:s'),
 
         ]);
-        Schema::create('results_'.$survey_code, function(Blueprint $table)
+
+        $question_set = $survey->questionSet()->first();
+        $questions = $question_set->questions();
+        Schema::create('results_'.$survey_code, function(Blueprint $table) use ($questions, $survey)
         {
             $table->increments('id');
             $table->string('email')->unique();
-            $table->string('question_1');
+            $table->string('token');
+            $table->dateTime('startdate');
+            $table->dateTime('datestamp');
+            foreach($questions->get() as $question){
+                $table->string($survey->code.'X'.$questionSet->id.'X'.$question->id, 1);
+            }
         });
     }
 }

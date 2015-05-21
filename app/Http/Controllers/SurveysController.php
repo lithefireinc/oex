@@ -149,7 +149,7 @@ class SurveysController extends Controller {
         $results->setTable("results_".$survey->code);
 
         $results->fill(['email'=>$this->user->email, 'startdate'=>session()->get('startdate'), 'datestamp'=>Carbon::now()]+$request->all());
-        
+
         $results->save();
 
         return redirect('surveys/available');
