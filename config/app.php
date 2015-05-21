@@ -148,7 +148,7 @@ return [
 		* Third Party Providers
 		*/
 		'Frozennode\Administrator\AdministratorServiceProvider',
-//	    'Illuminate\Html\HtmlServiceProvider',
+	    'Illuminate\Html\HtmlServiceProvider',
 //        'Orchestra\Auth\AuthServiceProvider',
 //        'Orchestra\Authorization\AuthorizationServiceProvider',
 //        'Orchestra\Memory\MemoryServiceProvider',
