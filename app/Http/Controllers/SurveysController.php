@@ -140,15 +140,16 @@ class SurveysController extends Controller {
         return view('surveys.takeSurvey', compact('survey', 'questions', 'choices'));
     }
 
-    public function recordResult(Request $request)
+    public function recordResult(TakeSurveyRequest $request)
     {
 
         $survey = session()->get('survey');
 
         $results = new Result;
         $results->setTable("results_".$survey->code);
-        $results->fill(['email'=>$this->user->email, 'startdate'=>session()->get('startdate'), 'datestamp'=>Carbon::now()]+$request->all());
 
+        $results->fill(['email'=>$this->user->email, 'startdate'=>session()->get('startdate'), 'datestamp'=>Carbon::now()]+$request->all());
+        
         $results->save();
 
         return redirect('surveys/available');
