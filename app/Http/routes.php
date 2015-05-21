@@ -32,6 +32,8 @@ Route::resource('surveys', 'SurveysController');
 
 Route::resource('questionSets', 'QuestionSetsController');
 
+Route::resource('questionTypes', 'QuestionTypeController');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
