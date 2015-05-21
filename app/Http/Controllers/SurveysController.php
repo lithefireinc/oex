@@ -71,31 +71,8 @@ class SurveysController extends Controller {
         {
             abort(403);
         }
-//        Request::all($request);
-        $survey = Survey::firstOrNew(['code'=>str_random(8)]);
-        $survey->fill($request->all());
-        $survey->save();
-        $questionSet =$survey->questionSet()->first();
-        $questions = $questionSet->questions();
 
-        Schema::create('results_'.$survey->code, function(Blueprint $table) use ($questions, $questionSet, $survey)
-        {
-
-            $table->increments('id');
-            $table->string('email')->unique();
-            $table->string('token');
-            $table->dateTime('startdate');
-            $table->dateTime('datestamp');
-
-            foreach($questions->get() as $question){
-                $table->string($survey->code.'X'.$questionSet->id.'X'.$question->id, 1);
-            }
-
-        });
-//        Survey::create($request->all()+['code'=>str_random(8)]);
-
-//        Auth::user()->surveys->create($request->all());
-
+        $this->saveData($request);
         flash('Survey created successfully!');
 
         return redirect('surveys');
@@ -154,7 +131,7 @@ class SurveysController extends Controller {
     public function takeSurvey($id)
     {
         $survey = Survey::findOrFail($id);
-        $questions = $survey->questionSet->question;
+        $questions = $survey->questionSet->questions;
         $choices = [1,2,3,4,5];
 
         return view('surveys.takeSurvey', compact('survey', 'questions', 'choices'));
@@ -163,5 +140,28 @@ class SurveysController extends Controller {
     public function storeTakeSurvey(TakeSurveyRequest $request)
     {
         return $request->all();
+    }
+
+    private function saveData(SurveyRequest $request){
+        $survey = Survey::firstOrNew(['code'=>str_random(8)]);
+        $survey->fill($request->all());
+        $survey->save();
+        $questionSet =$survey->questionSet()->first();
+        $questions = $questionSet->questions();
+
+        Schema::create('results_'.$survey->code, function(Blueprint $table) use ($questions, $questionSet, $survey)
+        {
+
+            $table->increments('id');
+            $table->string('email')->unique();
+            $table->string('token');
+            $table->dateTime('startdate');
+            $table->dateTime('datestamp');
+
+            foreach($questions->get() as $question){
+                $table->string($survey->code.'X'.$questionSet->id.'X'.$question->id, 1);
+            }
+
+        });
     }
 }

@@ -20,6 +20,8 @@ elixir(function(mix) {
         'libs/select2.css',
         'libs/bootstrap-datetimepicker.min.css',
         'libs/select2-bootstrap.css',
+        'libs/font-awesome.min.css',
+        'mac-styles.css',
         'app.css',
     ]);
 

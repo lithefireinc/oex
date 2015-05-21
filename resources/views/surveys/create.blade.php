@@ -4,6 +4,8 @@
 
     <h1 class="page-heading">Create Survey</h1>
 
+    @include ('errors.list')
+
     {!! Form::open(['url'=>'surveys']) !!}
 <div class="row">
     <div class="col-sm-12">
@@ -52,7 +54,7 @@
     <div class="col-sm-3">
         <!-- Expires Form Input -->
         <div class="form-group">
-            {!! Form::label('start_date', 'Start Date:') !!}
+            {!! Form::label('start_date', 'Expires:') !!}
             <div class='input-group date' id='end'>
                 {!! Form::text('expires', null, ['class' => 'form-control']) !!}
                         <span class="input-group-addon">
@@ -69,6 +71,6 @@
 
     {!! Form::close() !!}
 
-    @include ('errors.list')
+
 
 @endsection
