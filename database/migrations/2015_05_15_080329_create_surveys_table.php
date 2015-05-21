@@ -43,6 +43,12 @@ class CreateSurveysTable extends Migration {
 	public function down()
 	{
 		Schema::drop('surveys');
+
+        $tables = DB::select('SHOW TABLES');
+        foreach ($tables as $table) {
+            if (strpos($table->Tables_in_oex, 'results')!==false)
+                Schema::drop($table->Tables_in_oex);
+        }
 	}
 
 }
