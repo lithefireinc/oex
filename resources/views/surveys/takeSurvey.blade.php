@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1 class="page-heading">Take Survey</h1>
+    <h1 class="page-heading">Evaluation of {!! $survey->faculty->full_name !!}</h1>
 
     <p style="white-space: pre-wrap; margin-bottom: 50px;"><b>Direction: </b>{{ $survey->instructions }}</p>
 
