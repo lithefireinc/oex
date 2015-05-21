@@ -23,11 +23,10 @@ Route::get('surveys/available',  [
 ]);
 
 Route::get('surveys/takeSurvey/{id}',  [
-    'middleware' => ['auth'],
     'uses' => 'SurveysController@takeSurvey'
 ]);
 
-Route::post('surveys/takeSurvey', 'SurveysController@storeTakeSurvey');
+Route::post('surveys/takeSurvey', 'SurveysController@recordResult');
 
 Route::resource('surveys', 'SurveysController');
 

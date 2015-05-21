@@ -8,6 +8,7 @@ use App\Http\Requests\TakeSurveyRequest;
 use App\Question;
 use App\QuestionSet;
 use Auth;
+use App\Result;
 
 use App\Survey;
 //use Illuminate\Http\Request;
@@ -134,12 +135,23 @@ class SurveysController extends Controller {
         $questions = $survey->questionSet->questions;
         $choices = [1,2,3,4,5];
 
+        session()->flash('survey', $survey);
+        session()->flash('startdate', Carbon::now());
         return view('surveys.takeSurvey', compact('survey', 'questions', 'choices'));
     }
 
-    public function storeTakeSurvey(TakeSurveyRequest $request)
+    public function recordResult(Request $request)
     {
-        return $request->all();
+
+        $survey = session()->get('survey');
+
+        $results = new Result;
+        $results->setTable("results_".$survey->code);
+        $results->fill(['email'=>$this->user->email, 'startdate'=>session()->get('startdate'), 'datestamp'=>Carbon::now()]+$request->all());
+
+        $results->save();
+
+        return redirect('surveys/available');
     }
 
     private function saveData(SurveyRequest $request){
