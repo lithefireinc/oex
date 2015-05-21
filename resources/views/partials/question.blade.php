@@ -6,7 +6,8 @@
         <div class="form-inline">
             @foreach($choices as $choice)
             <label class="radio-inline">
-                <input class="toggleBtn" type="radio" name="{!!$survey->code!!}X{!! $question->questionSet->id !!}X{!! $question->id !!}" value="{!! $choice !!}">{!!$choice!!}
+                {{--{!! Form::radio($fieldname.$question->id, Input::old($fieldname.$question->id) == $choice) !!} {!! $choice !!}--}}
+                <input type="radio" name="{!! $fieldname.$question->id !!}" value="{!! $choice !!}" @if(Input::old($fieldname.$question->id) == $choice) checked @endif>{!!$choice!!}
             </label>
 
             @endforeach

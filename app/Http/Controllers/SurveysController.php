@@ -137,7 +137,8 @@ class SurveysController extends Controller {
 
         session()->flash('survey', $survey);
         session()->flash('startdate', Carbon::now());
-        return view('surveys.takeSurvey', compact('survey', 'questions', 'choices'));
+        $fieldname = $survey->code.'X'.$survey->questionSet->id.'X';
+        return view('surveys.takeSurvey', compact('survey', 'questions', 'choices', 'fieldname'));
     }
 
     public function recordResult(TakeSurveyRequest $request)

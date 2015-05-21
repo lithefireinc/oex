@@ -4,11 +4,21 @@ use App\Http\Requests\Request;
 
 class TakeSurveyRequest extends Request {
 
+    protected $survey;
+    protected $question_set;
+    protected $questions;
+    public function __construct()
+    {
+        $this->survey = session()->get('survey');
+        $this->question_set = $this->survey->questionSet()->first();
+        $this->questions = $this->question_set->questions();
+    }
 	/**
 	 * Determine if the user is authorized to make this request.
 	 *
 	 * @return bool
 	 */
+
 	public function authorize()
 	{
 		return true;
@@ -21,9 +31,23 @@ class TakeSurveyRequest extends Request {
 	 */
 	public function rules()
 	{
-		return [
-        //
-		];
+        $rules = [];
+
+        foreach($this->questions->get() as $question){
+            $rules[$this->survey->code.'X'.$this->question_set->id.'X'.$question->id] = 'required';
+        }
+		return $rules;
 	}
+
+    public function messages()
+    {
+        $messages = [];
+        $count = 1;
+        foreach($this->questions->get() as $question){
+            $messages[$this->survey->code.'X'.$this->question_set->id.'X'.$question->id.'.required'] = "Item $count is required";
+            $count++;
+        }
+        return $messages;
+    }
 
 }

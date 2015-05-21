@@ -6,7 +6,7 @@
 
     <p style="white-space: pre-wrap; margin-bottom: 50px;"><b>Direction: </b>{{ $survey->instructions }}</p>
 
-
+    @include ('errors.list')
             {!! Form::open(['url'=>'surveys/takeSurvey']) !!}
         <ol>
                     @foreach( $questions as $question )
