@@ -18,6 +18,7 @@ class RoleTableSeeder extends Seeder
             'id'            => 1,
             'name'          => 'Superuser',
             'slug'          => 'superuser',
+            'level'         => 100,
             'description'   => 'Use this account with extreme caution. When using this account it is possible to cause irreversible damage to the system.'
         ]);
 
@@ -25,6 +26,7 @@ class RoleTableSeeder extends Seeder
             'id'            => 2,
             'name'          => 'Administrator',
             'slug'          => 'admin',
+            'level'         => 99,
             'description'   => ''
         ]);
 
