@@ -148,12 +148,12 @@ return [
 		* Third Party Providers
 		*/
 		'Frozennode\Administrator\AdministratorServiceProvider',
-	    'Illuminate\Html\HtmlServiceProvider',
-        'Orchestra\Auth\AuthServiceProvider',
-        'Orchestra\Authorization\AuthorizationServiceProvider',
-        'Orchestra\Memory\MemoryServiceProvider',
-        'Orchestra\Auth\CommandServiceProvider',
-        'Orchestra\Memory\CommandServiceProvider',
+//	    'Illuminate\Html\HtmlServiceProvider',
+//        'Orchestra\Auth\AuthServiceProvider',
+//        'Orchestra\Authorization\AuthorizationServiceProvider',
+//        'Orchestra\Memory\MemoryServiceProvider',
+//        'Orchestra\Auth\CommandServiceProvider',
+//        'Orchestra\Memory\CommandServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
         'Bican\Roles\RolesServiceProvider',
     ],
@@ -204,7 +204,7 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
         'Form'      => 'Illuminate\Html\FormFacade',
-        'ACL'       => 'Orchestra\Support\Facades\ACL',
+//        'ACL'       => 'Orchestra\Support\Facades\ACL',
 
 	],
 
