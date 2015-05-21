@@ -17,7 +17,7 @@ class CreateQuestionsTable extends Migration {
 			$table->increments('id');
             $table->integer('question_set_id')->unsigned();
             // $table->foreign('question_sets_id')->references('id')->on('question_sets');
-			$table->integer('question_type');
+			$table->integer('question_type_id')->unsigned();
 			$table->string('title');
 			$table->text('question');
 			$table->tinyInteger('required');
