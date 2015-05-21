@@ -75,11 +75,22 @@ class SurveysController extends Controller {
         $survey = Survey::firstOrNew(['code'=>str_random(8)]);
         $survey->fill($request->all());
         $survey->save();
-        Schema::create('results_'.$survey->code, function(Blueprint $table)
+        $questionSet =$survey->questionSet()->first();
+        $questions = $questionSet->questions();
+
+        Schema::create('results_'.$survey->code, function(Blueprint $table) use ($questions, $questionSet, $survey)
         {
+
             $table->increments('id');
             $table->string('email')->unique();
-            $table->string('question_1');
+            $table->string('token');
+            $table->dateTime('startdate');
+            $table->dateTime('datestamp');
+
+            foreach($questions->get() as $question){
+                $table->string($survey->code.'X'.$questionSet->id.'X'.$question->id, 1);
+            }
+
         });
 //        Survey::create($request->all()+['code'=>str_random(8)]);
 

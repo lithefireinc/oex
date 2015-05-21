@@ -21,7 +21,7 @@ class Survey extends Model {
 
     public function questionSet()
     {
-        return $this->belongsTo('\App\QuestionSet');
+        return $this->belongsTo('App\QuestionSet');
     }
 
     public function faculty()

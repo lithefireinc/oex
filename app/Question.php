@@ -14,6 +14,6 @@ class Question extends Model {
 
     public function questionSet()
     {
-        return $this->belongsTo('\App\QuestionSet');
+        return $this->belongsTo('\App\QuestionSet', 'question_set_id', 'id');
     }
 }
