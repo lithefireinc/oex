@@ -173,7 +173,11 @@ class SurveysController extends Controller {
             $table->dateTime('datestamp');
 
             foreach($questions->get() as $question){
-                $table->string($survey->code.'X'.$questionSet->id.'X'.$question->id, 1);
+                if($question->question_type_id == 1){
+                    $table->string($survey->code.'X'.$questionSet->id.'X'.$question->id, 1);
+                } elseif ($question->question_type_id == 2){
+                    $table->text($survey->code.'X'.$questionSet->id.'X'.$question->id);
+                }
             }
 
         });
