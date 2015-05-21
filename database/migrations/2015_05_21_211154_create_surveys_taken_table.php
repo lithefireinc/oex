@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSurveysTakensTable extends Migration {
+class CreateSurveysTakenTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -28,7 +28,7 @@ class CreateSurveysTakensTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('surveys_takens');
+		Schema::drop('surveys_taken');
 	}
 
 }
