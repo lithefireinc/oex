@@ -86,6 +86,6 @@
 
     <!-- Footer ends -->
 	<!-- Scripts -->
-    <script src="/js/all.js"></script>
+    <script src="{{ asset('/js/all.js') }}"></script>
 </body>
 </html>
