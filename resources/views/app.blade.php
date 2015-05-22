@@ -35,7 +35,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/') }}">Home</a></li>
                     @if (Auth::check())
-                    <li><a href="{{ url('surveys/available') }}">Surveys</a></li>
+                    <li><a href="{{ url('surveys/available') }}">Evaluations</a></li>
                     @endif
                     @if(Auth::check() && (Auth::user()->level() > 98))
 
@@ -65,10 +65,26 @@
 			</div>
 		</div>
 	</nav>
-    <div class="container">
-        @include('flash::message')
-	    @yield('content')
+    <div class="wrap">
+        <div class="container clear-top main">
+
+            @include('flash::message')
+	        @yield('content')
+        </div>
     </div>
+    <!-- Footer starts -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Copyright info -->
+                        <p class="copy">Copyright &copy; 2015 | <a href="http://lithefire.com">Lithefire Solutions Inc.</a> </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Footer ends -->
 	<!-- Scripts -->
     <script src="/js/all.js"></script>
 </body>

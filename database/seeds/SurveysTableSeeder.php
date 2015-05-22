@@ -3,6 +3,7 @@
 use App\Survey;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class SurveysTableSeeder extends Seeder
 {
@@ -27,7 +28,8 @@ class SurveysTableSeeder extends Seeder
             'faculty_id' => '1',
             'question_set_id' => 1,
             'start_date' => date('Y-m-d H:i:s'),
-            'expires' => date('Y-m-d H:i:s'),
+            'expires' => Carbon::parse('+ 7 days'),
+            'active' => 1,
 
         ]);
 
@@ -41,7 +43,11 @@ class SurveysTableSeeder extends Seeder
             $table->dateTime('startdate');
             $table->dateTime('datestamp');
             foreach($questions->get() as $question){
-                $table->string($survey->code.'X'.$question_set->id.'X'.$question->id, 1);
+                if($question->question_type_id == 1){
+                    $table->string($survey->code.'X'.$question_set->id.'X'.$question->id, 1);
+                } elseif ($question->question_type_id == 2){
+                    $table->text($survey->code.'X'.$question_set->id.'X'.$question->id);
+                }
             }
         });
     }

@@ -13,7 +13,8 @@
             <th>Title</th>
             <th>Question Set</th>
             <th>Faculty</th>
-            <th>Active until</th>
+            <th>Expires</th>
+            <th>Actions</th>
         </thead>
 
         <tbody>
@@ -23,6 +24,7 @@
                     <td>{{ $survey->questionSet->description }}</td>
                     <td>{{ $survey->faculty->full_name}}</td>
                     <td>{{ $survey->expires->diffForHumans()}}</td>
+                    <td></td>
                 </tr>
             @endforeach
         </tbody>

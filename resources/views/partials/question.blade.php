@@ -2,7 +2,7 @@
     <h3>{!! $question->question !!}</h3>
     <hr/>
 
-    @if($question->questionType->question_type == 'Rate')
+    @if($question->questionType->description == 'Rating (1-5)')
         <div class="alert alert-info">
             <div class="form-inline">
                 @foreach($choices as $choice)
@@ -14,12 +14,12 @@
             </div>
         </div>
 
-    @elseif($question->questionType->question_type == 'Essay')
+    @elseif($question->questionType->description == 'Essay')
     <div class="alert alert-info">
         <div class="form-inline">
                 <!-- Question_type Form Input -->
                 <div class="form-group">
-                    {!! Form::textarea('question_type', null, ['class' => 'form-control', 'size' => '128x10']) !!}
+                    {!! Form::textarea($fieldname.$question->id, null, ['class' => 'form-control', 'size' => '128x10']) !!}
                 </div>
         </div>
     </div>

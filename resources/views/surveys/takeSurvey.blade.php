@@ -14,7 +14,7 @@
                     @endforeach
         </ol>
 
-    {!! Form::submit('Submit', ['class' => 'btn btn-primary form-control']) !!}
+    {!! Form::submit('Submit', ['class' => 'btn btn-primary form-control b-create']) !!}
 
     {!! Form::close() !!}
 

@@ -10,10 +10,10 @@ class QuestionTypesTableSeeder extends Seeder
         QuestionType::truncate();
 
         QuestionType::create([
-            'question_type' => 'Rate',
+            'description' => 'Rating (1-5)',
         ]);
         QuestionType::create([
-            'question_type' => 'Essay',
+            'description' => 'Essay',
         ]);
     }
 }

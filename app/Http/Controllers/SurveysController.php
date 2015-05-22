@@ -7,9 +7,9 @@ use App\Http\Requests\SurveyRequest;
 use App\Http\Requests\TakeSurveyRequest;
 use App\Question;
 use App\QuestionSet;
+use App\SurveysTaken;
 use Auth;
 use App\Result;
-
 use App\Survey;
 //use Illuminate\Http\Request;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,6 +17,7 @@ use Request;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class SurveysController extends Controller {
 
@@ -124,7 +125,8 @@ class SurveysController extends Controller {
 	}
 
     public function available(){
-        $surveys = Survey::latest('created_at')->get();
+        $surveys = Survey::active()->notTakenSurvey($this->user->id)->withinDate()->latest('created_at')->get();
+
         return view('surveys.available', compact('surveys'));
     }
 
@@ -153,11 +155,13 @@ class SurveysController extends Controller {
 
         $results->save();
 
+        SurveysTaken::create(["user_id"=>$this->user->id, "survey_code"=>$survey->code]);
+
         return redirect('surveys/available');
     }
 
     private function saveData(SurveyRequest $request){
-        $survey = Survey::firstOrNew(['code'=>str_random(8)]);
+        $survey = Survey::firstOrNew(['code'=>str_random(8), 'active'=>1]);
         $survey->fill($request->all());
         $survey->save();
         $questionSet =$survey->questionSet()->first();

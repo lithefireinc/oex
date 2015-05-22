@@ -1,27 +1,23 @@
 @extends('app')
 @section('content')
 
-    <h1 class="page-heading">Surveys</h1>
+    <h1 class="page-heading">Active Evaluations</h1>
 
     <table class="table table-striped table-bordered">
 
         <thead>
-        <th>Title</th>
-        <th>Question Set</th>
         <th>Faculty</th>
         <th>Duration</th>
-        <th>Action</th>
+        <th>Actions</th>
         </thead>
 
         <tbody>
         @foreach($surveys as $survey)
             <tr>
-                <td>{{ $survey->title }}</td>
-                <td>{{ $survey->questionSet->description }}</td>
-                <td>{{ $survey->faculty->last_name.', '.$survey->faculty->last_name.' '.$survey->faculty->middle_name}}</td>
-                <td>{{ date('F d, Y', strtotime($survey->start_date)) .' - '. date('F d, Y', strtotime($survey->expires))}}</td>
+                <td>{{ $survey->faculty->full_name}}</td>
+                <td>{!! $survey->start_date->toDayDateTimeString() !!}-<br/>{!! $survey->expires->toDayDateTimeString() !!}</td>
                 <td>
-                    <a class="btn btn-success" href="{{ action('SurveysController@takeSurvey', [$survey]) }}">Take Survey</a>
+                    <a class="btn btn-success" href="{{ action('SurveysController@takeSurvey', [$survey]) }}">Evaluate</a>
                 </td>
             </tr>
         @endforeach
@@ -30,7 +26,7 @@
     </table>
 
     @unless(count($surveys))
-        <p class="text-center">There are no active surveys!</p>
+        <p class="text-center">There are no active evaluations!</p>
     @endunless
 
 @stop
