@@ -29,7 +29,7 @@
                         {!! Form::open(['method'=>'PATCH', 'url'=>'surveys/' . $survey->id]) !!}
                             {{--<div class="form-group">--}}
                                 @if($survey->active == 1)
-                                {!! Form::submit('Deactivate', array('class' => 'btn btn-success')) !!}
+                                {!! Form::submit('Deactivate', array('class' => 'btn btn-danger')) !!}
                                 @else
                                 {!! Form::submit('Activate', array('class' => 'btn btn-success')) !!}
                                 @endif

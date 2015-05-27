@@ -118,6 +118,11 @@ class SurveysController extends Controller {
         Survey::findOrFail($surveyId)
             ->update(['active' => $isActive]);
 
+        if(!$isActive)
+            flash('Survey '. Survey::pluck('title') . ' is now Inactive!');
+        else
+            flash('Survey '. Survey::pluck('title') . ' is now Active!');
+
         return redirect()->back();
 	}
 
