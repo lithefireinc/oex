@@ -17,14 +17,14 @@ return array(
 	 */
 	'columns' => array(
 		'id',
-        'question_type',
+        'description',
     ),
 
 	/**
 	 * The filter set
 	 */
 	'filters' => array(
-        'question_type',
+        'description',
 	),
 
 	/**
@@ -37,7 +37,7 @@ return array(
 		),
 	),
     'rules' => array(
-        'question_type' => 'required',
+        'description' => 'required',
 
     ),
     'form_width' => 500,
