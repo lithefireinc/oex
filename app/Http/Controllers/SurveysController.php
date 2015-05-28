@@ -102,15 +102,28 @@ class SurveysController extends Controller {
 		//
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param $surveyId
+     * @param Request $request
+     * @return Response
+     * @internal param int $id
+     */
+	public function update($surveyId)
 	{
-		//
+		$isActive = Survey::pluck('active');
+        $isActive = !$isActive;
+
+        Survey::findOrFail($surveyId)
+            ->update(['active' => $isActive]);
+
+        if(!$isActive)
+            flash('Survey '. Survey::pluck('title') . ' is now Inactive!');
+        else
+            flash('Survey '. Survey::pluck('title') . ' is now Active!');
+
+        return redirect()->back();
 	}
 
 	/**

@@ -24,7 +24,20 @@
                     <td>{{ $survey->questionSet->description }}</td>
                     <td>{{ $survey->faculty->full_name}}</td>
                     <td>{{ $survey->expires->diffForHumans()}}</td>
-                    <td></td>
+                    <td align="center">
+                        
+                        {!! Form::open(['method'=>'PATCH', 'url'=>'surveys/' . $survey->id]) !!}
+                            {{--<div class="form-group">--}}
+                                @if($survey->active == 1)
+                                {!! Form::submit('Deactivate', array('class' => 'btn btn-danger')) !!}
+                                @else
+                                {!! Form::submit('Activate', array('class' => 'btn btn-success')) !!}
+                                @endif
+                            {{--</div>--}}
+
+                        {!! Form::close() !!}
+
+                    </td>
                 </tr>
             @endforeach
         </tbody>
