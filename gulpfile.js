@@ -21,6 +21,7 @@ elixir(function(mix) {
         'libs/bootstrap-datetimepicker.min.css',
         'libs/select2-bootstrap.css',
         'libs/font-awesome.min.css',
+        'libs/jquery.dataTables.css',
         'mac-styles.css',
         'app.css',
     ]);
@@ -31,6 +32,7 @@ elixir(function(mix) {
         'libs/bootstrap.min.js',
         'libs/moment.js',
         'libs/bootstrap-datetimepicker.js',
+        'libs/jquery.dataTables.js',
         'app.js',
     ]);
 });
