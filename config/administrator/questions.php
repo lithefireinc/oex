@@ -27,7 +27,7 @@ return array(
         'question_type_id' => array(
             'title' => "Question Type",
             'relationship' => 'questionType', //this is the name of the Eloquent relationship method!
-            'select' => "question_type",
+            'select' => "description",
         ),
     ),
 
@@ -44,7 +44,7 @@ return array(
         'question_type_id' => array(
             'title' => "Question Type",
             'relationship' => 'questionType', //this is the name of the Eloquent relationship method!
-            'select' => "question_type",
+            'select' => "description",
         ),
 	),
 
@@ -69,7 +69,7 @@ return array(
         'questionType' => array(
             'type' => "relationship",
             'title' => 'Question Type', //this is the name of the Eloquent relationship method!
-            'name_field' => "question_type",
+            'name_field' => "description",
         ),
 	),
     'rules' => array(
