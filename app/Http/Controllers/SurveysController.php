@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use yajra\Datatables\Datatables;
 
 class SurveysController extends Controller {
 
@@ -198,5 +199,39 @@ class SurveysController extends Controller {
             }
 
         });
+    }
+
+
+    public function getIndex()
+    {
+        return view('surveys.index');
+    }
+
+    public function getData()
+    {
+//        $surveys = Survey::with('faculty')->select('*');
+        $surveys = Survey::leftJoin('faculties', 'surveys.faculty_id', '=', 'faculties.id')
+            ->select([
+                'surveys.id',
+                'last_name',
+                'first_name',
+                'middle_name',
+                'title',
+                'description',
+                'expires',
+                'active',
+                'surveys.created_at',
+                DB::raw('CONCAT(last_name, ", ", first_name, " ", middle_name) AS last_name')
+
+            ]);
+
+        return Datatables::of($surveys)
+            ->addColumn('action', function ($survey) {
+                if($survey->active == 1)
+                    return '<a class="btn btn-danger btn-sm" href=/active/'.$survey->id.'>Deactivate</a>';
+                else
+                    return '<a class="btn btn-success btn-sm" href=/active/'.$survey->id.'>Activate</a>';
+            })
+            ->make(true);
     }
 }

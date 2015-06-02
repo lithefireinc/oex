@@ -28,11 +28,26 @@ Route::get('surveys/takeSurvey/{id}',  [
 
 Route::post('surveys/takeSurvey', 'SurveysController@recordResult');
 
+/* Routes for Datatables */
+//Route::controllers([
+//    'surveys' => 'SurveysController'
+//]);
+Route::get('active/{id}', [
+    'uses' => 'SurveysController@update'
+]);
+Route::get('surveys', [
+    'uses' => 'SurveysController@getIndex'
+]);
+Route::get('surveys/data', [
+    'uses' => 'SurveysController@getData'
+]);
+
+
 Route::resource('surveys', 'SurveysController');
 
 Route::resource('questionSets', 'QuestionSetsController');
 
-Route::resource('questionTypes', 'QuestionTypeController');
+//Route::resource('questionTypes', 'QuestionTypeController');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
