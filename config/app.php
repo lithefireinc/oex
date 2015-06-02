@@ -156,6 +156,7 @@ return [
 //        'Orchestra\Memory\CommandServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
         'Bican\Roles\RolesServiceProvider',
+        'yajra\Datatables\DatatablesServiceProvider',
     ],
 
 	/*
@@ -205,6 +206,7 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
         'Form'      => 'Illuminate\Html\FormFacade',
 //        'ACL'       => 'Orchestra\Support\Facades\ACL',
+        'Datatables' => 'yajra\Datatables\Datatables',
 
 	],
 
