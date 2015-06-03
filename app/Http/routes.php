@@ -28,16 +28,10 @@ Route::get('surveys/takeSurvey/{id}',  [
 
 Route::post('surveys/takeSurvey', 'SurveysController@recordResult');
 
-/* Routes for Datatables */
-//Route::controllers([
-//    'surveys' => 'SurveysController'
-//]);
 Route::get('surveys/toggleActive/{id}', [
     'uses' => 'SurveysController@toggleActive'
 ]);
-//Route::get('surveys', [
-//    'uses' => 'SurveysController@getIndex'
-//]);
+
 Route::get('surveys/data', [
     'uses' => 'SurveysController@getData'
 ]);

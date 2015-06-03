@@ -208,10 +208,14 @@ class SurveysController extends Controller {
         return Datatables::of($surveys)
             ->removeColumn('')
             ->addColumn('action', function ($survey) {
-                if($survey->active == 1)
-                    return '<a class="btn btn-danger btn-sm" href="'.url('surveys/toggleActive', [$survey->id]).'">Deactivate</a>';
-                else
-                    return '<a href="'.url('surveys/toggleActive', [$survey->id]).'" class="btn btn-sm btn-hover btn-success"><span class="glyphicon glyphicon-check"></span></a>';
+                if($survey->active == 1){
+                    $btnCls = "btn btn-sm btn-success";
+                    $iconCls = "fa fa-check";
+                }else {
+                    $btnCls = "btn btn-sm btn-danger";
+                    $iconCls = "fa fa-times";
+                }
+                    return '<a href="'.url('surveys/toggleActive', [$survey->id]).'" class="'.$btnCls.'"><span class="'.$iconCls.'"></span></a>';
             })
             ->make(true);
     }
@@ -219,12 +223,13 @@ class SurveysController extends Controller {
     public function toggleActive($id)
     {
         $survey = Survey::findOrFail($id);
-
-        $survey->update(['active'=>!$survey->pluck('active')]);
-        if(!$survey->pluck('active'))
-            flash('Survey '. $survey->pluck('title') . ' is now Inactive!');
+        $survey->update(['active'=>!$survey->active]);
+        if(!$survey->active)
+            $active = "Inactive";
         else
-            flash('Survey '. $survey->pluck('title') . ' is now Active!');
+            $active = "Active";
+
+        flash('Survey '. $survey->title. ' is now '.$active.'!');
 
         return redirect()->back();
     }

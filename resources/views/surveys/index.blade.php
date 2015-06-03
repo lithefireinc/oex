@@ -15,7 +15,7 @@
             <th>Description</th>
             <th>Faculty</th>
             <th>Expires</th>
-            <th>Action</th>
+            <th>Active</th>
         </tr>
         </thead>
     </table>
