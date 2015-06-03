@@ -14,6 +14,8 @@
             <th>Title</th>
             <th>Description</th>
             <th>Faculty</th>
+            <th></th>
+            <th></th>
             <th>Expires</th>
             <th>Active</th>
         </tr>

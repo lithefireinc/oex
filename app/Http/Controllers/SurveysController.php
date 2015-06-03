@@ -201,21 +201,31 @@ class SurveysController extends Controller {
                 'expires',
                 'active',
                 'surveys.created_at',
-                DB::raw('CONCAT(last_name, ", ", first_name, " ", middle_name) AS full_name')
+                'last_name',
+                'first_name',
+                'middle_name',
+                DB::raw('CONCAT(last_name, ", ", first_name, " ", middle_name) AS last_name')
 
             ]);
 
         return Datatables::of($surveys)
             ->removeColumn('')
             ->addColumn('action', function ($survey) {
-                if($survey->active == 1){
-                    $btnCls = "btn btn-sm btn-success";
-                    $iconCls = "fa fa-check";
-                }else {
+                $disabled = '';
+                if($survey->expires < Carbon::now()){
+                    $disabled='disabled';
                     $btnCls = "btn btn-sm btn-danger";
                     $iconCls = "fa fa-times";
+                }else {
+                    if ($survey->active == 1) {
+                        $btnCls = "btn btn-sm btn-success";
+                        $iconCls = "fa fa-check";
+                    } else {
+                        $btnCls = "btn btn-sm btn-danger";
+                        $iconCls = "fa fa-times";
+                    }
                 }
-                    return '<a href="'.url('surveys/toggleActive', [$survey->id]).'" class="'.$btnCls.'"><span class="'.$iconCls.'"></span></a>';
+                    return '<a href="'.url('surveys/toggleActive', [$survey->id]).'" class="'.$btnCls.'" '.$disabled.'><span class="'.$iconCls.'"></span></a>';
             })
             ->make(true);
     }
