@@ -22,8 +22,9 @@ elixir(function(mix) {
         'libs/select2-bootstrap.css',
         'libs/font-awesome.min.css',
         //'libs/jquery.dataTables.css',
-        'libs/dataTables.bootstrap.css',
         'mac-styles.css',
+        'libs/dataTables.bootstrap.css',
+
         'app.css',
     ]);
 

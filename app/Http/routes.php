@@ -35,9 +35,9 @@ Route::post('surveys/takeSurvey', 'SurveysController@recordResult');
 Route::get('active/{id}', [
     'uses' => 'SurveysController@update'
 ]);
-Route::get('surveys', [
-    'uses' => 'SurveysController@getIndex'
-]);
+//Route::get('surveys', [
+//    'uses' => 'SurveysController@getIndex'
+//]);
 Route::get('surveys/data', [
     'uses' => 'SurveysController@getData'
 ]);

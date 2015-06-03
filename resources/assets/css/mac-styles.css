@@ -877,7 +877,7 @@ table.dataTable thead .sorting_asc_disabled {
 }
 
 table.dataTable thead .sorting_desc_disabled {
-    background: url("../images/sort_desc_disabled.png") no-repeat center right;
+    background: url("../img/sort_desc_disabled.png") no-repeat center right;
 }
 
 .page-tables table.dataTable thead th{

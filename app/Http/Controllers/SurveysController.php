@@ -210,7 +210,7 @@ class SurveysController extends Controller {
     public function getData()
     {
 //        $surveys = Survey::with('faculty')->select('*');
-        $surveys = Survey::leftJoin('faculties', 'surveys.faculty_id', '=', 'faculties.id')
+        $surveys = Survey::join('faculties', 'surveys.faculty_id', '=', 'faculties.id')
             ->select([
                 'surveys.id',
                 'last_name',
@@ -226,6 +226,7 @@ class SurveysController extends Controller {
             ]);
 
         return Datatables::of($surveys)
+            ->removeColumn('')
             ->addColumn('action', function ($survey) {
                 if($survey->active == 1)
                     return '<a class="btn btn-danger btn-sm" href=/active/'.$survey->id.'>Deactivate</a>';

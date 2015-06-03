@@ -19,8 +19,6 @@ $(function(){
     $("#end").on("dp.change", function (e) {
         $('#start').data("DateTimePicker").maxDate(e.date);
     });
-
-    $(document).ready(function() {
         $('#surveys-table').DataTable({
             "processing": true,
             "serverSide": true,
@@ -37,5 +35,5 @@ $(function(){
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
-    });
+
 });
