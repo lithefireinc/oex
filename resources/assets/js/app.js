@@ -23,7 +23,7 @@ $(function(){
             "processing": true,
             "serverSide": true,
             "order": [[0, "desc"]],
-            "ajax": "/surveys/data",
+            "ajax": "surveys/data",
             "columns": [
                 {data: 'id', name: 'id', visible: false, searchable: false},
                 {data: 'title', name: 'title'},
