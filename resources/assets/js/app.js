@@ -28,9 +28,7 @@ $(function(){
                 {data: 'id', name: 'id', visible: false, searchable: false},
                 {data: 'title', name: 'title'},
                 {data: 'description', name: 'description'},
-                {data: 'last_name', name: 'last_name'},
-                {data: 'first_name', name: 'first_name', visible: false},
-                {data: 'middle_name', name: 'middle_name', visible: false},
+                {data: 'full_name', name: 'last_name'},
                 {data: 'expires', name: 'expires'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]

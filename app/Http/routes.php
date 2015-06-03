@@ -32,8 +32,8 @@ Route::post('surveys/takeSurvey', 'SurveysController@recordResult');
 //Route::controllers([
 //    'surveys' => 'SurveysController'
 //]);
-Route::get('active/{id}', [
-    'uses' => 'SurveysController@update'
+Route::get('surveys/toggleActive/{id}', [
+    'uses' => 'SurveysController@toggleActive'
 ]);
 //Route::get('surveys', [
 //    'uses' => 'SurveysController@getIndex'
