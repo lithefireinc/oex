@@ -136,6 +136,7 @@ class SurveysController extends Controller {
 
     public function takeSurvey($id)
     {
+        $this->middleware('surveyTaken');
         $survey = Survey::findOrFail($id);
         $questions = $survey->questionSet->questions;
         $choices = [1,2,3,4,5];

@@ -23,7 +23,8 @@ Route::get('surveys/available',  [
 ]);
 
 Route::get('surveys/takeSurvey/{id}',  [
-    'uses' => 'SurveysController@takeSurvey'
+    'uses' => 'SurveysController@takeSurvey',
+    'middleware' => 'surveyTaken'
 ]);
 
 Route::post('surveys/takeSurvey', 'SurveysController@recordResult');
