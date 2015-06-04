@@ -4,5 +4,4 @@
 .idea/
 .idea/workspace.xml
 /public/packages/
-/resources/views/vendor
 *.DS_Store

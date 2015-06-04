@@ -76,7 +76,7 @@ class SurveysController extends Controller {
         }
 
         $this->saveData($request);
-        flash('Survey created successfully!');
+        flash()->success('Survey created successfully!');
 
         return redirect('surveys');
 	}
@@ -234,13 +234,13 @@ class SurveysController extends Controller {
     {
         $survey = Survey::findOrFail($id);
         $survey->update(['active'=>!$survey->active]);
-        if(!$survey->active)
+        if(!$survey->active) {
             $active = "Inactive";
-        else
+            flash()->success('Survey ' . $survey->title . ' is now ' . $active . '!');
+        } else {
             $active = "Active";
-
-        flash('Survey '. $survey->title. ' is now '.$active.'!');
-
+            flash()->success('Survey ' . $survey->title . ' is now ' . $active . '!');
+        }
         return redirect()->back();
     }
 }
