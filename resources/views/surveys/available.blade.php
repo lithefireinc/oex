@@ -14,7 +14,7 @@
         <tbody>
         @foreach($surveys as $survey)
             <tr>
-                <td>{{ $survey->faculty->full_name}}</td>
+                <td>{!! $survey->faculty->full_name !!}</td>
                 <td>{!! $survey->start_date->toDayDateTimeString() !!}-<br/>{!! $survey->expires->toDayDateTimeString() !!}</td>
                 <td>
                     <a class="btn btn-success" href="{{ action('SurveysController@takeSurvey', [$survey]) }}">Evaluate</a>

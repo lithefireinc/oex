@@ -8,7 +8,7 @@
 				<div class="panel-heading">Login</div>
 				<div class="panel-body">
 					@if (count($errors) > 0)
-						<div class="alert-modified alert alert-danger login-error">
+						<div class="alert-modified alert alert-danger login-error b-mbtwenty">
 							<strong>Whoops!</strong> There were some problems with your input.<br><br>
 							<ul>
 								@foreach ($errors->all() as $error)
