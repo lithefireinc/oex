@@ -16,34 +16,29 @@ return array(
      * The display columns
      */
     'columns' => array(
-        'id',
-        'last_name',
-        'first_name',
-        'middle_name',
+        'ADVICODE',
+        'IDNO',
+        'ADVISER',
     ),
 
     /**
      * The filter set
      */
     'filters' => array(
-        'last_name',
-        'first_name',
+        'ADVISER',
+        'IDNO',
     ),
 
     /**
      * The editable fields
      */
     'edit_fields' => array(
-        'last_name' => array(
-            'title' => 'Last Name',
+        'ADVISER' => array(
+            'title' => 'Adviser',
             'type' => 'text',
         ),
-        'middle_name' => array(
-            'title' => 'Middle Name',
-            'type' => 'text',
-        ),
-        'first_name' => array(
-            'title' => 'First Name',
+        'IDNO' => array(
+            'title' => 'ID number',
             'type' => 'text',
         ),
     ),

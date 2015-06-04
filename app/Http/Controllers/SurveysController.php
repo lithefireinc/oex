@@ -56,7 +56,8 @@ class SurveysController extends Controller {
         }
 
         $questionSet = QuestionSet::lists('description', 'id');
-        $faculty = Faculty::get()->lists('full_name', 'id');
+        //dd(Faculty::get()->lists('ADVISER', 'ADVICODE'));
+        $faculty = Faculty::get()->lists('ADVISER', 'ADVICODE');
 
 
 	    return view('surveys.create', compact('questionSet', 'faculty'));
@@ -194,7 +195,7 @@ class SurveysController extends Controller {
     public function getData()
     {
 //        $surveys = Survey::with('faculty')->select('*');
-        $surveys = Survey::join('faculties', 'surveys.faculty_id', '=', 'faculties.id')
+        $surveys = Survey::join('engine.FILEADVI', 'surveys.faculty_id', '=', 'engine.FILEADVI.ADVICODE')
             ->select([
                 'surveys.id',
                 'title',
@@ -202,10 +203,8 @@ class SurveysController extends Controller {
                 'expires',
                 'active',
                 'surveys.created_at',
-                'last_name',
-                'first_name',
-                'middle_name',
-                DB::raw('CONCAT(last_name, ", ", first_name, " ", middle_name) AS last_name')
+                'ADVISER',
+//                DB::raw('CONCAT(last_name, ", ", first_name, " ", middle_name) AS last_name')
 
             ]);
 
