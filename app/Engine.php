@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-abstract class Filereference extends Model {
+abstract class Engine extends Model {
 
 	protected $connection;
 
