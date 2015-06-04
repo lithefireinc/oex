@@ -151,7 +151,7 @@ class SurveysController extends Controller {
     {
 
         $survey = session()->get('survey');
-
+        //dd($survey->faculty()->first()->full_name);
         $results = new Result;
         $results->setTable("results_".$survey->code);
 
@@ -160,7 +160,7 @@ class SurveysController extends Controller {
         $results->save();
 
         SurveysTaken::create(["user_id"=>$this->user->id, "survey_code"=>$survey->code]);
-
+        flash()->success('You have successfully taken the survey for '.$survey->faculty()->first()->full_name);
         return redirect('surveys/available');
     }
 
@@ -237,7 +237,7 @@ class SurveysController extends Controller {
         $survey->update(['active'=>!$survey->active]);
         if(!$survey->active) {
             $active = "Inactive";
-            flash()->success('Survey ' . $survey->title . ' is now ' . $active . '!');
+            flash()->info('Survey ' . $survey->title . ' is now ' . $active . '!');
         } else {
             $active = "Active";
             flash()->success('Survey ' . $survey->title . ' is now ' . $active . '!');

@@ -38,7 +38,7 @@ html, body {
 }
 
 .alert-modified {
-  width: 90%; /* Configure it fit in your design  */
+  width: 100%; /* Configure it fit in your design  */
   margin: 0 auto; /* Centering Stuff */
   background-color: #FFFFFF; /* Default background */
   padding: 20px;
@@ -88,4 +88,11 @@ html, body {
 
 .errors-list {
   padding-left: 30px;
+}
+
+.login-error {
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
 }
