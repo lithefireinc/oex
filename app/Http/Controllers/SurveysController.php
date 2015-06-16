@@ -161,7 +161,7 @@ class SurveysController extends Controller {
         $results->save();
 
         SurveysTaken::create(["user_id"=>$this->user->id, "survey_code"=>$survey->code]);
-        flash()->success('You have successfully taken the survey for '.$survey->faculty()->first()->full_name);
+        flash()->success('You have successfully taken the survey for '.$survey->faculty()->first()->ADVISER);
         return redirect('surveys/available');
     }
 

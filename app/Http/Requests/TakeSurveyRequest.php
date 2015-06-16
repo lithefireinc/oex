@@ -36,7 +36,8 @@ class TakeSurveyRequest extends Request {
         $rules = [];
 
         foreach($this->questions->get() as $question){
-            $rules[$this->survey->code.'X'.$this->question_set->id.'X'.$question->id] = 'required';
+            if($question->required)
+                $rules[$this->survey->code.'X'.$this->question_set->id.'X'.$question->id] = 'required';
         }
 		return $rules;
 	}
@@ -47,13 +48,10 @@ class TakeSurveyRequest extends Request {
         $count = 1;
 
         foreach($this->questions->get() as $question){
-//            if($question->question_type_id == 1){
+            if($question->required)
                 $messages[$this->survey->code.'X'.$this->question_set->id.'X'.$question->id.'.required'] = "Item $count is required";
+
                 $count++;
-//            } elseif($question->question_type_id == 2){
-//                $messages[$this->survey->code.'X'.$this->question_set->id.'X'.$question->id.'.required'] = "Item $count is required";
-//                $count++;
-//            }
         }
         return $messages;
     }
