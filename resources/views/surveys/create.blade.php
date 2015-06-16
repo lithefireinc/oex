@@ -64,6 +64,15 @@
         </div>
     </div>
 </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <!-- Per Page Form Input -->
+            <div class="form-group">
+                {!! Form::label('per_page', 'Questions Per Page:') !!}
+                {!! Form::input('number','per_page', 10, ['class' => 'form-control']) !!}
+            </div>
+        </div>
+    </div>
     <!-- 'Create Survey' Form Input -->
     <div class="form-group">
         {!! Form::submit('Create Survey', ['class' => 'btn btn-primary form-control']) !!}

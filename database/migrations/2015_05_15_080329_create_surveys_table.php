@@ -25,6 +25,7 @@ class CreateSurveysTable extends Migration {
             $table->integer('question_set_id')->unsigned();
             $table->integer('faculty_id')->unsigned();
             $table->integer('schedule_id')->unsigned();
+            $table->integer('per_page')->unsigned();
             $table->boolean('active');
             $table->dateTime('expires');
             $table->dateTime('start_date');

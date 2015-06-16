@@ -27,6 +27,7 @@ class SurveysTableSeeder extends Seeder
             'code'=> $survey_code,
             'faculty_id' => '1',
             'question_set_id' => 1,
+            'per_page'=> 10,
             'start_date' => date('Y-m-d H:i:s'),
             'expires' => Carbon::parse('+ 7 days'),
             'active' => 1,
