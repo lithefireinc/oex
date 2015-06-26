@@ -34,10 +34,10 @@ class SurveysTableSeeder extends Seeder
 
         ]);
 
-        $questionSet = $survey->questionSet()->first();
-        $questionCategory = $questionSet->questionCategory();
+        $question_set = $survey->questionSet()->first();
+        $question_categories = $question_set->questionCategory();
 
-        Schema::create('results_'.$survey_code, function(Blueprint $table) use ($questionCategory, $survey, $questionSet)
+        Schema::create('results_'.$survey_code, function(Blueprint $table) use ($question_categories, $survey, $question_set)
         {
             $table->increments('id');
             $table->string('email')->unique();
@@ -45,12 +45,12 @@ class SurveysTableSeeder extends Seeder
             $table->dateTime('startdate');
             $table->dateTime('datestamp');
 
-            foreach($questionCategory->get() as $q) {
-                foreach ($q->questions()->get() as $question) {
+            foreach($question_categories->get() as $question_category) {
+                foreach ($question_category->questions()->get() as $question) {
                     if ($question->question_type_id == 1) {
-                        $table->string($survey->code . 'X' . $questionSet->id . 'X' . $question->id, 1);
+                        $table->string($survey->code . 'X' . $question_set->id . 'X' . $question_category->id . 'X' . $question->id, 1);
                     } elseif ($question->question_type_id == 2) {
-                        $table->text($survey->code . 'X' . $questionSet->id . 'X' . $question->id);
+                        $table->text($survey->code . 'X' . $question_set->id . 'X' . $question_category->id . 'X' . $question->id);
                     }
                 }
             }
