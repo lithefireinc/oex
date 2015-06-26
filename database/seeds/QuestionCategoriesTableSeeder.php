@@ -21,8 +21,13 @@ class QuestionCategoriesTableSeeder extends Seeder
         ]);
         QuestionCategory::create([
             'question_set_id' => '1',
-            'description' => 'Question Related to your Course (Subject)',
+            'description' => 'Evaluation Skills',
             'order' => '2'
+        ]);
+        QuestionCategory::create([
+            'question_set_id' => '1',
+            'description' => 'Question Related to your Course (Subject)',
+            'order' => '3'
         ]);
     }
 }

@@ -47,8 +47,29 @@ class QuestionsTableSeeder extends Seeder
         ]);
         Question::create([
             'question_category_id' => '2',
-            'question' => 'What were your expectations for the course (subject) that have not been met?',
+            'question' => 'Has clearly-defined basis for grading students.',
             'order' => '6',
+            'question_type_id' => 1,
+            'required' => 1,
+        ]);
+        Question::create([
+            'question_category_id' => '2',
+            'question' => 'Gives test and practical exercise that are well prepared and are easily understood, as good measure of what the students have learned.',
+            'order' => '7',
+            'question_type_id' => 1,
+            'required' => 1,
+        ]);
+        Question::create([
+            'question_category_id' => '2',
+            'question' => 'Practice fairness; avoids favoritism.',
+            'order' => '8',
+            'question_type_id' => 1,
+            'required' => 1,
+        ]);
+        Question::create([
+            'question_category_id' => '3',
+            'question' => 'What were your expectations for the course (subject) that have not been met?',
+            'order' => '9',
             'question_type_id' => 2,
             'required' => 0,
         ]);
