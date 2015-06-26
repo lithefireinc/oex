@@ -15,7 +15,9 @@ class CreateQuestionCategoriesTable extends Migration
         Schema::create('question_categories', function(Blueprint $table)
         {
             $table->increments('id');
+            $table->integer('question_set_id')->unsigned();
             $table->string("description");
+            $table->integer('order')->unsigned();
             $table->timestamps();
         });
     }
