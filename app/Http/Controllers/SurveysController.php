@@ -7,6 +7,7 @@ use App\Http\Requests\SurveyRequest;
 use App\Http\Requests\TakeSurveyRequest;
 use App\Question;
 use App\QuestionSet;
+use App\QuestionCategory;
 use App\SurveysTaken;
 use Auth;
 use App\Result;
@@ -169,11 +170,10 @@ class SurveysController extends Controller {
         $survey = Survey::firstOrNew(['code'=>str_random(8), 'active'=>1]);
         $survey->fill($request->all());
         $survey->save();
-        $questionSet =$survey->questionSet()->first();
-        $questions = $questionSet->questions();
+        $questionSet = $survey->questionSet()->first();
+        $questionCategory = $questionSet->questionCategory();
 
-        Schema::create('results_'.$survey->code, function(Blueprint $table) use ($questions, $questionSet, $survey)
-        {
+        Schema::create('results_'.$survey->code, function(Blueprint $table) use ($questionCategory, $questionSet, $survey) {
 
             $table->increments('id');
             $table->string('email')->unique();
@@ -181,14 +181,15 @@ class SurveysController extends Controller {
             $table->dateTime('startdate');
             $table->dateTime('datestamp');
 
-            foreach($questions->get() as $question){
-                if($question->question_type_id == 1){
-                    $table->string($survey->code.'X'.$questionSet->id.'X'.$question->id, 1);
-                } elseif ($question->question_type_id == 2){
-                    $table->text($survey->code.'X'.$questionSet->id.'X'.$question->id);
+            foreach($questionCategory->get() as $q) {
+                foreach ($q->questions()->get() as $question) {
+                    if ($question->question_type_id == 1) {
+                        $table->string($survey->code . 'X' . $questionSet->id . 'X' . $question->id, 1);
+                    } elseif ($question->question_type_id == 2) {
+                        $table->text($survey->code . 'X' . $questionSet->id . 'X' . $question->id);
+                    }
                 }
             }
-
         });
     }
 
