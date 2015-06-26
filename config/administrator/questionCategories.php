@@ -17,8 +17,13 @@ return array(
      */
     'columns' => array(
         'id',
-        'description',
         'order',
+        'description',
+        'question_set_id' => array(
+            'title' => "Question Set",
+            'relationship' => 'questionSet', //this is the name of the Eloquent relationship method!
+            'select' => "description",
+        ),
     ),
 
     /**
@@ -26,19 +31,29 @@ return array(
      */
     'filters' => array(
         'description',
+        'question_set_id' => array(
+            'title' => "Question Set",
+            'relationship' => 'questionSet', //this is the name of the Eloquent relationship method!
+            'select' => "description",
+        ),
     ),
 
     /**
      * The editable fields
      */
     'edit_fields' => array(
+        'order' => array(
+            'title' => 'Order',
+            'type' => 'number',
+        ),
         'description' => array(
             'title' => 'Question Category',
             'type' => 'text',
         ),
-        'order' => array(
-            'title' => 'Order',
-            'type' => 'number',
+        'questionSet' => array(
+            'type' => "relationship",
+            'title' => 'Question Set', //this is the name of the Eloquent relationship method!
+            'name_field' => "description",
         ),
     ),
     'rules' => array(
