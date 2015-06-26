@@ -1,5 +1,5 @@
 <div>
-    <h3>{!! $question->question !!}</h3>
+
     <hr/>
 
     @if($question->questionType->description == 'Rating (1-5)')
@@ -19,7 +19,7 @@
         <div class="form-inline">
                 <!-- Question_type Form Input -->
                 <div class="form-group">
-                    {!! Form::textarea($fieldname.$question->id, null, ['class' => 'form-control', 'size' => '128x10']) !!}
+                    {!! Form::textarea($fieldname.$question->id, null, ['class' => 'form-control', 'size' => '123x10']) !!}
                 </div>
         </div>
     </div>
