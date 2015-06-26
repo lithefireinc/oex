@@ -12,7 +12,12 @@ class CreateQuestionCategoriesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('question_categories', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->string("description");
+            $table->timestamps();
+        });
     }
 
     /**
@@ -22,6 +27,6 @@ class CreateQuestionCategoriesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('question_categories');
     }
 }
