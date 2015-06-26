@@ -53,7 +53,7 @@ return array(
 	 *	)
 	 */
 	'menu' => array(
-        'Question' =>array('questionSets', 'questions',),
+        'Question' =>array('questionSets', 'questionCategories','questions',),
         'faculties',
     ),
 
