@@ -12,9 +12,9 @@ class Question extends Model {
         'order',
     ];
 
-    public function questionSet()
+    public function questionCategory()
     {
-        return $this->belongsTo('\App\QuestionSet', 'question_set_id', 'id');
+        return $this->belongsTo('\App\QuestionCategory', 'question_category_id', 'id');
     }
 
     public function questionType()
