@@ -140,13 +140,13 @@ class SurveysController extends Controller {
     {
         $this->middleware('surveyTaken');
         $survey = Survey::findOrFail($id);
-        $questionCategory = $survey->questionSet->questionCategory;
+        $question_categories = $survey->questionSet->questionCategory;
         $choices = [1,2,3,4,5];
 
         session()->flash('survey', $survey);
         session()->flash('startdate', Carbon::now());
         $fieldname = $survey->code.'X'.$survey->questionSet->id.'X';
-        return view('surveys.takeSurvey', compact('survey', 'questionCategory', 'choices', 'fieldname'));
+        return view('surveys.takeSurvey', compact('survey', 'question_categories', 'choices', 'fieldname'));
     }
 
     public function recordResult(TakeSurveyRequest $request)

@@ -10,18 +10,21 @@
         @include ('errors.list')
             {!! Form::open(['url'=>'surveys/takeSurvey']) !!}
 
-                <ol type="A">
-                    @foreach( $questionCategory as $qc )
-                        <h2><li>{!! $qc->description !!}</li></h2>
-                        <ol>
-                            @foreach( $qc->questions()->get() as $question )
-                                <h3><li>{!! $question->question !!}</li></h3>
-                                @include('partials.question')
-                            @endforeach
-                        </ol>
-                    @endforeach
-                </ol>
+            <ol type="A">
+                <?php $count = 1; ?>
+                @foreach( $question_categories as $question_category )
+                    <h2><li>{!! $question_category->description !!}</li></h2>
 
+                    @foreach( $question_category->questions()->get() as $question )
+                        <h3>
+                            {!! $count . '. ' . $question->question !!}
+                            @include('partials.question')
+                            <?php $count++ ?>
+                        </h3>
+                    @endforeach
+
+                @endforeach
+            </ol>
 
         {!! Form::submit('Submit', ['class' => 'btn btn-primary form-control b-create']) !!}
 

@@ -6,13 +6,15 @@ class TakeSurveyRequest extends Request {
 
     protected $survey;
     protected $question_set;
+    protected $question_categories;
     protected $questions;
 
     public function __construct()
     {
         $this->survey = session()->get('survey');
         $this->question_set = $this->survey->questionSet()->first();
-        $this->questions = $this->question_set->questions();
+        $this->question_categories = $this->question_set->questionCategory();
+//        $this->questions = $this->question_set->questions();
 
     }
 	/**
@@ -33,11 +35,14 @@ class TakeSurveyRequest extends Request {
 	 */
 	public function rules()
 	{
-        $rules = [];
+        $rules = [
+        ];
 
-        foreach($this->questions->get() as $question){
-            if($question->required)
-                $rules[$this->survey->code.'X'.$this->question_set->id.'X'.$question->id] = 'required';
+        foreach($this->question_categories->get() as $question_category) {
+            foreach ($question_category->questions()->get() as $question) {
+                if ($question->required)
+                    $rules[$this->survey->code . 'X' . $this->question_set->id . 'X' . $question_category->id . 'X' . $question->id] = 'required';
+            }
         }
 		return $rules;
 	}
@@ -47,11 +52,13 @@ class TakeSurveyRequest extends Request {
         $messages = [];
         $count = 1;
 
-        foreach($this->questions->get() as $question){
-            if($question->required)
-                $messages[$this->survey->code.'X'.$this->question_set->id.'X'.$question->id.'.required'] = "Item $count is required";
+        foreach($this->question_categories->get() as $question_category) {
+            foreach ($question_category->questions()->get() as $question) {
+                if ($question->required)
+                    $messages[$this->survey->code . 'X' . $this->question_set->id . 'X' . $question_category->id . 'X' . $question->id . '.required'] = "Item $count is required";
 
                 $count++;
+            }
         }
         return $messages;
     }
