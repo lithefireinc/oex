@@ -18,6 +18,7 @@ return array(
     'columns' => array(
         'id',
         'description',
+        'order',
     ),
 
     /**
@@ -34,6 +35,10 @@ return array(
         'description' => array(
             'title' => 'Question Category',
             'type' => 'text',
+        ),
+        'order' => array(
+            'title' => 'Order',
+            'type' => 'number',
         ),
     ),
     'rules' => array(
