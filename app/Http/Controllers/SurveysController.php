@@ -7,6 +7,7 @@ use App\Http\Requests\SurveyRequest;
 use App\Http\Requests\TakeSurveyRequest;
 use App\Question;
 use App\QuestionSet;
+use App\QuestionCategory;
 use App\SurveysTaken;
 use Auth;
 use App\Result;
@@ -139,13 +140,17 @@ class SurveysController extends Controller {
     {
         $this->middleware('surveyTaken');
         $survey = Survey::findOrFail($id);
-        $questions = $survey->questionSet->questions;
+//        $question_categories = $survey->questionSet->questionCategory;
+
+        $question_set = $survey->questionSet()->first();
+        $question_categories = $question_set->questionCategory()->orderBy('order')->get();
+
         $choices = [1,2,3,4,5];
 
         session()->flash('survey', $survey);
         session()->flash('startdate', Carbon::now());
         $fieldname = $survey->code.'X'.$survey->questionSet->id.'X';
-        return view('surveys.takeSurvey', compact('survey', 'questions', 'choices', 'fieldname'));
+        return view('surveys.takeSurvey', compact('survey', 'question_categories', 'choices', 'fieldname'));
     }
 
     public function recordResult(TakeSurveyRequest $request)
@@ -169,26 +174,26 @@ class SurveysController extends Controller {
         $survey = Survey::firstOrNew(['code'=>str_random(8), 'active'=>1]);
         $survey->fill($request->all());
         $survey->save();
-        $questionSet =$survey->questionSet()->first();
-        $questions = $questionSet->questions();
+        $question_set = $survey->questionSet()->first();
+        $question_categories = $question_set->questionCategory();
 
-        Schema::create('results_'.$survey->code, function(Blueprint $table) use ($questions, $questionSet, $survey)
+        Schema::create('results_'.$survey->code, function(Blueprint $table) use ($question_categories, $survey, $question_set)
         {
-
             $table->increments('id');
             $table->string('email')->unique();
             $table->string('token');
             $table->dateTime('startdate');
             $table->dateTime('datestamp');
 
-            foreach($questions->get() as $question){
-                if($question->question_type_id == 1){
-                    $table->string($survey->code.'X'.$questionSet->id.'X'.$question->id, 1);
-                } elseif ($question->question_type_id == 2){
-                    $table->text($survey->code.'X'.$questionSet->id.'X'.$question->id);
+            foreach($question_categories->orderBy('order')->get() as $question_category) {
+                foreach ($question_category->questions()->orderBy('order')->get() as $question) {
+                    if ($question->question_type_id == 1) {
+                        $table->string($survey->code . 'X' . $question_set->id . 'X' . $question_category->id . 'X' . $question->id, 1);
+                    } elseif ($question->question_type_id == 2) {
+                        $table->text($survey->code . 'X' . $question_set->id . 'X' . $question_category->id . 'X' . $question->id);
+                    }
                 }
             }
-
         });
     }
 

@@ -35,19 +35,23 @@ class SurveysTableSeeder extends Seeder
         ]);
 
         $question_set = $survey->questionSet()->first();
-        $questions = $question_set->questions();
-        Schema::create('results_'.$survey_code, function(Blueprint $table) use ($questions, $survey, $question_set)
+        $question_categories = $question_set->questionCategory();
+
+        Schema::create('results_'.$survey_code, function(Blueprint $table) use ($question_categories, $survey, $question_set)
         {
             $table->increments('id');
             $table->string('email')->unique();
             $table->string('token');
             $table->dateTime('startdate');
             $table->dateTime('datestamp');
-            foreach($questions->get() as $question){
-                if($question->question_type_id == 1){
-                    $table->string($survey->code.'X'.$question_set->id.'X'.$question->id, 1);
-                } elseif ($question->question_type_id == 2){
-                    $table->text($survey->code.'X'.$question_set->id.'X'.$question->id);
+
+            foreach($question_categories->get() as $question_category) {
+                foreach ($question_category->questions()->get() as $question) {
+                    if ($question->question_type_id == 1) {
+                        $table->string($survey->code . 'X' . $question_set->id . 'X' . $question_category->id . 'X' . $question->id, 1);
+                    } elseif ($question->question_type_id == 2) {
+                        $table->text($survey->code . 'X' . $question_set->id . 'X' . $question_category->id . 'X' . $question->id);
+                    }
                 }
             }
         });
