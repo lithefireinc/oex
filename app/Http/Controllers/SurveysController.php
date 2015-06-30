@@ -173,7 +173,7 @@ class SurveysController extends Controller {
         $question_set = $survey->questionSet()->first();
         $question_categories = $question_set->questionCategory();
 
-        Schema::create('results_'.$survey_code, function(Blueprint $table) use ($question_categories, $survey, $question_set)
+        Schema::create('results_'.$survey->code, function(Blueprint $table) use ($question_categories, $survey, $question_set)
         {
             $table->increments('id');
             $table->string('email')->unique();
