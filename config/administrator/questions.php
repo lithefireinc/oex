@@ -36,15 +36,15 @@ return array(
 	 */
 	'filters' => array(
         'question',
-        'question_category_id' => array(
+        'questionCategory' => array(
             'title' => "Question Category",
-            'relationship' => 'questionCategory', //this is the name of the Eloquent relationship method!
-            'select' => "description",
+            'type' => 'relationship',
+            'name_field' => "description",
         ),
-        'question_type_id' => array(
+        'questionType' => array(
             'title' => "Question Type",
-            'relationship' => 'questionType', //this is the name of the Eloquent relationship method!
-            'select' => "description",
+            'type' => 'relationship',
+            'name_field' => "description",
         ),
 	),
 

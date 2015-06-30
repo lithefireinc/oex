@@ -31,10 +31,10 @@ return array(
      */
     'filters' => array(
         'description',
-        'question_set_id' => array(
+        'questionSet' => array(
             'title' => "Question Set",
-            'relationship' => 'questionSet', //this is the name of the Eloquent relationship method!
-            'select' => "description",
+            'type' => 'relationship',
+            'name_field' => "description",
         ),
     ),
 
