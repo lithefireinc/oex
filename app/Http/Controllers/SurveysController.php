@@ -231,6 +231,8 @@ class SurveysController extends Controller {
                     }
                 }
                     return '<a href="'.url('surveys/toggleActive', [$survey->id]).'" class="'.$btnCls.'" '.$disabled.'><span class="'.$iconCls.'"></span></a>';
+            })->addColumn('result', function ($survey) {
+                return '<a href="'.url('surveys/result', [$survey->id]).'" class="btn btn-s btn-primary"><i class="glyphicon glyphicon-list-alt"></i> View Result</a>';
             })
             ->make(true);
     }
@@ -247,5 +249,21 @@ class SurveysController extends Controller {
             flash()->success('Survey ' . $survey->title . ' is now ' . $active . '!');
         }
         return redirect()->back();
+    }
+
+    public function viewResult($id){
+        $survey = Survey::findOrFail($id);
+
+        $question_set = $survey->questionSet()->first();
+        $question_categories = $question_set->questionCategory()->orderBy('order')->get();
+        $results_table = 'results_'.$survey->code;
+        $field_name = $survey->code.'X'.$survey->questionSet->id.'X';
+        $columns = Schema::getColumnListing('results_'.$survey->code);
+        $results = DB::table($results_table)->select($columns)->get();
+
+//        dd($results);
+
+        return view('surveys.result', compact('survey', 'question_categories', 'field_name', 'columns', 'results'));
+
     }
 }

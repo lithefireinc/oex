@@ -16,6 +16,7 @@
             <th>Faculty</th>
             <th>Expires</th>
             <th>Active</th>
+            <th>Result</th>
         </tr>
         </thead>
     </table>

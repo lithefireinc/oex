@@ -99,4 +99,38 @@ html, body {
 .b-mbtwenty {
   margin-bottom: 20px; }
 
+.table_results {
+    width: auto;
+    overflow-x: auto;
+}
+
+.table_results td, th {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table_results tr .table_results_row {
+    position: relative;
+}
+
+.table_results tr .table_result_hidden {
+    display: none;
+    position: fixed;
+    background:#F8F8F8;
+    color: #717171;
+    border: 5px solid #DFDFDF;
+    z-index: 100;
+    height: auto;
+    width: auto;
+    padding:10px;
+    text-align: center;
+}
+
+.table_results tr :hover .table_result_hidden {
+    display: block;
+    z-index: 100;
+}
+
 /*# sourceMappingURL=app.css.map */

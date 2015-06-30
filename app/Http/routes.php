@@ -33,8 +33,12 @@ Route::get('surveys/toggleActive/{id}', [
     'uses' => 'SurveysController@toggleActive'
 ]);
 
-Route::get('surveys/data', [
+Route::get('surveys/data/', [
     'uses' => 'SurveysController@getData'
+]);
+
+Route::get('surveys/result/{id}', [
+    'uses' => 'SurveysController@viewResult'
 ]);
 
 
