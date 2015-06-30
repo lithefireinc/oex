@@ -140,7 +140,11 @@ class SurveysController extends Controller {
     {
         $this->middleware('surveyTaken');
         $survey = Survey::findOrFail($id);
-        $question_categories = $survey->questionSet->questionCategory;
+//        $question_categories = $survey->questionSet->questionCategory;
+
+        $question_set = $survey->questionSet()->first();
+        $question_categories = $question_set->questionCategory()->orderBy('order')->get();
+
         $choices = [1,2,3,4,5];
 
         session()->flash('survey', $survey);
@@ -181,8 +185,8 @@ class SurveysController extends Controller {
             $table->dateTime('startdate');
             $table->dateTime('datestamp');
 
-            foreach($question_categories->get() as $question_category) {
-                foreach ($question_category->questions()->get() as $question) {
+            foreach($question_categories->orderBy('order')->get() as $question_category) {
+                foreach ($question_category->questions()->orderBy('order')->get() as $question) {
                     if ($question->question_type_id == 1) {
                         $table->string($survey->code . 'X' . $question_set->id . 'X' . $question_category->id . 'X' . $question->id, 1);
                     } elseif ($question->question_type_id == 2) {

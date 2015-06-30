@@ -15,7 +15,7 @@
                 @foreach( $question_categories as $question_category )
                     <h2><li>{!! $question_category->description !!}</li></h2>
 
-                    @foreach( $question_category->questions()->get() as $question )
+                    @foreach( $question_category->questions()->orderBy('order')->get() as $question )
                         <h3>
                             {!! $count . '. ' . $question->question !!}
                             @include('partials.question')
