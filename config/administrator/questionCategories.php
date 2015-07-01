@@ -19,11 +19,6 @@ return array(
         'id',
         'order',
         'description',
-        'question_set_id' => array(
-            'title' => "Question Set",
-            'relationship' => 'questionSet', //this is the name of the Eloquent relationship method!
-            'select' => "description",
-        ),
     ),
 
     /**
@@ -31,11 +26,6 @@ return array(
      */
     'filters' => array(
         'description',
-        'questionSet' => array(
-            'title' => "Question Set",
-            'type' => 'relationship',
-            'name_field' => "description",
-        ),
     ),
 
     /**
@@ -49,11 +39,6 @@ return array(
         'description' => array(
             'title' => 'Question Category',
             'type' => 'text',
-        ),
-        'questionSet' => array(
-            'type' => "relationship",
-            'title' => 'Question Set', //this is the name of the Eloquent relationship method!
-            'name_field' => "description",
         ),
     ),
     'rules' => array(
