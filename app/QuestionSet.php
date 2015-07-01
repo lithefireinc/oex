@@ -6,9 +6,9 @@ class QuestionSet extends Model {
 
 	protected $fillable = ['description'];
 
-    public function questionCategory()
+    public function questions()
     {
-        return $this->hasMany('\App\QuestionCategory');
+        return $this->hasMany('\App\Question');
     }
 
     public function survey()
