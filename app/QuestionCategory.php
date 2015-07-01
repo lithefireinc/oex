@@ -4,7 +4,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class QuestionCategory extends Model
 {
-    protected $fillable = ['description'];
+    protected $fillable = [
+        'description',
+        'order',
+    ];
 
     public function questions()
     {
