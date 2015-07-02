@@ -8,7 +8,7 @@
                 @foreach($choices as $choice)
                     <label class="radio-inline">
                         {{--{!! Form::radio($fieldname.$question->id, Input::old($fieldname.$question->id) == $choice) !!} {!! $choice !!}--}}
-                        <input type="radio" name="{!! $fieldname.'X'.$question->id !!}" value="{!! $choice !!}" @if(Input::old($fieldname.'X'.$question->id) == $choice) checked @endif>{!!$choice!!}
+                        <input type="radio" name="{!! $fieldname.$question->id !!}" value="{!! $choice !!}" @if(Input::old($fieldname.'X'.$question->id) == $choice) checked @endif>{!!$choice!!}
                     </label>
                 @endforeach
             </div>
@@ -19,7 +19,7 @@
         <div class="form-inline">
                 <!-- Question_type Form Input -->
                 <div class="form-group">
-                    {!! Form::textarea($fieldname.'X'.$question->id, null, ['class' => 'form-control', 'size' => '123x10']) !!}
+                    {!! Form::textarea($fieldname.$question->id, null, ['class' => 'form-control', 'size' => '123x10']) !!}
                 </div>
         </div>
     </div>

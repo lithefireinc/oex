@@ -141,15 +141,13 @@ class SurveysController extends Controller {
     {
         $this->middleware('surveyTaken');
         $survey = Survey::findOrFail($id);
-
         $questions = $survey->questionSet->questions;
-//        $question_set = $survey->questionSet()->first();
         $question_categories = new Collection;
         foreach($questions as $question){
-            $question_categories->add($question->questionCategory);
+            if($question->questionCategory)
+                $question_categories->add($question->questionCategory);
         }
-        $question_categories = $question_categories->unique();
-
+        $question_categories = $question_categories->unique()->sortBy('order');
         $choices = [1,2,3,4,5];
 
         session()->flash('survey', $survey);
@@ -161,7 +159,6 @@ class SurveysController extends Controller {
     public function recordResult(TakeSurveyRequest $request)
     {
         $survey = session()->get('survey');
-        //dd($survey->faculty()->first()->full_name);
         $results = new Result;
         $results->setTable("results_".$survey->code);
 
