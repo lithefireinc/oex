@@ -251,17 +251,21 @@ class SurveysController extends Controller {
         return redirect()->back();
     }
 
-    public function viewResult($id){
+    public function viewResult($id)
+    {
         $survey = Survey::findOrFail($id);
-
         $question_set = $survey->questionSet()->first();
-        $question_categories = $question_set->questionCategory()->orderBy('order')->get();
+        $questions = $survey->questionSet->questions;
+        $question_categories = new Collection;
+        foreach($questions as $question){
+            if($question->questionCategory)
+                $question_categories->add($question->questionCategory);
+        }
+        $question_categories = $question_categories->unique()->sortBy('order');
         $results_table = 'results_'.$survey->code;
         $field_name = $survey->code.'X'.$survey->questionSet->id.'X';
         $columns = Schema::getColumnListing('results_'.$survey->code);
         $results = DB::table($results_table)->select($columns)->get();
-
-//        dd($results);
 
         return view('surveys.result', compact('survey', 'question_categories', 'field_name', 'columns', 'results'));
 

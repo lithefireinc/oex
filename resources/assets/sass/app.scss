@@ -100,3 +100,20 @@ html, body {
 .b-mbtwenty {
   margin-bottom: 20px;
 }
+
+.table_results {
+  width: auto;
+  table-layout: fixed;
+  overflow: scroll;
+}
+
+.table_results td, th {
+  overflow: hidden;
+  min-width: 500px;
+}
+
+div.table_results_wrapper {
+  width: auto;
+  height: auto;
+  overflow: auto;
+}
