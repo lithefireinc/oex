@@ -101,19 +101,45 @@ html, body {
   margin-bottom: 20px;
 }
 
-.table_results {
-  width: auto;
+//.table_results {
+//  width: auto;
+//  table-layout: fixed;
+//  overflow: scroll;
+//}
+//
+//.table_results td, th {
+//  overflow: hidden;
+//  min-width: 500px;
+//}
+//
+//div.table_results_wrapper {
+//  width: auto;
+//  height: auto;
+//  overflow: auto;
+//}
+
+.table_survey_results {
   table-layout: fixed;
-  overflow: scroll;
+  width: 100%;
 }
-
-.table_results td, th {
-  overflow: hidden;
-  min-width: 500px;
+.table_survey_results td, th {
+  vertical-align: top;
+  border-top: 1px solid #ccc;
+  padding:10px;
+  width: 250px;
+  height: 75px;
 }
-
-div.table_results_wrapper {
-  width: auto;
-  height: auto;
-  overflow: auto;
+.table_survey_results th {
+  position:absolute;
+  left:0;
+  min-width:400px;
+}
+.outer {
+  position:relative;
+}
+.inner {
+  overflow-x:scroll;
+  overflow-y:visible;
+  width: 750px;
+  margin-left: 400px;
 }
