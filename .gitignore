@@ -5,3 +5,4 @@
 .idea/workspace.xml
 /public/packages/
 *.DS_Store
+bootstrap/cache/*

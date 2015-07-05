@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\QuestionSet;
 
 use Illuminate\Http\Request;
 
@@ -79,6 +80,10 @@ class QuestionSetsController extends Controller {
 	public function destroy($id)
 	{
 		//
+	}
+
+	public function lists(){
+	    return QuestionSet::all(['description as text', 'id as value']);
 	}
 
 }

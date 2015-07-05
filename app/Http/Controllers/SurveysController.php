@@ -58,7 +58,6 @@ class SurveysController extends Controller {
         }
 
         $questionSet = QuestionSet::lists('description', 'id');
-        //dd(Faculty::get()->lists('ADVISER', 'ADVICODE'));
         $faculty = Faculty::get()->lists('ADVISER', 'ADVICODE');
 
 
@@ -77,11 +76,10 @@ class SurveysController extends Controller {
         {
             abort(403);
         }
-
         $this->saveData($request);
         flash()->success('Survey created successfully!');
 
-        return redirect('surveys');
+        return response()->json(["url"=>url("surveys")]);
 	}
 
 	/**
@@ -200,7 +198,7 @@ class SurveysController extends Controller {
     public function getData()
     {
 //        $surveys = Survey::with('faculty')->select('*');
-        $surveys = Survey::join('engine.FILEADVI', 'surveys.faculty_id', '=', 'engine.FILEADVI.ADVICODE')
+        $surveys = Survey::join(env('ENGINE').'.FILEADVI', 'surveys.faculty_id', '=', env('ENGINE').'.FILEADVI.ADVICODE')
             ->select([
                 'surveys.id',
                 'title',

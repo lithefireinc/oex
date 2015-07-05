@@ -53,4 +53,7 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
+Route::get("questionSetList", "QuestionSetsController@lists");
+Route::get("facultyList", "FacultyController@lists");
+
 
