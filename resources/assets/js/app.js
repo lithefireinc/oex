@@ -21,7 +21,8 @@ $(function(){
                 //{data: 'first_name', name: 'first_name', visible: false},
                 //{data: 'middle_name', name: 'middle_name', visible: false},
                 {data: 'expires', name: 'expires'},
-                {data: 'action', name: 'action', orderable: false, searchable: false}
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+                {data: 'result', name: 'result', orderable: false, searchable: false}
             ]
         });
 

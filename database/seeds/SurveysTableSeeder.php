@@ -36,6 +36,7 @@ class SurveysTableSeeder extends Seeder
 
         $question_set = $survey->questionSet()->first();
         $questions = $question_set->questions();
+
         Schema::create('results_'.$survey_code, function(Blueprint $table) use ($questions, $survey, $question_set)
         {
             $table->increments('id');
@@ -43,6 +44,7 @@ class SurveysTableSeeder extends Seeder
             $table->string('token');
             $table->dateTime('startdate');
             $table->dateTime('datestamp');
+
             foreach($questions->get() as $question){
                 if($question->question_type_id == 1){
                     $table->string($survey->code.'X'.$question_set->id.'X'.$question->id, 1);

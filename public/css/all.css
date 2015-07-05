@@ -3780,5 +3780,30 @@ html, body {
 .b-mbtwenty {
   margin-bottom: 20px; }
 
+.table_survey_results {
+  table-layout: fixed;
+  width: 100%; }
+
+.table_survey_results td, th {
+  vertical-align: top;
+  border-top: 1px solid #ccc;
+  padding: 10px;
+  width: 250px;
+  height: 75px; }
+
+.table_survey_results th {
+  position: absolute;
+  left: 0;
+  min-width: 400px; }
+
+.outer {
+  position: relative; }
+
+.inner {
+  overflow-x: scroll;
+  overflow-y: visible;
+  width: 750px;
+  margin-left: 400px; }
+
 /*# sourceMappingURL=app.css.map */
 /*# sourceMappingURL=all.css.map */

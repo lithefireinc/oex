@@ -34,9 +34,8 @@ class TakeSurveyRequest extends Request {
 	public function rules()
 	{
         $rules = [];
-
-        foreach($this->questions->get() as $question){
-            if($question->required)
+        foreach ($this->questions->get() as $question) {
+            if ($question->required)
                 $rules[$this->survey->code.'X'.$this->question_set->id.'X'.$question->id] = 'required';
         }
 		return $rules;
@@ -46,12 +45,11 @@ class TakeSurveyRequest extends Request {
     {
         $messages = [];
         $count = 1;
-
-        foreach($this->questions->get() as $question){
-            if($question->required)
+        foreach ($this->questions->get() as $question) {
+            if ($question->required)
                 $messages[$this->survey->code.'X'.$this->question_set->id.'X'.$question->id.'.required'] = "Item $count is required";
 
-                $count++;
+            $count++;
         }
         return $messages;
     }

@@ -24,6 +24,11 @@ return array(
             'relationship' => 'questionSet', //this is the name of the Eloquent relationship method!
             'select' => "description",
         ),
+        'question_category_id' => array(
+            'title' => "Question Category",
+            'relationship' => 'questionCategory', //this is the name of the Eloquent relationship method!
+            'select' => "description",
+        ),
         'question_type_id' => array(
             'title' => "Question Type",
             'relationship' => 'questionType', //this is the name of the Eloquent relationship method!
@@ -36,15 +41,20 @@ return array(
 	 */
 	'filters' => array(
         'question',
-        'question_set_id' => array(
+        'questionSet' => array(
             'title' => "Question Set",
-            'relationship' => 'questionSet', //this is the name of the Eloquent relationship method!
-            'select' => "description",
+            'type' => 'relationship',
+            'name_field' => "description",
         ),
-        'question_type_id' => array(
+        'questionCategory' => array(
+            'title' => "Question Category",
+            'type' => 'relationship',
+            'name_field' => "description",
+        ),
+        'questionType' => array(
             'title' => "Question Type",
-            'relationship' => 'questionType', //this is the name of the Eloquent relationship method!
-            'select' => "description",
+            'type' => 'relationship',
+            'name_field' => "description",
         ),
 	),
 
@@ -64,6 +74,11 @@ return array(
         'questionSet' => array(
             'type' => "relationship",
             'title' => 'Question Set', //this is the name of the Eloquent relationship method!
+            'name_field' => "description",
+        ),
+        'questionCategory' => array(
+            'type' => "relationship",
+            'title' => 'Question Category', //this is the name of the Eloquent relationship method!
             'name_field' => "description",
         ),
         'questionType' => array(

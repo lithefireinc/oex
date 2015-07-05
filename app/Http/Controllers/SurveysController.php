@@ -7,11 +7,13 @@ use App\Http\Requests\SurveyRequest;
 use App\Http\Requests\TakeSurveyRequest;
 use App\Question;
 use App\QuestionSet;
+use App\QuestionCategory;
 use App\SurveysTaken;
 use Auth;
 use App\Result;
 use App\Survey;
 //use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Schema\Blueprint;
 use Request;
 use Illuminate\Support\Facades\Input;
@@ -138,19 +140,23 @@ class SurveysController extends Controller {
         $this->middleware('surveyTaken');
         $survey = Survey::findOrFail($id);
         $questions = $survey->questionSet->questions;
+        $question_categories = new Collection;
+        foreach($questions as $question){
+            if($question->questionCategory)
+                $question_categories->add($question->questionCategory);
+        }
+        $question_categories = $question_categories->unique()->sortBy('order');
         $choices = [1,2,3,4,5];
 
         session()->flash('survey', $survey);
         session()->flash('startdate', Carbon::now());
         $fieldname = $survey->code.'X'.$survey->questionSet->id.'X';
-        return view('surveys.takeSurvey', compact('survey', 'questions', 'choices', 'fieldname'));
+        return view('surveys.takeSurvey', compact('survey', 'questions', 'choices', 'fieldname', 'question_categories'));
     }
 
     public function recordResult(TakeSurveyRequest $request)
     {
-
         $survey = session()->get('survey');
-        //dd($survey->faculty()->first()->full_name);
         $results = new Result;
         $results->setTable("results_".$survey->code);
 
@@ -163,16 +169,16 @@ class SurveysController extends Controller {
         return redirect('surveys/available');
     }
 
-    private function saveData(SurveyRequest $request){
+    private function saveData(SurveyRequest $request)
+    {
         $survey = Survey::firstOrNew(['code'=>str_random(8), 'active'=>1]);
         $survey->fill($request->all());
         $survey->save();
-        $questionSet =$survey->questionSet()->first();
-        $questions = $questionSet->questions();
+        $question_set = $survey->questionSet()->first();
+        $questions = $question_set->questions();
 
-        Schema::create('results_'.$survey->code, function(Blueprint $table) use ($questions, $questionSet, $survey)
+        Schema::create('results_'.$survey->code, function(Blueprint $table) use ($questions, $survey, $question_set)
         {
-
             $table->increments('id');
             $table->string('email')->unique();
             $table->string('token');
@@ -181,12 +187,11 @@ class SurveysController extends Controller {
 
             foreach($questions->get() as $question){
                 if($question->question_type_id == 1){
-                    $table->string($survey->code.'X'.$questionSet->id.'X'.$question->id, 1);
+                    $table->string($survey->code.'X'.$question_set->id.'X'.$question->id, 1);
                 } elseif ($question->question_type_id == 2){
-                    $table->text($survey->code.'X'.$questionSet->id.'X'.$question->id);
+                    $table->text($survey->code.'X'.$question_set->id.'X'.$question->id);
                 }
             }
-
         });
     }
 
@@ -224,6 +229,8 @@ class SurveysController extends Controller {
                     }
                 }
                     return '<a href="'.url('surveys/toggleActive', [$survey->id]).'" class="'.$btnCls.'" '.$disabled.'><span class="'.$iconCls.'"></span></a>';
+            })->addColumn('result', function ($survey) {
+                return '<a href="'.url('surveys/result', [$survey->id]).'" class="btn btn-s btn-primary"><i class="glyphicon glyphicon-list-alt"></i> View Result</a>';
             })
             ->make(true);
     }
@@ -240,5 +247,25 @@ class SurveysController extends Controller {
             flash()->success('Survey ' . $survey->title . ' is now ' . $active . '!');
         }
         return redirect()->back();
+    }
+
+    public function viewResult($id)
+    {
+        $survey = Survey::findOrFail($id);
+        $question_set = $survey->questionSet()->first();
+        $questions = $survey->questionSet->questions;
+        $question_categories = new Collection;
+        foreach($questions as $question){
+            if($question->questionCategory)
+                $question_categories->add($question->questionCategory);
+        }
+        $question_categories = $question_categories->unique()->sortBy('order');
+        $results_table = 'results_'.$survey->code;
+        $field_name = $survey->code.'X'.$survey->questionSet->id.'X';
+        $columns = Schema::getColumnListing('results_'.$survey->code);
+        $results = DB::table($results_table)->select($columns)->get();
+
+        return view('surveys.result', compact('survey', 'question_categories', 'field_name', 'columns', 'results'));
+
     }
 }
