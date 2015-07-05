@@ -56,7 +56,6 @@ class SurveysController extends Controller {
         }
 
         $questionSet = QuestionSet::lists('description', 'id');
-        //dd(Faculty::get()->lists('ADVISER', 'ADVICODE'));
         $faculty = Faculty::get()->lists('ADVISER', 'ADVICODE');
 
 
@@ -75,11 +74,10 @@ class SurveysController extends Controller {
         {
             abort(403);
         }
-
         $this->saveData($request);
         flash()->success('Survey created successfully!');
 
-        return redirect('surveys');
+        return response()->json(["url"=>url("surveys")]);
 	}
 
 	/**

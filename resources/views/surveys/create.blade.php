@@ -1,85 +1,83 @@
 @extends('app')
 
 @section('content')
-
+<div id="create-survey">
     <h1 class="page-heading">Create Survey</h1>
 
-    @include ('errors.list')
+    @include ('errors.errors')
 
-    {!! Form::open(['url'=>'surveys']) !!}
-<div class="row">
-    <div class="col-sm-12">
-        <!-- Title Form Input -->
-        <div class="form-group">
-            {!! Form::label('title', 'Title:') !!}
-            {!! Form::text('title', null, ['class' => 'form-control']) !!}
-        </div>
+    {!! Form::open(['url'=>'surveys', 'v-on'=>'submit: createSurvey']) !!}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="title">Title: </label>
+                    <input type="text" name="title" id="title" class="form-control" v-model="survey.title"/>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description: </label>
+                    <input type="text" name="description" id="description" class="form-control" v-model="survey.description"/>
+                </div>
+                <div class="form-group">
+                    <label for="instructions">Instructions: </label>
+                    <textarea name="instructions" id="instructions" class="form-control" v-model="survey.instructions" rows="10">
+                    </textarea>
+                </div>
+                <div class="form-group">
+                    <label for="question_set_id">Question Set: </label>
+                    <select name="question_set_id" id="question_set_id" class="form-control" v-model="survey.question_set_id" options="questionSets">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="faculty_id">Faculty: </label>
+                    <select name="faculty_id" id="faculty_id" class="form-control" v-model="survey.faculty_id" options="faculties">
+                    </select>
+                </div>
 
-        <!-- Description Form Input -->
-        <div class="form-group">
-            {!! Form::label('description', 'Description:') !!}
-            {!! Form::text('description', null, ['class' => 'form-control']) !!}
-        </div>
-
-        <!-- Instructions Form Input -->
-        <div class="form-group">
-            {!! Form::label('instructions', 'Instructions:') !!}
-            {!! Form::textarea('instructions', null, ['class' => 'form-control']) !!}
-        </div>
-
-        <div class="form-group">
-            {!! Form::label('question_set_id', 'Question Set:') !!}
-            {!! Form::select('question_set_id', $questionSet, null, ['class' => 'form-control']) !!}
-        </div>
-
-        <div class="form-group">
-            {!! Form::label('faculty_id', 'Faculty Id:') !!}
-            {!! Form::select('faculty_id', $faculty, null, ['class' => 'form-control select2']) !!}
-        </div>
-    </div>
-</div>
-<div class="row">
-    <!-- Start_date Form Input -->
-    <div class="col-sm-3">
-        <div class="form-group">
-            {!! Form::label('start_date', 'Start Date:') !!}
-            <div class='input-group date' id='start'>
-                {!! Form::text('start_date', null, ['class' => 'form-control']) !!}
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
             </div>
         </div>
-    </div>
-    <div class="col-sm-3">
-        <!-- Expires Form Input -->
-        <div class="form-group">
-            {!! Form::label('start_date', 'Expires:') !!}
-            <div class='input-group date' id='end'>
-                {!! Form::text('expires', null, ['class' => 'form-control']) !!}
+        <div class="row">
+        <!-- Start_date Form Input -->
+            <div class="col-sm-3">
+                <div class="form-group">
+                {!! Form::label('start_date', 'Start Date:') !!}
+                <div class='input-group date' id='start' v-datetimepicker="survey.start_date">
+                    <input type="text" class="form-control"/>
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <!-- Expires Form Input -->
+                <div class="form-group">
+                    {!! Form::label('start_date', 'Expires:') !!}
+                    <div class='input-group date' id='end' v-datetimepicker="survey.expires">
+                        {!! Form::text('expires', null, ['class' => 'form-control']) !!}
                         <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
+                        <span class="glyphicon glyphicon-calendar"></span>
                         </span>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-    <div class="row">
-        <div class="col-sm-3">
+        <div class="row">
+            <div class="col-sm-3">
             <!-- Per Page Form Input -->
-            <div class="form-group">
-                {!! Form::label('per_page', 'Questions Per Page:') !!}
-                {!! Form::input('number','per_page', 10, ['class' => 'form-control']) !!}
+                <div class="form-group">
+                    {!! Form::label('per_page', 'Questions Per Page:') !!}
+                    {!! Form::input('number','per_page', 10, ['class' => 'form-control', 'v-model'=>'survey.per_page', 'number']) !!}
+                </div>
             </div>
         </div>
-    </div>
-    <!-- 'Create Survey' Form Input -->
-    <div class="form-group">
+        <!-- 'Create Survey' Form Input -->
+        <div class="form-group">
         {!! Form::submit('Create Survey', ['class' => 'btn btn-primary form-control']) !!}
-    </div>
-
+        </div>
     {!! Form::close() !!}
+</div>
 
-
-
+@endsection
+@section('scripts')
+    <script src="{{ asset('js/vue/survey.js') }}"></script>
 @endsection

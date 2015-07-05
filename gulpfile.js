@@ -36,6 +36,15 @@ elixir(function(mix) {
         'libs/bootstrap-datetimepicker.js',
         'libs/jquery.dataTables.js',
         'libs/dataTables.bootstrap.js',
+        'libs/vue.js',
+        'libs/vue-resource.js',
+    ], 'public/js/vendor.js');
+    mix.scripts([
+        'directives.js',
         'app.js',
     ]);
+
+    mix.scripts([
+        'vue/survey.js'
+    ], 'public/js/vue/survey.js');
 });
