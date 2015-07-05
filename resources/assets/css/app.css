@@ -103,7 +103,7 @@ html, body {
   table-layout: fixed;
   width: 100%; }
 
-.table_survey_results td, th {
+.table_survey_results td, .table_survey_results th {
   vertical-align: top;
   border-top: 1px solid #ccc;
   padding: 10px;
