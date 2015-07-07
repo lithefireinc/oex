@@ -6,3 +6,4 @@
 /public/packages/
 *.DS_Store
 bootstrap/cache/*
+storage/foxpro/*

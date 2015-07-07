@@ -158,6 +158,7 @@ return [
         'Laracasts\Flash\FlashServiceProvider',
         'Bican\Roles\RolesServiceProvider',
         'yajra\Datatables\DatatablesServiceProvider',
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
 	/*
@@ -208,6 +209,7 @@ return [
         'Form'      => 'Illuminate\Html\FormFacade',
 //        'ACL'       => 'Orchestra\Support\Facades\ACL',
         'Datatables' => 'yajra\Datatables\Datatables',
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
 	],
 

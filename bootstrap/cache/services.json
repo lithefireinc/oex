@@ -32,7 +32,8 @@
         "Illuminate\\Html\\HtmlServiceProvider",
         "Laracasts\\Flash\\FlashServiceProvider",
         "Bican\\Roles\\RolesServiceProvider",
-        "yajra\\Datatables\\DatatablesServiceProvider"
+        "yajra\\Datatables\\DatatablesServiceProvider",
+        "Maatwebsite\\Excel\\ExcelServiceProvider"
     ],
     "eager": [
         "Illuminate\\Auth\\AuthServiceProvider",
@@ -54,7 +55,8 @@
         "Frozennode\\Administrator\\AdministratorServiceProvider",
         "Laracasts\\Flash\\FlashServiceProvider",
         "Bican\\Roles\\RolesServiceProvider",
-        "yajra\\Datatables\\DatatablesServiceProvider"
+        "yajra\\Datatables\\DatatablesServiceProvider",
+        "Maatwebsite\\Excel\\ExcelServiceProvider"
     ],
     "deferred": {
         "command.app.name": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",

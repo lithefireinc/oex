@@ -2,13 +2,13 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-abstract class Engine extends Model {
+abstract class Ogs extends Model {
 
-	protected $connection;
+    protected $connection;
 
     public function __construct(){
         parent::__construct();
-        $this->connection = 'engine';
+        $this->connection = 'ogs';
     }
 
 }
