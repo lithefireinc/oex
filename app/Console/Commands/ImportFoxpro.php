@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Services\Import\PrepareColl2015Data;
 use App\Services\Import\PrepareFilescheData;
+use App\Services\Import\PrepareFilesectData;
 use App\Services\Import\PrepareScheduleData;
 use Illuminate\Console\Command;
 use DB;
@@ -68,11 +69,16 @@ class ImportFoxpro extends Command
                         $prepare->replace_key($row);
                         DB::table(env('OGS').'.SCHEDULE')->insert($row);
                     break;
-                    case "coll2015":
+                    case "COLL2015":
                         $prepare = new PrepareColl2015Data();
                         $prepare->replace_key($row);
-                        DB::table('pmmspon_ogs00009.COLLEGE')->insert($row);
-                        break;
+                        DB::table(env('OGS').'.COLLEGE')->insert($row);
+                    break;
+                    case "FILESECT":
+                        $prepare = new PrepareFilesectData();
+                        $prepare->replace_key($row);
+                        DB::table(env('OGS').'.FILESECT')->insert($row);
+                    break;
                 }
                 $this->output->progressAdvance();
             }
