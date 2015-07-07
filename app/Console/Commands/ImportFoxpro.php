@@ -67,6 +67,11 @@ class ImportFoxpro extends Command
                         $prepare->replace_key($row);
                         DB::table(env('OGS').'.SCHEDULE')->insert($row);
                     break;
+                    case "COLL2015":
+                        $prepare = new PrepareColl2015Data();
+                        $prepare->replace_key($row);
+                        DB::table(env('OGS').'.COLL2015')->insert($row);
+                        break;
                 }
                 $this->output->progressAdvance();
             }
