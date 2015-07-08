@@ -9,6 +9,7 @@ use App\Services\Import\PrepareFileroomData;
 use App\Services\Import\PrepareFilescheData;
 use App\Services\Import\PrepareFilesectData;
 use App\Services\Import\PrepareFilestleData;
+use App\Services\Import\PrepareFilesttyData;
 use App\Services\Import\PrepareScheduleData;
 use App\Services\Import\PrepareSubjfileData;
 use Illuminate\Console\Command;
@@ -95,6 +96,10 @@ class ImportFoxpro extends Command
                     break;
                     case "FILESTLE":
                         $prepare = new PrepareFilestleData();
+                        $prepare->importData($row);
+                    break;
+                    case "FILESTTY":
+                        $prepare = new PrepareFilesttyData();
                         $prepare->importData($row);
                     break;
                 }
