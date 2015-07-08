@@ -3,7 +3,8 @@
 use Carbon\Carbon;
 
 abstract class PrepareImportData implements PrepareImportDataInterface {
-    protected $data = ["ADVIIDNO"=>["adviidnoc10", "ADVIIDNO"],
+    protected $data = [
+        "ADVIIDNO"=>["adviidnoc10", "ADVIIDNO"],
         "IDNO"=>["idnoc15", "IDNO"],
         "ADVISER"=>["adviserc55", "ADVISER"],
         "YEAR"=>["yearc2", "YEAR"],
@@ -68,6 +69,7 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
         "FEE02_TUI"=>["fee02_tuin82", 'FEE02_TUI'],
         "FEE02_LAB"=>["fee02_labn82", 'FEE02_LAB'],
         "FEE02_TUT"=>["fee02_tutn82", 'FEE02_TUT'],
+        "IDNO"=>["idnoc15", 'IDNO'],
     ];
 
     public function replace_key_function($array, $data)
