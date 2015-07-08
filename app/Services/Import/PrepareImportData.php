@@ -55,6 +55,7 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
         "SECTION35"=>["sectionc35", "SECTION"],
         "SECTORDER"=>["sectorderc2","SECTORDER"],
         "DESCRIPTIO"=>["descriptioc35", 'DESCRIPTIO'],
+        "DESCRIPTIO"=>["descriptioc47", 'DESCRIPTIO'],
         "MALE"=>["malen30", 'MALE'],
         "FEMALE"=>["femalen30", 'FEMALE'],
         "STUDCOUNT"=>["studcountn30", 'STUDCOUNT'],
@@ -70,6 +71,10 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
         "FEE02_LAB"=>["fee02_labn82", 'FEE02_LAB'],
         "FEE02_TUT"=>["fee02_tutn82", 'FEE02_TUT'],
         "IDNO"=>["idnoc15", 'IDNO'],
+        "DAYS"=>["daysc15", 'DAYS'],
+        "DAMATRIX01"=>["damatrix01c7", 'DAMATRIX01'],
+        "DAMATRIX02"=>["damatrix02c7", 'DAMATRIX02'],
+
     ];
 
     public function replace_key_function($array, $data)
