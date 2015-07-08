@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Services\Import\PrepareAdviserData;
 use App\Services\Import\PrepareCollegeData;
+use App\Services\Import\PrepareFiledaysData;
 use App\Services\Import\PrepareFilescheData;
 use App\Services\Import\PrepareFilesectData;
 use App\Services\Import\PrepareScheduleData;
@@ -82,6 +83,10 @@ class ImportFoxpro extends Command
                         $prepare = new PrepareAdviserData();
                         $prepare->importData($row);
                     break;
+                    case "FILEDAYS":
+                        $prepare = new PrepareFiledaysData();
+                        $prepare->importData($row);
+                        break;
                 }
                 $this->output->progressAdvance();
             }
