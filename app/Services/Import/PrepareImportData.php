@@ -9,6 +9,7 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
         "ADVISER"=>["adviserc55", "ADVISER"],
         "YEAR"=>["yearc2", "YEAR"],
         "ROOM"=>["roomc5", "ROOM"],
+        "ROOM"=>["roomc47", "ROOM"],
         "DCREATED"=> ["dcreatedd", "DCREATED"],
         "TCREATED"=> ["tcreatedc8", "TCREATED"],
         "SCHEIDNO"=>["scheidnoc5", 'SCHEIDNO'],
