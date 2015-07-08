@@ -57,10 +57,12 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
         "SECTORDER"=>["sectorderc2","SECTORDER"],
         "DESCRIPTIO"=>["descriptioc35", 'DESCRIPTIO'],
         "DESCRIPTIO"=>["descriptioc47", 'DESCRIPTIO'],
+        "DESCRIPTIO25"=>["descriptioc25", 'DESCRIPTIO'],
         "MALE"=>["malen30", 'MALE'],
         "FEMALE"=>["femalen30", 'FEMALE'],
         "STUDCOUNT"=>["studcountn30", 'STUDCOUNT'],
         "ACTIVATED"=>["activatedl", 'ACTIVATED'],
+        "ACTIVATE"=>["activatel", 'ACTIVATED'],
         "COURSEDESC"=>["coursedescc100", 'COURSEDESC'],
         "UNITS_LEC"=>["units_lecc5", 'UNITS_LEC'],
         "UNITS_LAB"=>["units_labc5", 'UNITS_LAB'],
@@ -75,6 +77,7 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
         "DAYS"=>["daysc15", 'DAYS'],
         "DAMATRIX01"=>["damatrix01c7", 'DAMATRIX01'],
         "DAMATRIX02"=>["damatrix02c7", 'DAMATRIX02'],
+        "STLEIDNO"=>["stleidnoc3", 'STLEIDNO'],
 
     ];
 
