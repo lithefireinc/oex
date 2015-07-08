@@ -2,8 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Services\Import\PrepareColl2015Data;
 use App\Services\Import\PrepareFilescheData;
+use App\Services\Import\PrepareFilesectData;
 use App\Services\Import\PrepareScheduleData;
+use App\Services\Import\PrepareSubjfileData;
 use Illuminate\Console\Command;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -70,8 +73,18 @@ class ImportFoxpro extends Command
                     case "COLL2015":
                         $prepare = new PrepareColl2015Data();
                         $prepare->replace_key($row);
-                        DB::table(env('OGS').'.COLL2015')->insert($row);
-                        break;
+                        DB::table(env('OGS').'.COLLEGE')->insert($row);
+                    break;
+                    case "FILESECT":
+                        $prepare = new PrepareFilesectData();
+                        $prepare->replace_key($row);
+                        DB::table(env('OGS').'.FILESECT')->insert($row);
+                    break;
+                    case "SUBJFILE":
+                        $prepare = new PrepareSubjfileData();
+                        $prepare->replace_key($row);
+                        DB::table(env('OGS').'.FILESUBJ')->insert($row);
+                    break;
                 }
                 $this->output->progressAdvance();
             }
