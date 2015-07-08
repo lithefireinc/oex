@@ -13,8 +13,8 @@ class PrepareFileroomData extends PrepareImportData {
 
     public function replace_key(&$array){
         $array = $this->replace_key_function($array, $this->data["ROOMIDNO"]);
-        $array = $this->replace_key_function($array, $this->data["ROOM"]);
-        $array = $this->replace_key_function($array, $this->data["DESCRIPTIO"]);
+        $array = $this->replace_key_function($array, $this->data["ROOM47"]);
+        $array = $this->replace_key_function($array, $this->data["DESCRIPTIO47"]);
         $array = $this->replace_key_function($array, $this->data["ACTIVATED"]);
     }
 

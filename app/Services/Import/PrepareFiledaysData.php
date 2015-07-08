@@ -14,7 +14,7 @@ class PrepareFiledaysData extends PrepareImportData {
     public function replace_key(&$array){
         $array = $this->replace_key_function($array, $this->data["DAYSIDNO"]);
         $array = $this->replace_key_function($array, $this->data["DAYS"]);
-        $array = $this->replace_key_function($array, $this->data["DESCRIPTIO"]);
+        $array = $this->replace_key_function($array, $this->data["DESCRIPTIO47"]);
         $array = $this->replace_key_function($array, $this->data["DAMATRIX01"]);
         $array = $this->replace_key_function($array, $this->data["DAMATRIX02"]);
         $array = $this->replace_key_function($array, $this->data["ACTIVATED"]);
