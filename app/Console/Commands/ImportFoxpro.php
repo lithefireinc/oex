@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Services\Import\PrepareColl2015Data;
+use App\Services\Import\PrepareCollegeData;
 use App\Services\Import\PrepareFilescheData;
 use App\Services\Import\PrepareFilesectData;
 use App\Services\Import\PrepareScheduleData;
@@ -32,8 +32,6 @@ class ImportFoxpro extends Command
      *
      * @return void
      */
-
-    protected $prepare;
 
     public function __construct()
     {
@@ -68,11 +66,8 @@ class ImportFoxpro extends Command
                         $prepare->importData($row);
                     break;
                     case "COLL2015":
-                        $prepare = new PrepareColl2015Data();
+                        $prepare = new PrepareCollegeData();
                         $prepare->importData($row);
-                        
-                        $prepare->replace_key($row);
-                        DB::table(env('OGS').'.COLLEGE')->insert($row);
                     break;
                     case "FILESECT":
                         $prepare = new PrepareFilesectData();
