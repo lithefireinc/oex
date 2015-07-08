@@ -13,6 +13,7 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
         "SCHEIDNO"=>["scheidnoc5", 'SCHEIDNO'],
         "SUBJIDNO"=>["subjidnoc5", 'SUBJIDNO'],
         "SUBJCODE"=>["subjcodec25", 'SUBJCODE'],
+        "UNITS_TTL"=>["units_ttlc5", "UNITS_TTL"],
         "DAYSIDNO"=>["daysidnoc5", 'DAYSIDNO'],
         "TIMEIDNO"=>["timeidnoc5", 'TIMEIDNO'],
         "ADVIIDNO"=>["adviidnoc10", 'ADVIIDNO'],
@@ -24,6 +25,10 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
         "TCREATED"=>["tcreatedc8", 'TCREATED'],
         "DMODIFIED"=>["dmodifiedd", 'DMODIFIED'],
         "TMODIFIED"=>["tmodifiedc8", 'TMODIFIED'],
+        "STUDIDNO"=>["studidnoc10", 'STUDIDNO'],
+        "NAME"=>["namec67", 'NAME'],
+        "SCHEIDNO"=>["scheidnoc5", 'SCHEIDNO'],
+        "DROPPED"=>["droppedl", 'DROPPED'],
     ];
 
     public function replace_key_function($array, $data)
@@ -41,8 +46,8 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
     {
         $array = $this->replace_key_function($array, $this->data["DCREATED"]);
         $array = $this->replace_key_function($array, $this->data["TCREATED"]);
-        $array = $this->replace_key_function($array, $this->dadta['DMODIFIED']);
-        $array = $this->replace_key_function($array, $this->dadta['TMODIFIED']);
+        $array = $this->replace_key_function($array, $this->data['DMODIFIED']);
+        $array = $this->replace_key_function($array, $this->data['TMODIFIED']);
         $array['DMODIFIED'] = Carbon::parse($array['DMODIFIED'])->toDateString();
         $array['DCREATED'] = Carbon::parse($array['DCREATED'])->toDateString();
     }

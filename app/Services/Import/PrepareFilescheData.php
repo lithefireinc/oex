@@ -16,7 +16,6 @@ class PrepareFilescheData extends PrepareImportData{
         $array = $this->replace_key_function($array, $this->data['SECTIDNO']);
         $array = $this->replace_key_function($array, $this->data['ROOMIDNO']);
         $array = $this->replace_key_function($array, $this->data['REMARKS']);
-        $array = $this->replace_key_function($array, $this->data['DCREATED']);
         $this->replace_dates($array);
     }
 
