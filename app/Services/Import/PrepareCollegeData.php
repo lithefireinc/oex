@@ -5,6 +5,13 @@ use DB;
 use Carbon\Carbon;
 
 class PrepareCollegeData extends PrepareImportData{
+
+    public function importData($row){
+        $this->replace_key($row);
+        $this->replace_dates($row);
+        DB::table(env('OGS').'.COLLEGE')->insert($row);
+    }
+
     public function replace_key(&$array){
         $array = $this->replace_key_function($array, $this->data['STUDIDNO']);
         $array = $this->replace_key_function($array, $this->data['IDNO']);
@@ -32,13 +39,7 @@ class PrepareCollegeData extends PrepareImportData{
         $array = $this->replace_key_function($array, $this->data['AMPAID_LAB']);
         $array = $this->replace_key_function($array, $this->data['AMPAID_OTF']);
         $array = $this->replace_key_function($array, $this->data['DENROLLED']);
-        $array['DENROLLED'] = Carbon::parse($array['DENROLLED'])->toDateString();
         $array = $this->replace_key_function($array, $this->data['SCLSIDNO']);
-        $this->replace_dates($array);
-    }
 
-    public function importData($row){
-        $this->replace_key($row);
-        DB::table(env('OGS').'.COLLEGE')->insert($row);
     }
 }
