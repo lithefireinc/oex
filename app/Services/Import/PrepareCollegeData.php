@@ -2,6 +2,7 @@
 
 use App\Services\Import\PrepareImportData;
 use DB;
+use Carbon\Carbon;
 
 class PrepareCollegeData extends PrepareImportData{
     public function replace_key(&$array){
@@ -31,6 +32,7 @@ class PrepareCollegeData extends PrepareImportData{
         $array = $this->replace_key_function($array, $this->data['AMPAID_LAB']);
         $array = $this->replace_key_function($array, $this->data['AMPAID_OTF']);
         $array = $this->replace_key_function($array, $this->data['DENROLLED']);
+        $array['DENROLLED'] = Carbon::parse($array['DENROLLED'])->toDateString();
         $array = $this->replace_key_function($array, $this->data['SCLSIDNO']);
         $this->replace_dates($array);
     }
