@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Services\Import\PrepareAdviserData;
 use App\Services\Import\PrepareCollegeData;
 use App\Services\Import\PrepareFilescheData;
 use App\Services\Import\PrepareFilesectData;
@@ -75,6 +76,10 @@ class ImportFoxpro extends Command
                     break;
                     case "SUBJFILE":
                         $prepare = new PrepareSubjfileData();
+                        $prepare->importData($row);
+                    break;
+                    case "ADVISERS":
+                        $prepare = new PrepareAdviserData();
                         $prepare->importData($row);
                     break;
                 }
