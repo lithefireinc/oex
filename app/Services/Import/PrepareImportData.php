@@ -78,6 +78,9 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
         "DAMATRIX01"=>["damatrix01c7", 'DAMATRIX01'],
         "DAMATRIX02"=>["damatrix02c7", 'DAMATRIX02'],
         "STLEIDNO"=>["stleidnoc3", 'STLEIDNO'],
+        "STTYIDNO"=>["sttyidnoc3", 'STTYIDNO'],
+        "STUDTYPE"=>["studtypec25", 'STUDTYPE'],
+
 
     ];
 
