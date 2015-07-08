@@ -51,10 +51,33 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
         "AMPAID_OTF"=>["ampaid_otfn82", 'AMPAID_OTF'],
         "DENROLLED"=>["denrolledd", 'DENROLLED'],
         "SCLSIDNO"=>["sclsidnoc5", 'SCLSIDNO'],
+        "SECTION35"=>["sectionc35", "SECTION"],
+        "SECTORDER"=>["sectorderc2","SECTORDER"],
+        "DESCRIPTIO"=>["descriptioc35", 'DESCRIPTIO'],
+        "MALE"=>["malen30", 'MALE'],
+        "FEMALE"=>["femalen30", 'FEMALE'],
+        "STUDCOUNT"=>["studcountn30", 'STUDCOUNT'],
+        "ACTIVATED"=>["activatedl", 'ACTIVATED'],
+        "COURSEDESC"=>["coursedescc100", 'COURSEDESC'],
+        "UNITS_LEC"=>["units_lecc5", 'UNITS_LEC'],
+        "UNITS_LAB"=>["units_labc5", 'UNITS_LAB'],
+        "UNITS_TTL"=>["units_ttlc5", 'UNITS_TTL'],
+        "FEE_TUI"=>["fee_tuin82", 'FEE_TUI'],
+        "FEE_LAB"=>["fee_labn82", 'FEE_LAB'],
+        "FEE_TUT"=>["fee_tutn82", 'FEE_TUT'],
+        "FEE02_TUI"=>["fee02_tuin82", 'FEE02_TUI'],
+        "FEE02_LAB"=>["fee02_labn82", 'FEE02_LAB'],
+        "FEE02_TUT"=>["fee02_tutn82", 'FEE02_TUT'],
     ];
 
     public function replace_key_function($array, $data)
     {
+        if(substr($data[0], -1, 1) === "l")
+            $array[$data[0]] = $this->changeToBoolean($array[$data[0]]);
+
+        if(substr($data[0], -1, 1) === "d")
+            $array[$data[0]] = $this->changeToDate($array[$data[0]]);
+
         $keys = array_keys($array);
         $index = array_search($data[0], $keys);
         if ($index !== false) {
@@ -70,7 +93,15 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
         $array = $this->replace_key_function($array, $this->data["TCREATED"]);
         $array = $this->replace_key_function($array, $this->data['DMODIFIED']);
         $array = $this->replace_key_function($array, $this->data['TMODIFIED']);
-        $array['DMODIFIED'] = Carbon::parse($array['DMODIFIED'])->toDateString();
-        $array['DCREATED'] = Carbon::parse($array['DCREATED'])->toDateString();
+        $array['DMODIFIED'] = $this->changeToDate($array['DMODIFIED']);
+        $array['DCREATED'] = $this->changeToDate($array['DCREATED']);
+    }
+
+    public function changeToDate($value){
+        return Carbon::parse($value)->toDateString();
+    }
+
+    public function changeToBoolean($value){
+        return filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 }

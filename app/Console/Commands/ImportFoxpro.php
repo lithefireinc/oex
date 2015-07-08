@@ -72,14 +72,10 @@ class ImportFoxpro extends Command
                     case "FILESECT":
                         $prepare = new PrepareFilesectData();
                         $prepare->importData($row);
-                        $prepare->replace_key($row);
-                        DB::table(env('OGS').'.FILESECT')->insert($row);
                     break;
                     case "SUBJFILE":
                         $prepare = new PrepareSubjfileData();
                         $prepare->importData($row);
-                        $prepare->replace_key($row);
-                        DB::table(env('OGS').'.FILESUBJ')->insert($row);
                     break;
                 }
                 $this->output->progressAdvance();
