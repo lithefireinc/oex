@@ -80,8 +80,11 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
         "STLEIDNO"=>["stleidnoc3", 'STLEIDNO'],
         "STTYIDNO"=>["sttyidnoc3", 'STTYIDNO'],
         "STUDTYPE"=>["studtypec25", 'STUDTYPE'],
-
-
+        "TIME"=>["timec42", 'TIME'],
+        "TIME24"=>["time24c42", 'TIME'],
+        "TIMATRIX01"=>["timatrix01c96", 'TIMEMATRIX01'],
+        "TIMATRIX02"=>["timatrix02c96", 'TIMEMATRIX02'],
+        "TIMATRIX03"=>["timatrix03c96", 'TIMEMATRIX03'],
     ];
 
     public function replace_key_function($array, $data)
