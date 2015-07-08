@@ -53,35 +53,37 @@ class ImportFoxpro extends Command
             $this->error("The file " . $csv . " does not exist.");
             return;
         }
+        $this->info("Preparing to import ".$file);
         Excel::load($csv, function($reader) use ($file){
-            $this->info("Preparing to import ".$file);
-
             $results = $reader->toArray();
             $this->output->progressStart(count($results));
             foreach($results as $row){
                 switch($file) {
                     case "SCHEFILE":
                         $prepare = new PrepareFilescheData();
-                        $prepare->replace_key($row);
-                        DB::table(env('OGS').'.FILESCHE')->insert($row);
+                        $prepare->importData($row);
                     break;
                     case "SCHEDULE":
                         $prepare = new PrepareScheduleData();
+                        $prepare->importData($row);
                         $prepare->replace_key($row);
                         DB::table(env('OGS').'.SCHEDULE')->insert($row);
                     break;
                     case "COLL2015":
                         $prepare = new PrepareColl2015Data();
+                        $prepare->importData($row);
                         $prepare->replace_key($row);
                         DB::table(env('OGS').'.COLLEGE')->insert($row);
                     break;
                     case "FILESECT":
                         $prepare = new PrepareFilesectData();
+                        $prepare->importData($row);
                         $prepare->replace_key($row);
                         DB::table(env('OGS').'.FILESECT')->insert($row);
                     break;
                     case "SUBJFILE":
                         $prepare = new PrepareSubjfileData();
+                        $prepare->importData($row);
                         $prepare->replace_key($row);
                         DB::table(env('OGS').'.FILESUBJ')->insert($row);
                     break;

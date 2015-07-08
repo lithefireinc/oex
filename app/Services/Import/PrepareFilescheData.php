@@ -1,21 +1,27 @@
 <?php namespace App\Services\Import;
 
 use App\Services\Import\PrepareImportData;
+use DB;
 
 class PrepareFilescheData extends PrepareImportData{
     public function replace_key(&$array){
-        $array = $this->replace_key_function($array, "scheidnoc5", 'SCHEIDNO');
-        $array = $this->replace_key_function($array, "subjidnoc5", 'SUBJIDNO');
-        $array = $this->replace_key_function($array, "subjcodec25", 'SUBJCODE');
-        $array = $this->replace_key_function($array, "units_ttlc5", 'UNITS_TTL');
-        $array = $this->replace_key_function($array, "daysidnoc5", 'DAYSIDNO');
-        $array = $this->replace_key_function($array, "timeidnoc5", 'TIMEIDNO');
-        $array = $this->replace_key_function($array, "adviidnoc10", 'ADVIIDNO');
-        $array = $this->replace_key_function($array, "couridnoc5", 'COURIDNO');
-        $array = $this->replace_key_function($array, "sectidnoc3", 'SECTIDNO');
-        $array = $this->replace_key_function($array, "roomidnoc3", 'ROOMIDNO');
-        $array = $this->replace_key_function($array, "remarksm", 'REMARKS');
-        $array = $this->replace_key_function($array, "dcreatedd", 'DCREATED');
+        $array = $this->replace_key_function($array, $this->data['SCHEIDNO']);
+        $array = $this->replace_key_function($array, $this->data['SUBJIDNO']);
+        $array = $this->replace_key_function($array, $this->data['SUBJCODE']);
+        $array = $this->replace_key_function($array, $this->data['UNITS_TTL']);
+        $array = $this->replace_key_function($array, $this->data['DAYSIDNO']);
+        $array = $this->replace_key_function($array, $this->data['TIMEIDNO']);
+        $array = $this->replace_key_function($array, $this->data['ADVIIDNO']);
+        $array = $this->replace_key_function($array, $this->data['COURIDNO']);
+        $array = $this->replace_key_function($array, $this->data['SECTIDNO']);
+        $array = $this->replace_key_function($array, $this->data['ROOMIDNO']);
+        $array = $this->replace_key_function($array, $this->data['REMARKS']);
+        $array = $this->replace_key_function($array, $this->data['DCREATED']);
         $this->replace_dates($array);
+    }
+
+    public function importData($row){
+        $this->replace_key($row);
+        DB::table(env('OGS').'.FILESCHE')->insert($row);
     }
 }
