@@ -16,7 +16,7 @@ class PrepareFileroomData extends PrepareImportData {
         $array = $this->replace_key_function($array, $this->data["ROOM47"]);
         $array = $this->replace_key_function($array, $this->data["DESCRIPTIO47"]);
         $array = $this->replace_key_function($array, $this->data["ACTIVATED"]);
-        $this->replace_dates($row);
+        $this->replace_dates($array);
     }
 
 

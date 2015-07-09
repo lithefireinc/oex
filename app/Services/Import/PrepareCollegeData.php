@@ -39,7 +39,7 @@ class PrepareCollegeData extends PrepareImportData{
         $array = $this->replace_key_function($array, $this->data['AMPAID_OTF']);
         $array = $this->replace_key_function($array, $this->data['DENROLLED']);
         $array = $this->replace_key_function($array, $this->data['SCLSIDNO']);
-        $this->replace_dates($row);
+        $this->replace_dates($array);
     }
 
 

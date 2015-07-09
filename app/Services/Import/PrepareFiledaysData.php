@@ -18,7 +18,8 @@ class PrepareFiledaysData extends PrepareImportData {
         $array = $this->replace_key_function($array, $this->data["DAMATRIX01"]);
         $array = $this->replace_key_function($array, $this->data["DAMATRIX02"]);
         $array = $this->replace_key_function($array, $this->data["ACTIVATED"]);
-        $this->replace_dates($row);
+        $this->replace_dates($array);
+
     }
 
 

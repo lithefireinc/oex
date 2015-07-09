@@ -15,7 +15,7 @@ class PrepareFilestleData extends PrepareImportData {
         $array = $this->replace_key_function($array, $this->data["YEAR"]);
         $array = $this->replace_key_function($array, $this->data["DESCRIPTIO25"]);
         $array = $this->replace_key_function($array, $this->data["ACTIVATE"]);
-        $this->replace_dates($row);
+        $this->replace_dates($array);
     }
 
 

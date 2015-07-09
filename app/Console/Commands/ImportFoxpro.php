@@ -78,6 +78,7 @@ class ImportFoxpro extends Command
             $prepare->truncate();
 
             foreach ($results as $key => $row) {
+                reset($row);
                 if($row[key($row)] === null){
                     $this->output->progressAdvance();
                     continue;
