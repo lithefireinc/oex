@@ -3,11 +3,13 @@
 use Carbon\Carbon;
 
 abstract class PrepareImportData implements PrepareImportDataInterface {
-    protected $data = ["ADVIIDNO"=>["adviidnoc10", "ADVIIDNO"],
+    protected $data = [
+        "ADVIIDNO"=>["adviidnoc10", "ADVIIDNO"],
         "IDNO"=>["idnoc15", "IDNO"],
         "ADVISER"=>["adviserc55", "ADVISER"],
         "YEAR"=>["yearc2", "YEAR"],
         "ROOM"=>["roomc5", "ROOM"],
+        "ROOM47"=>["roomc47", "ROOM"],
         "DCREATED"=> ["dcreatedd", "DCREATED"],
         "TCREATED"=> ["tcreatedc8", "TCREATED"],
         "SCHEIDNO"=>["scheidnoc5", 'SCHEIDNO'],
@@ -54,10 +56,13 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
         "SECTION35"=>["sectionc35", "SECTION"],
         "SECTORDER"=>["sectorderc2","SECTORDER"],
         "DESCRIPTIO"=>["descriptioc35", 'DESCRIPTIO'],
+        "DESCRIPTIO47"=>["descriptioc47", 'DESCRIPTIO'],
+        "DESCRIPTIO25"=>["descriptioc25", 'DESCRIPTIO'],
         "MALE"=>["malen30", 'MALE'],
         "FEMALE"=>["femalen30", 'FEMALE'],
         "STUDCOUNT"=>["studcountn30", 'STUDCOUNT'],
         "ACTIVATED"=>["activatedl", 'ACTIVATED'],
+        "ACTIVATE"=>["activatel", 'ACTIVATED'],
         "COURSEDESC"=>["coursedescc100", 'COURSEDESC'],
         "UNITS_LEC"=>["units_lecc5", 'UNITS_LEC'],
         "UNITS_LAB"=>["units_labc5", 'UNITS_LAB'],
@@ -68,6 +73,18 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
         "FEE02_TUI"=>["fee02_tuin82", 'FEE02_TUI'],
         "FEE02_LAB"=>["fee02_labn82", 'FEE02_LAB'],
         "FEE02_TUT"=>["fee02_tutn82", 'FEE02_TUT'],
+        "IDNO"=>["idnoc15", 'IDNO'],
+        "DAYS"=>["daysc15", 'DAYS'],
+        "DAMATRIX01"=>["damatrix01c7", 'DAMATRIX01'],
+        "DAMATRIX02"=>["damatrix02c7", 'DAMATRIX02'],
+        "STLEIDNO"=>["stleidnoc3", 'STLEIDNO'],
+        "STTYIDNO"=>["sttyidnoc3", 'STTYIDNO'],
+        "STUDTYPE"=>["studtypec25", 'STUDTYPE'],
+        "TIME"=>["timec42", 'TIME'],
+        "TIME24"=>["time24c42", 'TIME'],
+        "TIMATRIX01"=>["timatrix01c96", 'TIMEMATRIX01'],
+        "TIMATRIX02"=>["timatrix02c96", 'TIMEMATRIX02'],
+        "TIMATRIX03"=>["timatrix03c96", 'TIMEMATRIX03'],
     ];
 
     public function replace_key_function($array, $data)
