@@ -1,6 +1,7 @@
 <?php namespace App\Services\Import;
 
 use Carbon\Carbon;
+use DB;
 
 abstract class PrepareImportData implements PrepareImportDataInterface {
     protected $data = [
@@ -10,8 +11,6 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
         "YEAR"=>["yearc2", "YEAR"],
         "ROOM"=>["roomc5", "ROOM"],
         "ROOM47"=>["roomc47", "ROOM"],
-        "DCREATED"=> ["dcreatedd", "DCREATED"],
-        "TCREATED"=> ["tcreatedc8", "TCREATED"],
         "SCHEIDNO"=>["scheidnoc5", 'SCHEIDNO'],
         "SUBJIDNO"=>["subjidnoc5", 'SUBJIDNO'],
         "SUBJCODE"=>["subjcodec25", 'SUBJCODE'],
@@ -87,6 +86,12 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
         "TIMATRIX03"=>["timatrix03c96", 'TIMEMATRIX03'],
     ];
 
+    protected $table = '';
+
+    public function __construct(){
+
+    }
+
     public function replace_key_function($array, $data)
     {
         if(substr($data[0], -1, 1) === "l")
@@ -120,5 +125,14 @@ abstract class PrepareImportData implements PrepareImportDataInterface {
 
     public function changeToBoolean($value){
         return filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    public function truncate(){
+        DB::table($this->table)->truncate();
+    }
+
+    public function importData($row){
+        $this->replace_key($row);
+        DB::table($this->table)->insert($row);
     }
 }

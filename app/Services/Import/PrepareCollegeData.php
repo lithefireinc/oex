@@ -2,14 +2,13 @@
 
 use App\Services\Import\PrepareImportData;
 use DB;
-use Carbon\Carbon;
 
 class PrepareCollegeData extends PrepareImportData{
+    protected $table;
 
-    public function importData($row){
-        $this->replace_key($row);
-        $this->replace_dates($row);
-        DB::table(env('OGS').'.COLLEGE')->insert($row);
+    public function __construct(){
+        parent::__construct();
+        $this->table = env('OGS').'.COLLEGE';
     }
 
     public function replace_key(&$array){
@@ -40,6 +39,8 @@ class PrepareCollegeData extends PrepareImportData{
         $array = $this->replace_key_function($array, $this->data['AMPAID_OTF']);
         $array = $this->replace_key_function($array, $this->data['DENROLLED']);
         $array = $this->replace_key_function($array, $this->data['SCLSIDNO']);
-
+        $this->replace_dates($row);
     }
+
+
 }

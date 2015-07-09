@@ -4,11 +4,11 @@ use App\Services\Import\PrepareImportData;
 use DB;
 
 class PrepareFiledaysData extends PrepareImportData {
+    protected $table;
 
-    public function importData($row){
-        $this->replace_key($row);
-        $this->replace_dates($row);
-        DB::table(env('ENGINE').'.FILEDAYS')->insert($row);
+    public function __construct(){
+        parent::__construct();
+        $this->table = env('ENGINE').'.FILEDAYS';
     }
 
     public function replace_key(&$array){
@@ -18,6 +18,7 @@ class PrepareFiledaysData extends PrepareImportData {
         $array = $this->replace_key_function($array, $this->data["DAMATRIX01"]);
         $array = $this->replace_key_function($array, $this->data["DAMATRIX02"]);
         $array = $this->replace_key_function($array, $this->data["ACTIVATED"]);
+        $this->replace_dates($row);
     }
 
 

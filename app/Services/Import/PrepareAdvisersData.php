@@ -3,12 +3,12 @@
 use App\Services\Import\PrepareImportData;
 use DB;
 
-class PrepareAdviserData extends PrepareImportData {
+class PrepareAdvisersData extends PrepareImportData {
+    protected $table;
 
-    public function importData($row){
-        $this->replace_key($row);
-        $this->replace_dates($row);
-        DB::table(env('ENGINE').'.FILEADVI')->insert($row);
+    public function __construct(){
+        parent::__construct();
+        $this->table = env('ENGINE').'.FILEADVI';
     }
 
     public function replace_key(&$array){
@@ -19,6 +19,4 @@ class PrepareAdviserData extends PrepareImportData {
         $array = $this->replace_key_function($array, $this->data["SECTION"]);
         $array = $this->replace_key_function($array, $this->data["ROOM"]);
     }
-
-
 }

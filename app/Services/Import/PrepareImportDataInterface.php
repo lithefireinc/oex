@@ -3,4 +3,5 @@
 interface PrepareImportDataInterface {
     public function replace_key(&$array);
     public function importData($row);
+    public function truncate();
 }
