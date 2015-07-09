@@ -25,16 +25,16 @@ class ImportFoxpro extends Command
 
     protected $tables = [
         "ADVISERS",
-        "COLLEGE",
         "FILEDAYS",
         "FILEROOM",
         "FILESECT",
         "FILESTLE",
         "FILESSTTY",
         "FILETIME",
-        "SCHEDULE",
         "SCHEFILE",
         "SUBJFILE",
+        "COLLEGE",
+        "SCHEDULE",
     ];
 
     /**
