@@ -14,7 +14,7 @@ class ImportFoxpro extends Command
      *
      * @var string
      */
-    protected $signature = 'import:foxpro {csv? : The csv file to import with no file extensions}';
+    protected $signature = 'import:foxpro {csv? : The csv file to import with no file extensions} {--without="" : exclude tables}';
 
     /**
      * The console command description.
@@ -59,7 +59,10 @@ class ImportFoxpro extends Command
         if(!empty($file)) {
             $this->prepareImport($file);
         }else{
+            $without = explode(",", $this->option("without"));
             foreach($this->tables as $table) {
+                if(in_array($table, $without))
+                    continue;
                 $this->prepareImport($table);
             }
         }
@@ -87,7 +90,7 @@ class ImportFoxpro extends Command
     }
 
     public function prepareImport($file){
-        $csv = storage_path('foxpro') . '/' . strtoupper($this->argument('csv')) . ".CSV";
+        $csv = storage_path('foxpro') . '/' . strtoupper($file) . ".CSV";
         if (!file_exists($csv)) {
             $this->error("The file " . $csv . " does not exist.");
             return;
