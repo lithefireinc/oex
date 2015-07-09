@@ -29,7 +29,7 @@ class ImportFoxpro extends Command
         "FILEROOM",
         "FILESECT",
         "FILESTLE",
-        "FILESSTTY",
+        "FILESTTY",
         "FILETIME",
         "SCHEFILE",
         "SUBJFILE",
