@@ -14,7 +14,7 @@ class ImportFoxpro extends Command
      *
      * @var string
      */
-    protected $signature = 'import:foxpro {csv? : The csv file to import with no file extensions} {--without="" : exclude tables}';
+    protected $signature = 'import:foxpro {csv? : The csv file to import with no file extensions} {--without="" : exclude tables} {--only= : execute import only in this tables}';
 
     /**
      * The console command description.
@@ -24,6 +24,7 @@ class ImportFoxpro extends Command
     protected $description = 'Import foxpro DBF to MySQL';
 
     protected $tables = [
+        "SCHEDULE",
         "ADVISERS",
         "FILEDAYS",
         "FILEROOM",
@@ -34,7 +35,6 @@ class ImportFoxpro extends Command
         "SCHEFILE",
         "SUBJFILE",
         "COLLEGE",
-        "SCHEDULE",
     ];
 
     /**
@@ -55,16 +55,12 @@ class ImportFoxpro extends Command
      */
     public function handle()
     {
+        DB::disableQueryLog();
         $file = $this->argument('csv');
         if(!empty($file)) {
             $this->prepareImport($file);
         }else{
-            $without = explode(",", $this->option("without"));
-            foreach($this->tables as $table) {
-                if(in_array($table, $without))
-                    continue;
-                $this->prepareImport($table);
-            }
+            $this->specifyTables();
         }
 
     }
@@ -87,6 +83,7 @@ class ImportFoxpro extends Command
                 $this->output->progressAdvance();
             }
             $this->output->progressFinish();
+            unset($reader);
         });
     }
 
@@ -98,5 +95,21 @@ class ImportFoxpro extends Command
         }
         $this->info("Preparing to import " . $file);
         $this->loadExcel($csv, $file);
+    }
+
+    public function specifyTables(){
+        $without = explode(",", $this->option("without"));
+        $only = explode(",", $this->option("only"));
+        if($only[0] !== ""){
+            foreach ($only as $table) {
+                $this->prepareImport($table);
+            }
+        }else {
+            foreach ($this->tables as $table) {
+                if (in_array($table, $without))
+                    continue;
+                $this->prepareImport($table);
+            }
+        }
     }
 }
