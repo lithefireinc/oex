@@ -3,7 +3,14 @@
 use App\Services\Import\PrepareImportData;
 use DB;
 
-class PrepareFilescheData extends PrepareImportData{
+class PrepareSchefileData extends PrepareImportData{
+    protected $table;
+
+    public function __construct(){
+        parent::__construct();
+        $this->table = env('OGS').'.FILESCHE';
+    }
+
     public function replace_key(&$array){
         $array = $this->replace_key_function($array, $this->data['SCHEIDNO']);
         $array = $this->replace_key_function($array, $this->data['SUBJIDNO']);
@@ -17,10 +24,5 @@ class PrepareFilescheData extends PrepareImportData{
         $array = $this->replace_key_function($array, $this->data['ROOMIDNO']);
         $array = $this->replace_key_function($array, $this->data['REMARKS']);
         $this->replace_dates($array);
-    }
-
-    public function importData($row){
-        $this->replace_key($row);
-        DB::table(env('OGS').'.FILESCHE')->insert($row);
     }
 }

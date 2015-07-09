@@ -4,11 +4,11 @@ use App\Services\Import\PrepareImportData;
 use DB;
 
 class PrepareFiletimeData extends PrepareImportData {
+    protected $table;
 
-    public function importData($row){
-        $this->replace_key($row);
-        $this->replace_dates($row);
-        DB::table(env('ENGINE').'.FILETIME')->insert($row);
+    public function __construct(){
+        parent::__construct();
+        $this->table = env('ENGINE').'.FILETIME';
     }
 
     public function replace_key(&$array){
@@ -20,6 +20,7 @@ class PrepareFiletimeData extends PrepareImportData {
         $array = $this->replace_key_function($array, $this->data["TIMATRIX02"]);
         $array = $this->replace_key_function($array, $this->data["TIMATRIX03"]);
         $array = $this->replace_key_function($array, $this->data["ACTIVATED"]);
+        $this->replace_dates($row);
     }
 
 

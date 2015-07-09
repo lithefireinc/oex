@@ -4,6 +4,13 @@ use App\Services\Import\PrepareImportData;
 use DB;
 
 class PrepareScheduleData extends PrepareImportData{
+    protected $table;
+
+    public function __construct(){
+        parent::__construct();
+        $this->table = env('OGS').'.SCHEDULE';
+    }
+
     public function replace_key(&$array){
         $array = $this->replace_key_function($array, $this->data['STUDIDNO']);
         $array = $this->replace_key_function($array, $this->data['IDNO']);
@@ -11,10 +18,5 @@ class PrepareScheduleData extends PrepareImportData{
         $array = $this->replace_key_function($array, $this->data['SCHEIDNO']);
         $array = $this->replace_key_function($array, $this->data['DROPPED']);
         $this->replace_dates($array);
-    }
-
-    public function importData($row){
-        $this->replace_key($row);
-        DB::table(env('OGS').'.SCHEDULE')->insert($row);
     }
 }

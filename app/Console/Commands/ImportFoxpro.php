@@ -2,17 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Services\Import\PrepareAdviserData;
-use App\Services\Import\PrepareCollegeData;
-use App\Services\Import\PrepareFiledaysData;
-use App\Services\Import\PrepareFileroomData;
-use App\Services\Import\PrepareFilescheData;
-use App\Services\Import\PrepareFilesectData;
-use App\Services\Import\PrepareFilestleData;
-use App\Services\Import\PrepareFilesttyData;
-use App\Services\Import\PrepareFiletimeData;
-use App\Services\Import\PrepareScheduleData;
-use App\Services\Import\PrepareSubjfileData;
+use App\Services\Import\PrepareImportData;
 use Illuminate\Console\Command;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -24,7 +14,7 @@ class ImportFoxpro extends Command
      *
      * @var string
      */
-    protected $signature = 'import:foxpro {csv : The csv file to import with no file extensions}';
+    protected $signature = 'import:foxpro {csv? : The csv file to import with no file extensions}';
 
     /**
      * The console command description.
@@ -32,6 +22,20 @@ class ImportFoxpro extends Command
      * @var string
      */
     protected $description = 'Import foxpro DBF to MySQL';
+
+    protected $tables = [
+        "ADVISERS",
+        "COLLEGE",
+        "FILEDAYS",
+        "FILEROOM",
+        "FILESECT",
+        "FILESTLE",
+        "FILESSTTY",
+        "FILETIME",
+        "SCHEDULE",
+        "SCHEFILE",
+        "SUBJFILE",
+    ];
 
     /**
      * Create a new command instance.
@@ -52,65 +56,43 @@ class ImportFoxpro extends Command
     public function handle()
     {
         $file = $this->argument('csv');
-        $csv = storage_path('foxpro').'/'.strtoupper($this->argument('csv')).".CSV";
-        if(!file_exists($csv)) {
+        if(!empty($file)) {
+            $this->prepareImport($file);
+        }else{
+            foreach($this->tables as $table) {
+                $this->prepareImport($table);
+            }
+        }
+
+    }
+
+    public function loadExcel($csv, $file){
+        Excel::load($csv, function ($reader) use ($file) {
+            $results = $reader->toArray();
+            $this->output->progressStart(count($results));
+            $class = "App\\Services\\Import\\Prepare".ucfirst(strtolower($file))."Data";
+            $prepare = new $class();
+            $prepare->truncate();
+
+            foreach ($results as $key => $row) {
+                if($row[key($row)] === null){
+                    $this->output->progressAdvance();
+                    continue;
+                }
+                $prepare->importData($row);
+                $this->output->progressAdvance();
+            }
+            $this->output->progressFinish();
+        });
+    }
+
+    public function prepareImport($file){
+        $csv = storage_path('foxpro') . '/' . strtoupper($this->argument('csv')) . ".CSV";
+        if (!file_exists($csv)) {
             $this->error("The file " . $csv . " does not exist.");
             return;
         }
-        $this->info("Preparing to import ".$file);
-        Excel::load($csv, function($reader) use ($file){
-            $results = $reader->toArray();
-            $this->output->progressStart(count($results));
-            foreach($results as $row){
-                switch($file) {
-                    case "SCHEFILE":
-                        $prepare = new PrepareFilescheData();
-                        $prepare->importData($row);
-                    break;
-                    case "SCHEDULE":
-                        $prepare = new PrepareScheduleData();
-                        $prepare->importData($row);
-                    break;
-                    case "COLL2015":
-                        $prepare = new PrepareCollegeData();
-                        $prepare->importData($row);
-                    break;
-                    case "FILESECT":
-                        $prepare = new PrepareFilesectData();
-                        $prepare->importData($row);
-                    break;
-                    case "SUBJFILE":
-                        $prepare = new PrepareSubjfileData();
-                        $prepare->importData($row);
-                    break;
-                    case "ADVISERS":
-                        $prepare = new PrepareAdviserData();
-                        $prepare->importData($row);
-                    break;
-                    case "FILEDAYS":
-                        $prepare = new PrepareFiledaysData();
-                        $prepare->importData($row);
-                    break;
-                    case "FILEROOM":
-                        $prepare = new PrepareFileroomData();
-                        $prepare->importData($row);
-                    break;
-                    case "FILESTLE":
-                        $prepare = new PrepareFilestleData();
-                        $prepare->importData($row);
-                    break;
-                    case "FILESTTY":
-                        $prepare = new PrepareFilesttyData();
-                        $prepare->importData($row);
-                    break;
-                    case "FILETIME":
-                        $prepare = new PrepareFiletimeData();
-                        $prepare->importData($row);
-                    break;
-                }
-                $this->output->progressAdvance();
-            }
-        });
-        $this->output->progressFinish();
+        $this->info("Preparing to import " . $file);
+        $this->loadExcel($csv, $file);
     }
 }

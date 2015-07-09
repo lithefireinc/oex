@@ -4,10 +4,11 @@ use App\Services\Import\PrepareImportData;
 use DB;
 
 class PrepareFilesectData extends PrepareImportData{
+    protected $table;
 
-    public function importData($row){
-        $this->replace_key($row);
-        DB::table(env('OGS').'.FILESECT')->insert($row);
+    public function __construct(){
+        parent::__construct();
+        $this->table = env('OGS').'.FILESECT';
     }
 
     public function replace_key(&$array){
