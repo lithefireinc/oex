@@ -20,7 +20,7 @@ class PrepareFiletimeData extends PrepareImportData {
         $array = $this->replace_key_function($array, $this->data["TIMATRIX02"]);
         $array = $this->replace_key_function($array, $this->data["TIMATRIX03"]);
         $array = $this->replace_key_function($array, $this->data["ACTIVATED"]);
-        $this->replace_dates($row);
+        $this->replace_dates($array);
     }
 
 
