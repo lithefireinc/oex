@@ -2,7 +2,7 @@
 
 use App\Filesche;
 use DB;
-class FacultySubjects {
+class FacultySubjectQuery {
     public function lists($faculty){
         return DB::connection('ogs')->table("FILESCHE")
             ->join("FILESUBJ", "FILESCHE.SUBJIDNO", "=", "FILESUBJ.SUBJIDNO")
@@ -16,7 +16,7 @@ class FacultySubjects {
         $time = env('ENGINE').".FILETIME";
         $room = env('ENGINE').".FILEROOM";
         $course = env('ENGINE').".FILECOUR";
-        return response()->json(DB::connection('ogs')->table("FILESCHE")
+        return DB::connection('ogs')->table("FILESCHE")
             ->select("DAYS", "TIME", "ROOM", "SECTION", "COURSE")
             ->leftJoin($days, $days.".DAYSIDNO", "=", "FILESCHE.DAYSIDNO")
             ->leftJoin($time, $time.".TIMEIDNO", "=", "FILESCHE.TIMEIDNO")
@@ -24,6 +24,6 @@ class FacultySubjects {
             ->leftJoin("FILESECT", "FILESECT.SECTIDNO", "=", "FILESCHE.SECTIDNO")
             ->leftJoin($course, $course.".COURIDNO", "=", "FILESCHE.COURIDNO")
             ->where("SCHEIDNO", $schedule)
-            ->first());
+            ->first();
     }
 }

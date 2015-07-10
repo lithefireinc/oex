@@ -15,6 +15,8 @@ class Survey extends Model {
         'instructions',
         'question_set_id',
         'faculty_id',
+        'schedule_id',
+        'per_page',
         'start_date',
         'expires',
         'active',

@@ -74,8 +74,9 @@
                     <div class="col-sm-6">
                         <!-- Per Page Form Input -->
                         <div class="form-group">
-                            {!! Form::label('per_page', 'Questions Per Page:') !!}
-                            {!! Form::input('number','per_page', 10, ['class' => 'form-control', 'v-model'=>'survey.per_page', 'number']) !!}
+                            <label for="per_page">Question Per Page: </label>
+                            <select name="per_page" id="per_page" class="form-control" v-model="survey.per_page" options="pages">
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -89,28 +90,7 @@
             </div>
         <!-- Start_date Form Input -->
             <div class="col-sm-6">
-                <div class="panel panel-default panel-fullheight">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Subject Details</h3>
-                    </div>
-                    <div class="panel-body">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <strong>Schedule:</strong> @{{ subjDetails.DAYS }} @{{ subjDetails.TIME }}
-                            </li>
-                            <li class="list-group-item">
-                                <strong>Room:</strong> @{{ subjDetails.ROOM }}
-                            </li>
-                            <li class="list-group-item">
-                                <strong>Course:</strong> @{{ subjDetails.COURSE }}
-                            </li>
-                            <li class="list-group-item">
-                                <strong>Section:</strong> @{{ subjDetails.SECTION }}
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
+                @include('partials.subjectDetails')
             </div>
         </div>
         <!-- 'Create Survey' Form Input -->

@@ -11,12 +11,11 @@
         <thead>
         <tr>
             <th></th>
-            <th>Title</th>
-            <th>Description</th>
+            <th>Question Set</th>
             <th>Faculty</th>
+            <th>Subject Details</th>
             <th>Expires</th>
-            <th>Active</th>
-            <th>Result</th>
+            <th>Action</th>
         </tr>
         </thead>
     </table>

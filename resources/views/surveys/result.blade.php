@@ -2,7 +2,7 @@
 @section('content')
 
     <h1 class="page-heading">Evaluation of {!! $survey->faculty->ADVISER !!} Results</h1>
-
+    @if(count($results))
     <div class="outer">
         <div class="inner">
             <table class="table table-striped table-bordered table_survey_results">
@@ -32,5 +32,8 @@
             </table>
         </div>
     </div>
+    @else
+        <p class="text-center">There are no results for this survey yet!</p>
+    @endif
 
 @stop

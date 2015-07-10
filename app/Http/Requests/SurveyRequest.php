@@ -27,7 +27,7 @@ class SurveyRequest extends Request {
             'instructions' => 'required',
             'start_date' => 'required|date',
             'expires' => 'required|date',
-            'per_page' => 'required|numeric',
+            'per_page' => 'required|numeric|min:5',
             'schedule_id' => 'required',
             'faculty_id' => 'required'
 		];

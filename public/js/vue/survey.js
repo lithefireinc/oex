@@ -22,7 +22,8 @@ new Vue({
             ROOM: '',
             SECTION: '',
             COURSE: ''
-        }
+        },
+        pages: [{value: 5,text: 5}, {value: 10,text: 10}, {value: 15,text: 15}, {value: 20,text: 20}]
     },
     methods: {
         fetchQuestionSet: function(){
@@ -49,7 +50,8 @@ new Vue({
             e.preventDefault();
             var survey = this.survey;
             this.$http.post(config.BASE+'/surveys', survey).success(function(data, status, request){
-                window.location.replace(data.url);
+                if(typeof data.url != 'undefined')
+                    window.location.replace(data.url);
             })
             .error(function(data, status, request){
             this.errors = [];
@@ -85,14 +87,18 @@ new Vue({
         var self = this;
         this.subjectDetails();
 
-        var e = document.createEvent('HTMLEvents')
-        e.initEvent('change', true, true)
-
+        var e = document.createEvent('HTMLEvents');
+        e.initEvent('change', true, true);
         $(this.$el)
             .find('select')
             .select2({theme: "bootstrap"})
             .on('change', function() {
-                this.dispatchEvent(e)
+                try{
+                    this.dispatchEvent(e);
+                }catch(err){
+
+                }
+
             });
     }
 });

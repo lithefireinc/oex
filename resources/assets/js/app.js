@@ -15,14 +15,11 @@ $(function(){
             "ajax": "surveys/data",
             "columns": [
                 {data: 'id', name: 'id', visible: false, searchable: false},
-                {data: 'title', name: 'title'},
-                {data: 'description', name: 'description'},
+                {data: 'title', name: 'title', width: '200px'},
                 {data: 'ADVISER', name: 'ADVISER'},
-                //{data: 'first_name', name: 'first_name', visible: false},
-                //{data: 'middle_name', name: 'middle_name', visible: false},
+                {data: 'details', name: 'details'},
                 {data: 'expires', name: 'expires'},
-                {data: 'action', name: 'action', orderable: false, searchable: false},
-                {data: 'result', name: 'result', orderable: false, searchable: false}
+                {data: 'action', name: 'action', orderable: false, searchable: false, width: '150px'}
             ]
         });
 

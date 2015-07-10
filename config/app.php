@@ -149,7 +149,7 @@ return [
 		* Third Party Providers
 		*/
 		'Frozennode\Administrator\AdministratorServiceProvider',
-	    'Illuminate\Html\HtmlServiceProvider',
+         Collective\Html\HtmlServiceProvider::class,
 //        'Orchestra\Auth\AuthServiceProvider',
 //        'Orchestra\Authorization\AuthorizationServiceProvider',
 //        'Orchestra\Memory\MemoryServiceProvider',
@@ -158,7 +158,7 @@ return [
         'Laracasts\Flash\FlashServiceProvider',
         'Bican\Roles\RolesServiceProvider',
         'yajra\Datatables\DatatablesServiceProvider',
-        Maatwebsite\Excel\ExcelServiceProvider::class,
+         Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
 	/*
@@ -206,7 +206,8 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
-        'Form'      => 'Illuminate\Html\FormFacade',
+        'Html'      => Collective\Html\HtmlFacade::class,
+        'Form'      => Collective\Html\FormFacade::class,
 //        'ACL'       => 'Orchestra\Support\Facades\ACL',
         'Datatables' => 'yajra\Datatables\Datatables',
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
