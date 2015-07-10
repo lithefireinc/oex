@@ -87,6 +87,10 @@
 
     <!-- Footer ends -->
 	<!-- Scripts -->
+    <script>
+        //config from php to javascript
+        var config = <?php echo json_encode($js_config); ?>;
+    </script>
     <script src="{{ asset('js/vendor.js') }}"></script>
     <script src="{{ asset('js/all.js') }}"></script>
     @yield('scripts')

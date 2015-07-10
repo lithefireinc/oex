@@ -55,5 +55,7 @@ Route::controllers([
 
 Route::get("questionSetList", "QuestionSetsController@lists");
 Route::get("facultyList", "FacultyController@lists");
+Route::get("scheduleList/{faculty}", "SchedulesController@lists");
+Route::get("subjectDetails/{schedule}", "SchedulesController@subjectDetails");
 
 

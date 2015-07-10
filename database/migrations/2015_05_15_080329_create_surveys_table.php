@@ -23,8 +23,8 @@ class CreateSurveysTable extends Migration {
             $table->string('url');
             $table->text('instructions');
             $table->integer('question_set_id')->unsigned();
-            $table->integer('faculty_id')->unsigned();
-            $table->integer('schedule_id')->unsigned();
+            $table->string('faculty_id', 10);
+            $table->string('schedule_id', 5);
             $table->integer('per_page')->unsigned();
             $table->boolean('active');
             $table->dateTime('expires');
