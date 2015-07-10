@@ -22,8 +22,7 @@ new Vue({
             ROOM: '',
             SECTION: '',
             COURSE: ''
-        },
-        pages: [{value: 5,text: 5}, {value: 10,text: 10}, {value: 15,text: 15}, {value: 20,text: 20}]
+        }
     },
     methods: {
         fetchQuestionSet: function(){
@@ -87,18 +86,14 @@ new Vue({
         var self = this;
         this.subjectDetails();
 
-        var e = document.createEvent('HTMLEvents');
-        e.initEvent('change', true, true);
+        var e = document.createEvent('HTMLEvents')
+        e.initEvent('change', true, true)
+
         $(this.$el)
             .find('select')
             .select2({theme: "bootstrap"})
             .on('change', function() {
-                try{
-                    this.dispatchEvent(e);
-                }catch(err){
-
-                }
-
+                this.dispatchEvent(e)
             });
     }
 });
