@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Queries\Surveys\FacultySubjects;
+use App\Queries\Surveys\FacultySubjectQuery;
 
 class SchedulesController extends Controller
 {
@@ -16,11 +16,11 @@ class SchedulesController extends Controller
     }
 
     public function lists($faculty){
-        return (new FacultySubjects)->lists($faculty);
+        return (new FacultySubjectQuery)->lists($faculty);
     }
 
     public function subjectDetails($schedule_id)
     {
-        return (new FacultySubjects)->subjectDetails($schedule_id);
+        return response()->json((new FacultySubjectQuery)->subjectDetails($schedule_id));
     }
 }

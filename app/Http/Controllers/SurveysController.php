@@ -15,12 +15,14 @@ use App\Survey;
 //use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Session;
 use Request;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 use yajra\Datatables\Datatables;
+use App\Queries\Surveys\SurveyQuery;
 
 class SurveysController extends Controller {
 
@@ -76,9 +78,8 @@ class SurveysController extends Controller {
         {
             abort(403);
         }
-        $this->saveData($request);
-        flash()->success('Survey created successfully!');
-
+        $survey = $this->saveData($request);
+        flash()->success('Survey created successfully! Activate it now for students to start evaluating.');
         return response()->json(["url"=>url("surveys")]);
 	}
 
@@ -171,7 +172,7 @@ class SurveysController extends Controller {
 
     private function saveData(SurveyRequest $request)
     {
-        $survey = Survey::firstOrNew(['code'=>str_random(8), 'active'=>1]);
+        $survey = Survey::firstOrNew(['code'=>str_random(8)]);
         $survey->fill($request->all());
         $survey->save();
         $question_set = $survey->questionSet()->first();
@@ -193,23 +194,13 @@ class SurveysController extends Controller {
                 }
             }
         });
+
+        return $survey;
     }
 
     public function getData()
     {
-//        $surveys = Survey::with('faculty')->select('*');
-        $surveys = Survey::join(env('ENGINE').'.FILEADVI', 'surveys.faculty_id', '=', env('ENGINE').'.FILEADVI.ADVICODE')
-            ->select([
-                'surveys.id',
-                'title',
-                'description',
-                'expires',
-                'active',
-                'surveys.created_at',
-                'ADVISER',
-//                DB::raw('CONCAT(last_name, ", ", first_name, " ", middle_name) AS last_name')
-
-            ]);
+        $surveys = (new SurveyQuery)->fetchSurveys();
 
         return Datatables::of($surveys)
             ->removeColumn('')
@@ -218,20 +209,27 @@ class SurveysController extends Controller {
                 if($survey->expires < Carbon::now()){
                     $disabled='disabled';
                     $btnCls = "btn btn-sm btn-danger";
-                    $iconCls = "fa fa-times";
+                    $text = "Inactive";
                 }else {
                     if ($survey->active == 1) {
-                        $btnCls = "btn btn-sm btn-success";
-                        $iconCls = "fa fa-check";
+                        $btnCls = "btn-danger";
+                        $text = "Deactivate";
                     } else {
-                        $btnCls = "btn btn-sm btn-danger";
-                        $iconCls = "fa fa-times";
+                        $btnCls = "btn-success";
+                        $text = "Activate";
                     }
                 }
-                    return '<a href="'.url('surveys/toggleActive', [$survey->id]).'" class="'.$btnCls.'" '.$disabled.'><span class="'.$iconCls.'"></span></a>';
-            })->addColumn('result', function ($survey) {
-                return '<a href="'.url('surveys/result', [$survey->id]).'" class="btn btn-s btn-primary"><i class="glyphicon glyphicon-list-alt"></i> View Result</a>';
+                    $activate = '<a href="'.url('surveys/toggleActive', [$survey->id]).'" class="btn btn-xs '.$btnCls.'" '.$disabled.'>'.$text.'</a>';
+                    $result = '<a href="'.url('surveys/result', [$survey->id]).'" class="btn btn-xs btn-default">View Result</a>';
+                    $html = <<<EOT
+
+                        $activate
+                        $result
+
+EOT;
+                return $html;
             })
+            ->editColumn('details', 'Schedule: {{$details}} - {{ $TIME }} {{ $ROOM }} | Class: {{ $COURSE }} {{ $SECTION }}')
             ->make(true);
     }
 

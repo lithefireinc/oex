@@ -5,7 +5,7 @@
         <div class="alert-modified alert alert-{{ Session::get('flash_notification.level') }}">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             @if( Session::get('flash_notification.level') == 'success' || Session::get('flash_notification.level') == 'info')
-                <strong>Success</strong> - {{ Session::get('flash_notification.message') }}
+                    <strong>Success</strong> - {{ Session::get('flash_notification.message') }}
             @else
                 <strong>Error</strong> - {{ Session::get('flash_notification.message') }}
             @endif

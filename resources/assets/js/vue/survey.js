@@ -49,7 +49,8 @@ new Vue({
             e.preventDefault();
             var survey = this.survey;
             this.$http.post(config.BASE+'/surveys', survey).success(function(data, status, request){
-                window.location.replace(data.url);
+                if(typeof data.url != 'undefined')
+                    window.location.replace(data.url);
             })
             .error(function(data, status, request){
             this.errors = [];
