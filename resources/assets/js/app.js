@@ -15,9 +15,9 @@ $(function(){
             "ajax": "surveys/data",
             "columns": [
                 {data: 'id', name: 'id', visible: false, searchable: false},
-                {data: 'title', name: 'title', width: '200px'},
+                {data: 'description', name: 'description', width: '200px'},
                 {data: 'ADVISER', name: 'ADVISER'},
-                {data: 'details', name: 'details'},
+                {data: 'details', name: 'details', orderable: false},
                 {data: 'expires', name: 'expires'},
                 {data: 'action', name: 'action', orderable: false, searchable: false, width: '150px'}
             ]

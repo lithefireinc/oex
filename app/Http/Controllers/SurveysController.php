@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Faculty;
-use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SurveyRequest;
 use App\Http\Requests\TakeSurveyRequest;
@@ -16,7 +16,6 @@ use App\Survey;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Session;
-use Request;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
@@ -198,7 +197,7 @@ class SurveysController extends Controller {
         return $survey;
     }
 
-    public function getData()
+    public function getData(Request $request)
     {
         $surveys = (new SurveyQuery)->fetchSurveys();
 
@@ -229,7 +228,14 @@ class SurveysController extends Controller {
 EOT;
                 return $html;
             })
-            ->editColumn('details', 'Schedule: {{$details}} - {{ $TIME }} {{ $ROOM }} | Class: {{ $COURSE }} {{ $SECTION }}')
+            ->filter(function ($query) use ($request) {
+                $search = $request->all()['search']['value'];
+                $query->where('question_sets.description', 'like', "%{$search}%");
+                $query->orWhere('ADVISER', 'like', "%{$search}%")
+                ->orWhere('expires', 'like', "%{$search}%");
+
+            })
+            ->editColumn('details', 'Schedule: {{$details}} - {{ $TIME }}, {{ $ROOM }} | Class: {{ $COURSE }}, {{ $SECTION }}')
             ->make(true);
     }
 
