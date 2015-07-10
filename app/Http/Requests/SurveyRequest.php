@@ -27,8 +27,18 @@ class SurveyRequest extends Request {
             'instructions' => 'required',
             'start_date' => 'required|date',
             'expires' => 'required|date',
-            'per_page' => 'required|numeric'
+            'per_page' => 'required|numeric',
+            'schedule_id' => 'required',
+            'faculty_id' => 'required'
 		];
 	}
+
+    public function messages()
+    {
+        return [
+            "schedule_id.required" => "Please select a subject",
+            "faculty_id.required" => "Please select a faculty",
+        ];
+    }
 
 }

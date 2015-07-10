@@ -11,15 +11,13 @@
             {!! Form::open(['url'=>'surveys/takeSurvey']) !!}
 
             <ol type="A">
-                <?php $count = 1; ?>
                 @foreach( $question_categories as $question_category )
                     <h2><li>{!! $question_category->description !!}</li></h2>
 
-                    @foreach( $question_category->questions()->orderBy('order')->get() as $question )
+                    @foreach( $question_category->questions()->orderBy('order')->get() as $key => $question )
                         <h3>
-                            {!! $count . '. ' . $question->question !!}
+                            {!! $key+1 . '. ' . $question->question !!}
                             @include('partials.question')
-                            <?php $count++ ?>
                         </h3>
                     @endforeach
 
