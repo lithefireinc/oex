@@ -1,9 +1,12 @@
 <?php namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use Illuminate\Support\Facades\Validator;
+use App\Services\Mailers\AppMailer;
 use App\User;
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Bican\Roles\Models\Role;
 
 class AuthController extends Controller {
@@ -27,19 +30,46 @@ class AuthController extends Controller {
      * @var string
      */
 
-    protected $redirectTo = 'surveys/available';
+//    protected $redirectTo = 'surveys/available';
+    protected $redirectTo = 'emails/confirm';
 
-	/**
-	 * Create a new authentication controller instance.
-	 *
-	 * @param  \Illuminate\Contracts\Auth\Guard  $auth
-	 * @param  \Illuminate\Contracts\Auth\Registrar  $registrar
-	 * @return void
-	 */
+    /**
+     * Create a new authentication controller instance.
+     *
+     * @internal param \Illuminate\Contracts\Auth\Guard $auth
+     * @internal param \Illuminate\Contracts\Auth\Registrar $registrar
+     */
 	public function __construct()
 	{
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param AppMailer $mailer
+     * @return \Illuminate\Http\Response
+     */
+    public function postRegister(Request $request, AppMailer $mailer)
+    {
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        $user = $this->create($request->all());
+        $mailer->sendEmailConfirmationTo($user);
+//        Auth::login($this->create($request->all()));
+
+        flash()->info('Please confirm your email address.');
+
+//        return redirect($this->redirectPath());
+        return redirect()->back();
+    }
 
     /**
      * Get a validator for an incoming registration request.
@@ -59,7 +89,7 @@ class AuthController extends Controller {
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     public function create(array $data)
@@ -67,7 +97,8 @@ class AuthController extends Controller {
         return $this->saveUser($data);
     }
 
-    private function saveUser(array $data){
+    private function saveUser(array $data
+    ){
         $user = new User;
         $user->fill([
             'name' => $data['name'],
@@ -78,6 +109,64 @@ class AuthController extends Controller {
         $user->attachRole(Role::find(3));
 
         return $user;
+    }
+
+    public function confirmEmail($token)
+    {
+        $user = User::whereConfirmation_token($token)->firstOrFail();
+
+        $user->confirmed = true;
+        $user->confirmation_token = null;
+        $user->save();
+
+        flash()->success('You are now confirmed. Please login.');
+
+        return redirect('auth/login');
+    }
+
+    public function postLogin(Request $request)
+    {
+        $this->validate($request, [
+            $this->loginUsername() => 'required', 'password' => 'required',
+        ]);
+
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        $throttles = $this->isUsingThrottlesLoginsTrait();
+
+        if ($throttles && $this->hasTooManyLoginAttempts($request)) {
+            return $this->sendLockoutResponse($request);
+        }
+
+        $credentials = $this->getCredentials($request);
+
+        if (Auth::attempt($credentials, $request->has('remember'))) {
+            flash()->success('You are now confirmed!');
+            return $this->handleUserWasAuthenticated($request, $throttles);
+        }
+
+        // If the login attempt was unsuccessful we will increment the number of attempts
+        // to login and redirect the user back to the login form. Of course, when this
+        // user surpasses their maximum number of attempts they will get locked out.
+        if ($throttles) {
+            $this->incrementLoginAttempts($request);
+        }
+
+        return redirect($this->loginPath())
+            ->withInput($request->only($this->loginUsername(), 'remember'))
+            ->withErrors([
+                $this->loginUsername() => $this->getFailedLoginMessage(),
+            ]);
+    }
+
+    protected function getCredentials(Request $request)
+    {
+        return [
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+            'confirmed' => true
+        ];
     }
 
 }
