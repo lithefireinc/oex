@@ -134,7 +134,7 @@ class AuthController extends Controller {
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
         $throttles = $this->isUsingThrottlesLoginsTrait();
-
+    
         if ($throttles && $this->hasTooManyLoginAttempts($request)) {
             return $this->sendLockoutResponse($request);
         }
@@ -142,7 +142,6 @@ class AuthController extends Controller {
         $credentials = $this->getCredentials($request);
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
-            flash()->success('You are now confirmed!');
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
 
