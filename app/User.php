@@ -35,6 +35,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+    public function userable()
+    {
+        return $this->morphTo();
+    }
+
     public static function boot()
     {
         parent::boot();
