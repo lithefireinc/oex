@@ -16,8 +16,12 @@ $(function(){
             "columns": [
                 {data: 'id', name: 'id', visible: false, searchable: false},
                 {data: 'description', name: 'description', width: '200px'},
+                {data: 'title', name: 'title', width: '200px'},
+                {data: 'description', name: 'description'},
                 {data: 'ADVISER', name: 'ADVISER'},
                 {data: 'details', name: 'details', orderable: false},
+                //{data: 'first_name', name: 'first_name', visible: false},
+                //{data: 'middle_name', name: 'middle_name', visible: false},
                 {data: 'expires', name: 'expires'},
                 {data: 'action', name: 'action', orderable: false, searchable: false, width: '150px'}
             ]

@@ -12,10 +12,10 @@ use App\SurveysTaken;
 use Auth;
 use App\Result;
 use App\Survey;
-//use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Session;
+use Request;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
@@ -218,6 +218,7 @@ class SurveysController extends Controller {
                         $text = "Activate";
                     }
                 }
+<<<<<<< HEAD
                     $activate = '<a href="'.url('surveys/toggleActive', [$survey->id]).'" class="btn btn-xs '.$btnCls.'" '.$disabled.'>'.$text.'</a>';
                     $result = '<a href="'.url('surveys/result', [$survey->id]).'" class="btn btn-xs btn-default">View Result</a>';
                     $html = <<<EOT
@@ -234,8 +235,28 @@ EOT;
                 $query->orWhere('ADVISER', 'like', "%{$search}%")
                 ->orWhere('expires', 'like', "%{$search}%");
 
+||||||| merged common ancestors
+                    return '<a href="'.url('surveys/toggleActive', [$survey->id]).'" class="'.$btnCls.'" '.$disabled.'><span class="'.$iconCls.'"></span></a>';
+            })->addColumn('result', function ($survey) {
+                return '<a href="'.url('surveys/result', [$survey->id]).'" class="btn btn-s btn-primary"><i class="glyphicon glyphicon-list-alt"></i> View Result</a>';
+=======
+                    $activate = '<a href="'.url('surveys/toggleActive', [$survey->id]).'" class="btn btn-xs '.$btnCls.'" '.$disabled.'>'.$text.'</a>';
+                    $result = '<a href="'.url('surveys/result', [$survey->id]).'" class="btn btn-xs btn-default">View Result</a>';
+                    $html = <<<EOT
+
+                        $activate
+                        $result
+
+EOT;
+                return $html;
+>>>>>>> origin/registration
             })
+<<<<<<< HEAD
             ->editColumn('details', 'Schedule: {{$details}} - {{ $TIME }}, {{ $ROOM }} | Class: {{ $COURSE }}, {{ $SECTION }}')
+||||||| merged common ancestors
+=======
+            ->editColumn('details', 'Schedule: {{$details}} - {{ $TIME }} {{ $ROOM }} | Class: {{ $COURSE }} {{ $SECTION }}')
+>>>>>>> origin/registration
             ->make(true);
     }
 

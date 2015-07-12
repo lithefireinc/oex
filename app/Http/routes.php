@@ -58,4 +58,4 @@ Route::get("facultyList", "FacultyController@lists");
 Route::get("scheduleList/{faculty}", "SchedulesController@lists");
 Route::get("subjectDetails/{schedule}", "SchedulesController@subjectDetails");
 
-
+Route::get('register/confirm/{confirmation_token}', 'Auth\AuthController@confirmEmail');
