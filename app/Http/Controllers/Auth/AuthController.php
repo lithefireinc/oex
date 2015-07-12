@@ -5,7 +5,6 @@ use App\Services\Mailers\AppMailer;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Bican\Roles\Models\Role;
@@ -53,25 +52,11 @@ class AuthController extends Controller {
      */
     public function postRegister(Request $request, AppMailer $mailer)
     {
-        $verifier = App::make('validation.presence');
-        $verifier->setConnection('ogs');
         $validator = $this->validator($request->all());
-        $validator->setPresenceVerifier($verifier);
 
         if ($validator->fails()) {
             $this->throwValidationException(
                 $request, $validator
-            );
-        }
-
-        $verifier2 = App::make('validation.presence');
-        $verifier2->setConnection('mysql');
-        $validator2 = $this->validator2($request->all());
-        $validator2->setPresenceVerifier($verifier2);
-
-        if ($validator2->fails()) {
-            $this->throwValidationException(
-                $request, $validator2
             );
         }
 
@@ -95,23 +80,15 @@ class AuthController extends Controller {
     {
         $messages = [
             'exists' => 'The ID Number does not exist.',
-            'required' => 'The ID Number field is required.'
-        ];
-        return Validator::make($data, [
-            'IDNO' => 'required|exists:COLLEGE,IDNO',
-        ], $messages);
-    }
+            'IDNO.required' => 'The ID Number field is required.',
+            'IDNO.unique' => 'The ID Number is already registered.',
 
-    public function validator2(array $data)
-    {
-        $message = [
-            'IDNO.unique' => 'The ID Number is already registered.'
         ];
         return Validator::make($data, [
-            'IDNO' => 'unique:users,userable_id',
+            'IDNO' => 'required|unique:users,userable_id|exists:'.env('OGS').'.COLLEGE,IDNO',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ], $message);
+            'password' => 'required|confirmed|min:6'
+        ], $messages);
     }
 
     /**
@@ -127,6 +104,7 @@ class AuthController extends Controller {
 
     private function saveUser(array $data
     ){
+        dd($data);
         $user = new User;
         $user->fill([
             'email' => $data['email'],
