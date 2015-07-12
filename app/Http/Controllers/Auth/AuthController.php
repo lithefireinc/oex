@@ -84,8 +84,7 @@ class AuthController extends Controller {
             'STUDIDNO.unique' => 'The student ID number is already registered.',
         ];
         return Validator::make($data, [
-//            'IDNO' => 'required|unique:users,userable_id|exists:'.env('OGS').'.COLLEGE,IDNO',
-            'STUDIDNO' => 'required|exists:'.env('OGS').'.COLLEGE,STUDIDNO',
+            'STUDIDNO' => 'required|unique:users,userable_id|exists:'.env('OGS').'.COLLEGE,STUDIDNO',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6'
         ], $messages);
