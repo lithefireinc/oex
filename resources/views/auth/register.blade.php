@@ -22,9 +22,9 @@
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">ID Number</label>
+							<label class="col-md-4 control-label">Student ID Number</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="IDNO" value="{{ old('IDNO') }}">
+								<input type="text" class="form-control" name="STUDIDNO" value="{{ old('STUDIDNO') }}">
 							</div>
 						</div>
 

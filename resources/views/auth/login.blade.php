@@ -22,7 +22,7 @@
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Username / E-Mail Address</label>
+							<label class="col-md-4 control-label">E-Mail Address</label>
 							<div class="col-md-6">
 								<input class="form-control" name="email" value="{{ old('email') }}">
 							</div>

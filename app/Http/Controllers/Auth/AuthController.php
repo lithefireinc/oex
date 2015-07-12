@@ -79,14 +79,13 @@ class AuthController extends Controller {
     public function validator(array $data)
     {
         $messages = [
-            'exists' => 'The ID Number does not exist.',
-            'IDNO.required' => 'The ID Number field is required.',
-            'IDNO.unique' => 'The ID Number is already registered.',
-
+            'exists' => 'The student ID number does not exist.',
+            'STUDIDNO.required' => 'The student ID number field is required.',
+            'STUDIDNO.unique' => 'The student ID number is already registered.',
         ];
         return Validator::make($data, [
 //            'IDNO' => 'required|unique:users,userable_id|exists:'.env('OGS').'.COLLEGE,IDNO',
-            'IDNO' => 'required|exists:'.env('OGS').'.COLLEGE,IDNO',
+            'STUDIDNO' => 'required|exists:'.env('OGS').'.COLLEGE,STUDIDNO',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6'
         ], $messages);
@@ -105,7 +104,7 @@ class AuthController extends Controller {
 
     private function saveUser(array $data
     ){
-        $college = College::findOrFail($data['IDNO']);
+        $college = College::findOrFail($data['STUDIDNO']);
 
         $user = new User();
 
