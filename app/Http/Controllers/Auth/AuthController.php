@@ -104,10 +104,14 @@ class AuthController extends Controller {
 
     public function validator2(array $data)
     {
+        $message = [
+            'IDNO.unique' => 'The ID Number is already registered.'
+        ];
         return Validator::make($data, [
+            'IDNO' => 'unique:users,userable_id',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
-        ]);
+        ], $message);
     }
 
     /**

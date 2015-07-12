@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class College extends Ogs
 {
     protected $table = 'COLLEGE';
-    protected $primaryKey = 'STUDCODE';
+    protected $primaryKey = 'IDNO';
     public $timestamps = false;
 
     public function user()
