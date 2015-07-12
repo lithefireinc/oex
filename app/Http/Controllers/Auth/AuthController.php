@@ -5,6 +5,7 @@ use App\Services\Mailers\AppMailer;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Bican\Roles\Models\Role;
@@ -30,8 +31,7 @@ class AuthController extends Controller {
      * @var string
      */
 
-//    protected $redirectTo = 'surveys/available';
-    protected $redirectTo = 'emails/confirm';
+    protected $redirectTo = 'surveys/available';
 
     /**
      * Create a new authentication controller instance.
@@ -53,11 +53,25 @@ class AuthController extends Controller {
      */
     public function postRegister(Request $request, AppMailer $mailer)
     {
+        $verifier = App::make('validation.presence');
+        $verifier->setConnection('ogs');
         $validator = $this->validator($request->all());
+        $validator->setPresenceVerifier($verifier);
 
         if ($validator->fails()) {
             $this->throwValidationException(
                 $request, $validator
+            );
+        }
+
+        $verifier2 = App::make('validation.presence');
+        $verifier2->setConnection('mysql');
+        $validator2 = $this->validator2($request->all());
+        $validator2->setPresenceVerifier($verifier2);
+
+        if ($validator2->fails()) {
+            $this->throwValidationException(
+                $request, $validator2
             );
         }
 
@@ -79,8 +93,18 @@ class AuthController extends Controller {
      */
     public function validator(array $data)
     {
+        $messages = [
+            'exists' => 'The ID Number does not exist.',
+            'required' => 'The ID Number field is required.'
+        ];
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'IDNO' => 'required|exists:COLLEGE,IDNO',
+        ], $messages);
+    }
+
+    public function validator2(array $data)
+    {
+        return Validator::make($data, [
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
@@ -101,7 +125,6 @@ class AuthController extends Controller {
     ){
         $user = new User;
         $user->fill([
-            'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
