@@ -3,10 +3,18 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\QuestionSet;
+use yajra\Datatables\Datatables;
 
 use Illuminate\Http\Request;
 
 class QuestionSetsController extends Controller {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        parent::__construct();
+
+    }
 
 	/**
 	 * Display a listing of the resource.
@@ -15,7 +23,13 @@ class QuestionSetsController extends Controller {
 	 */
 	public function index()
 	{
-		//
+        if($this->user->level() < 99)
+        {
+            abort(403);
+        }
+        $questionSets = QuestionSet::latest('created_at')->get();
+
+        return view('questionSets.index', compact('questionSets'));
 	}
 
 	/**
@@ -82,8 +96,21 @@ class QuestionSetsController extends Controller {
 		//
 	}
 
-	public function lists(){
+	public function lists()
+    {
 	    return QuestionSet::all(['description as text', 'id as value']);
 	}
+
+    public function getData()
+    {
+        $questionSets = QuestionSet::select(['id','description']);
+
+        return Datatables::of($questionSets)
+            ->addColumn('action', function ($questionSet) {
+                return '<a href="#edit-'.$questionSet->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+            })
+            ->editColumn('id', 'ID: {{$id}}')
+            ->make(true);
+    }
 
 }

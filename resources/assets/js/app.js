@@ -22,6 +22,17 @@ $(function(){
                 {data: 'action', name: 'action', orderable: false, searchable: false, width: '150px'}
             ]
         });
+    $('#questionSets-table').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "order": [[0, "desc"]],
+        "ajax": "questionSets/data",
+        "columns": [
+            {data: 'id', name: 'id', visible: false, searchable: false},
+            {data: 'description', name: 'description'},
+            {data: 'action', name: 'action', orderable: false, searchable: false, width: '150px'}
+        ]
+    });
 
 });
 
