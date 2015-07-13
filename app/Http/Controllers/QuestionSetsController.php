@@ -75,7 +75,7 @@ class QuestionSetsController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+        //
 	}
 
 	/**
@@ -86,19 +86,34 @@ class QuestionSetsController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+        $questionSet = QuestionSet::findOrFail($id);
+
+        return view('questionSets.edit', compact('questionSet'));
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int $id
+     * @param QuestionSetRequest $request
+     * @return Response
+     */
+	public function update($id, QuestionSetRequest $request)
 	{
-		//
-	}
+        $questionSet = QuestionSet::findOrFail($id);
+
+        $this->validate($request, [
+            'description' => 'required'
+        ]);
+
+        $input = $request->all();
+
+        $questionSet->fill($input)->save();
+
+        flash()->success('Question Set successfully added!');
+
+        return redirect('questionSets');
+    }
 
 	/**
 	 * Remove the specified resource from storage.
@@ -122,7 +137,7 @@ class QuestionSetsController extends Controller {
 
         return Datatables::of($questionSets)
             ->addColumn('action', function ($questionSet) {
-                return '<a href="#edit-'.$questionSet->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                return '<a href="questionSets/'.$questionSet->id.'/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
             })
             ->editColumn('id', 'ID: {{$id}}')
             ->make(true);
