@@ -37,6 +37,10 @@ Route::get('surveys/data/', [
     'uses' => 'SurveysController@getData'
 ]);
 
+Route::get('questionSets/data/', [
+    'uses' => 'QuestionSetsController@getData'
+]);
+
 Route::get('surveys/result/{id}', [
     'uses' => 'SurveysController@viewResult'
 ]);
