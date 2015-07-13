@@ -3,18 +3,20 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\QuestionSetRequest;
+use App\Question;
 use App\QuestionSet;
 use yajra\Datatables\Datatables;
+use yajra\Datatables\Html\Builder;
 
 use Illuminate\Http\Request;
 
 class QuestionSetsController extends Controller {
 
-    public function __construct()
+    public function __construct(Builder $htmlBuilder)
     {
+        $this->htmlBuilder = $htmlBuilder;
         $this->middleware('auth');
         parent::__construct();
-
     }
 
 	/**
@@ -78,17 +80,26 @@ class QuestionSetsController extends Controller {
         //
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @param Request $request
+     * @return Response
+     */
+	public function edit($id, Request $request)
 	{
         $questionSet = QuestionSet::findOrFail($id);
 
-        return view('questionSets.edit', compact('questionSet'));
+        if ($request->ajax()) {
+            return Datatables::of(Question::select(['order', 'question'])->where('question_set_id','=',$id))->make(true);
+        }
+
+        $datatables = $this->htmlBuilder
+            ->addColumn(['data' => 'order', 'name' => 'order', 'title' => 'Order'])
+            ->addColumn(['data' => 'question', 'name' => 'question', 'title' => 'Question']);
+
+        return view('questionSets.edit', compact('questionSet', 'datatables'));
 	}
 
     /**

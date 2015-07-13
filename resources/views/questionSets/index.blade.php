@@ -21,6 +21,4 @@
         <p class="text-center">You haven't created any question sets yet!</p>
     @endunless
 
-
-
-@stop
+@endsection

@@ -37,6 +37,25 @@ $(function(){
             {data: 'action', name: 'action', orderable: false, searchable: false, width: '150px'}
         ]
     });
+    $('#questions-table').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "order": [[0, "desc"]],
+        "ajax": "questions/data",
+        "columns": [
+            {data: 'id', name: 'id', visible: false, searchable: false},
+            {data: 'question', name: 'question'}
+        ]
+    });
+        $("#dataTableBuilder").DataTable({
+            "serverSide":true,
+            "processing":true,
+            "ajax":null,
+            "columns":[
+                {"data":"order","name":"order","title":"Order","orderable":false,"searchable":false},
+                {"data":"question","name":"question","title":"Question","orderable":true,"searchable":true}
+            ]
+        });
 
 });
 

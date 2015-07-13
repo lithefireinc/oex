@@ -50,6 +50,8 @@ Route::resource('surveys', 'SurveysController');
 
 Route::resource('questionSets', 'QuestionSetsController');
 
+Route::resource('questions', 'QuestionsController');
+
 //Route::resource('questionTypes', 'QuestionTypeController');
 
 Route::controllers([
