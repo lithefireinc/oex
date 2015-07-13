@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
             'username' => 'admin',
             'password' => Hash::make('123456') ,
             'name' => 'admin',
+            'confirmed' => 1
         ]);
 
         User::create([
@@ -23,6 +24,7 @@ class UsersTableSeeder extends Seeder
             'username' => 'student',
             'password' => Hash::make('123456') ,
             'name' => 'student',
+            'confirmed' => 1
         ]);
 
         User::create([
@@ -30,6 +32,7 @@ class UsersTableSeeder extends Seeder
             'username' => 'student2',
             'password' => Hash::make('123456') ,
             'name' => 'student2',
+            'confirmed' => 1
         ]);
 
         User::create([
@@ -37,6 +40,7 @@ class UsersTableSeeder extends Seeder
             'username' => 'student3',
             'password' => Hash::make('123456') ,
             'name' => 'student3',
+            'confirmed' => 1
         ]);
     }
 }

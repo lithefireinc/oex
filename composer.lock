@@ -882,16 +882,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.7",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "b58431785768abbb4f00c10e66a065095a0693ef"
+                "reference": "941a320939cf9421bb6573fad417c841f8b862f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/b58431785768abbb4f00c10e66a065095a0693ef",
-                "reference": "b58431785768abbb4f00c10e66a065095a0693ef",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/941a320939cf9421bb6573fad417c841f8b862f3",
+                "reference": "941a320939cf9421bb6573fad417c841f8b862f3",
                 "shasum": ""
             },
             "require": {
@@ -959,7 +959,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2015-07-11 14:58:06"
+            "time": "2015-07-12 21:01:33"
         },
         {
             "name": "league/fractal",
