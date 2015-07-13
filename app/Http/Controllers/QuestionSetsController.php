@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\QuestionSetRequest;
 use App\QuestionSet;
 use yajra\Datatables\Datatables;
 
@@ -39,17 +40,31 @@ class QuestionSetsController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		if($this->user->level() < 99)
+        {
+            abort(403);
+        }
+
+        return view('questionSets.create');
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param QuestionSetRequest $request
+     * @return Response
+     */
+	public function store(QuestionSetRequest $request)
 	{
-		//
+        if($this->user->level() < 99)
+        {
+            abort(403);
+        }
+
+        QuestionSet::create($request->all());
+
+        flash()->success('Question Set created successfully!');
+        return redirect('questionSets');
 	}
 
 	/**
