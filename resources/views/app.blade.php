@@ -44,6 +44,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('surveys') }}">Surveys</a></li>
+                                <li><a href="{{ url('questionSets') }}">Question Sets</a></li>
                                 <li><a href="{{ url('admin') }}">File Reference</a></li>
                             </ul>
                         </li>

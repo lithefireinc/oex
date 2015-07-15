@@ -5,6 +5,13 @@ use App\Survey;
 use DB;
 class SurveyQuery {
 
+    protected $scoped;
+
+    public function __construct($scoped = null)
+    {
+        $this->scoped = $scoped ?: new Survey;
+    }
+
     public function fetchSurveys()
     {
         $days = env('ENGINE').".FILEDAYS";
@@ -12,9 +19,9 @@ class SurveyQuery {
         $room = env('ENGINE').".FILEROOM";
         $course = env('ENGINE').".FILECOUR";
         $section = env('OGS').".FILESECT";
-        return DB::table("surveys")->select([
+        return Survey::select([
             'surveys.id',
-            'question_sets.description as title',
+            'question_sets.description',
             'expires',
             'active',
             'surveys.created_at',
@@ -31,7 +38,6 @@ class SurveyQuery {
             ->leftJoin($time, $time.".TIMEIDNO", "=", "FILESCHE.TIMEIDNO")
             ->leftJoin($room, $room.".ROOMIDNO", "=", "FILESCHE.ROOMIDNO")
             ->leftJoin($section, $section.".SECTIDNO", "=", "FILESCHE.SECTIDNO")
-            ->leftJoin($course, $course.".COURIDNO", "=", "FILESCHE.COURIDNO")
-            ->orderBy('surveys.id', 'desc');
+            ->leftJoin($course, $course.".COURIDNO", "=", "FILESCHE.COURIDNO");
     }
 }

@@ -37,6 +37,10 @@ Route::get('surveys/data/', [
     'uses' => 'SurveysController@getData'
 ]);
 
+Route::get('questionSets/data/', [
+    'uses' => 'QuestionSetsController@getData'
+]);
+
 Route::get('surveys/result/{id}', [
     'uses' => 'SurveysController@viewResult'
 ]);
@@ -45,6 +49,8 @@ Route::get('surveys/result/{id}', [
 Route::resource('surveys', 'SurveysController');
 
 Route::resource('questionSets', 'QuestionSetsController');
+
+Route::resource('questions', 'QuestionsController');
 
 //Route::resource('questionTypes', 'QuestionTypeController');
 
